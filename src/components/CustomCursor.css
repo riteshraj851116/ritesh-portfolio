@@ -1,0 +1,72 @@
+.custom-cursor-container {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-cursor-container.visible {
+  opacity: 1;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  background-color: #f5f5f0;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  mix-blend-mode: difference;
+  transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  z-index: 1000000;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(245, 245, 240, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              top 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              left 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background-color 0.25s ease;
+  z-index: 999999;
+}
+
+.cursor-ring.hovered {
+  top: -28px;
+  left: -28px;
+  width: 56px;
+  height: 56px;
+  border-color: rgba(245, 245, 240, 0.85);
+  background-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(1px);
+}
+
+.cursor-dot.hovered {
+  opacity: 0.5;
+  transform: scale(0.6);
+}
+
+.cursor-ring.clicking {
+  transform: scale(0.85);
+  border-color: #f5f5f0;
+}
+
+@media (pointer: coarse), (max-width: 768px) {
+  .custom-cursor-container {
+    display: none !important;
+  }
+}

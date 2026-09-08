@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
+import CustomCursor from "./components/CustomCursor";
 import Hero from "./components/Hero";
 import RollingStack from "./components/RollingStack";
 import About from "./components/About";
@@ -14,6 +15,9 @@ function App() {
 
   return (
     <>
+      {/* CUSTOM CURSOR */}
+      <CustomCursor />
+
       {/* LOADER */}
       {loading && (
         <Loader onComplete={() => setLoading(false)} />

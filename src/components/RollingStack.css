@@ -1,352 +1,295 @@
 .rolling-stack {
   position: relative;
-
   width: 100%;
-  height: 100vh;
-  min-height: 700px;
-
-  overflow: hidden;
-
+  min-height: 100vh;
+  padding: 100px 30px 40px;
   background: #111;
   color: #f5f5f0;
-
   perspective: 1400px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* =========================
-   HEADER
-========================= */
-
+/* HEADER */
 .rolling-stack-header {
-  position: absolute;
-
-  top: 30px;
-  left: 30px;
-  right: 30px;
-
   display: flex;
   justify-content: space-between;
-
-  font-size: 10px;
-
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(245, 245, 240, 0.2);
+  font-size: 9px;
   letter-spacing: 0.16em;
-
   opacity: 0.55;
-
   z-index: 10;
 }
 
-/* =========================
-   3D SCENE
-========================= */
-
-.cylinder-scene {
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  width: 1px;
-  height: 1px;
-
-  transform-style: preserve-3d;
-
-  transform: translate(-50%, -50%);
-
+/* 3D VIEWPORT */
+.cylinder-viewport {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  margin: 10px 0 20px;
+  overflow: hidden;
   perspective: 1400px;
 }
 
-/* =========================
-   CYLINDER
-========================= */
-
-.technology-cylinder {
+/* 3D SCENE */
+.cylinder-scene {
   position: absolute;
-
+  left: 50%;
+  top: 50%;
   width: 1px;
   height: 1px;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%);
+  perspective: 1400px;
+}
 
+/* CYLINDER */
+.technology-cylinder {
+  position: absolute;
+  width: 1px;
+  height: 1px;
   left: 0;
   top: 0;
-
   transform-style: preserve-3d;
-
   transform-origin: center center;
-
   will-change: transform;
 }
 
 .cylinder-item {
   position: absolute;
-
   left: -150px;
   top: -35px;
-
   width: 300px;
   height: 70px;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   transform-style: preserve-3d;
-
   backface-visibility: hidden;
 }
 
 .cylinder-item span {
   display: block;
-
-  font-size: clamp(2.5rem, 5vw, 5rem);
-
-  font-weight: 400;
-
-  letter-spacing: -0.06em;
-
+  font-size: 5rem;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #f5f5f0;
   white-space: nowrap;
-
-  text-align: center;
-
-  transition:
-    opacity 0.3s ease,
-    filter 0.3s ease;
+  user-select: none;
+  opacity: 0.9;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
 }
 
-/* =========================
-   CENTER
-========================= */
-
+/* CENTER */
 .cylinder-center {
   position: absolute;
-
-  left: 0;
-  top: 0;
-
-  transform:
-    translate(-50%, -50%)
-    translateZ(0);
-
-  width: 260px;
-  height: 260px;
-
-  border: 1px solid rgba(245, 245, 240, 0.25);
-
+  left: 50%;
+  top: 50%;
+  width: 240px;
+  height: 240px;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-
-  text-align: center;
-
-  background: rgba(17, 17, 17, 0.75);
-
-  backdrop-filter: blur(8px);
-
+  background: rgba(17, 17, 17, 0.85);
+  border: 1px solid rgba(245, 245, 240, 0.18);
+  backdrop-filter: blur(10px);
   z-index: 20;
 }
 
 .center-small {
-  font-size: 8px;
-
+  font-size: 8.5px;
   letter-spacing: 0.2em;
-
-  opacity: 0.5;
+  opacity: 0.55;
 }
 
 .center-main {
-  margin: 12px 0;
-
-  font-size: 5rem;
-
-  line-height: 0.8;
-
+  margin: 8px 0;
+  font-size: 4rem;
+  line-height: 0.85;
   letter-spacing: -0.08em;
+  font-weight: 600;
 }
 
-/* =========================
-   GLOW
-========================= */
-
+/* GLOW & RINGS */
 .cylinder-glow {
   position: absolute;
-
-  width: 500px;
-  height: 500px;
-
+  width: 480px;
+  height: 480px;
   left: 50%;
   top: 50%;
-
   transform: translate(-50%, -50%);
-
   border-radius: 50%;
-
   background: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.08) 0%,
     rgba(255, 255, 255, 0.02) 35%,
     transparent 70%
   );
-
-  filter: blur(20px);
-
+  filter: blur(25px);
   pointer-events: none;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
-.rolling-stack-footer {
-  position: absolute;
-
-  left: 30px;
-  right: 30px;
-  bottom: 30px;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  font-size: 9px;
-
-  letter-spacing: 0.16em;
-
-  opacity: 0.4;
-
-  z-index: 10;
-}
-
-/* =========================
-   RINGS
-========================= */
-
 .cylinder-scene::before {
   content: "";
-
   position: absolute;
-
   width: 850px;
   height: 850px;
-
   left: 50%;
   top: 50%;
-
-  transform:
-    translate(-50%, -50%)
-    rotateX(70deg);
-
+  transform: translate(-50%, -50%) rotateX(70deg);
   border: 1px solid rgba(245, 245, 240, 0.08);
-
   border-radius: 50%;
-
   pointer-events: none;
 }
 
 .cylinder-scene::after {
   content: "";
-
   position: absolute;
-
-  width: 600px;
-  height: 600px;
-
+  width: 1050px;
+  height: 1050px;
   left: 50%;
   top: 50%;
-
-  transform:
-    translate(-50%, -50%)
-    rotateX(70deg);
-
-  border: 1px solid rgba(245, 245, 240, 0.06);
-
+  transform: translate(-50%, -50%) rotateX(70deg);
+  border: 1px dashed rgba(245, 245, 240, 0.04);
   border-radius: 50%;
-
   pointer-events: none;
 }
 
-/* =========================
-   TABLET
-========================= */
-
-@media (max-width: 1024px) {
-  .cylinder-item {
-    transform-origin: center;
-  }
-
-  .cylinder-center {
-    width: 220px;
-    height: 220px;
-  }
-
-  .center-main {
-    font-size: 4rem;
-  }
+/* SKILLS INTERACTIVE DIRECTORY */
+.skills-interactive-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 10px auto 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 10;
 }
 
-/* =========================
-   MOBILE
-========================= */
+.skills-filter-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
+.skill-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(245, 245, 240, 0.15);
+  color: rgba(245, 245, 240, 0.6);
+  border-radius: 30px;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(245, 245, 240, 0.4);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.skill-filter-btn.active {
+  background: #f5f5f0;
+  border-color: #f5f5f0;
+  color: #111;
+  font-weight: 600;
+}
+
+/* SKILLS GRID */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.skill-badge-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(245, 245, 240, 0.1);
+  border-radius: 4px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-badge-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(245, 245, 240, 0.3);
+  transform: translateY(-2px);
+}
+
+.badge-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #f5f5f0;
+}
+
+.badge-level {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 245, 240, 0.15);
+  color: rgba(245, 245, 240, 0.6);
+}
+
+.badge-role {
+  font-size: 10.5px;
+  color: rgba(245, 245, 240, 0.45);
+}
+
+/* FOOTER */
+.rolling-stack-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 25px;
+  border-top: 1px solid rgba(245, 245, 240, 0.2);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  opacity: 0.4;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .rolling-stack {
-    min-height: 650px;
+    padding: 90px 20px 30px;
   }
 
-  .rolling-stack-header {
-    left: 20px;
-    right: 20px;
-    top: 20px;
+  .cylinder-viewport {
+    height: 380px;
   }
 
   .cylinder-scene {
-    transform:
-      translate(-50%, -50%)
-      scale(0.62);
+    transform: translate(-50%, -50%) scale(0.62);
   }
 
-  .cylinder-item span {
-    font-size: 4rem;
-  }
-
-  .cylinder-center {
-    width: 220px;
-    height: 220px;
+  .skills-grid {
+    grid-template-columns: 1fr;
   }
 
   .rolling-stack-footer {
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-  }
-}
-
-/* =========================
-   SMALL MOBILE
-========================= */
-
-@media (max-width: 480px) {
-  .cylinder-scene {
-    transform:
-      translate(-50%, -50%)
-      scale(0.48);
-  }
-
-  .rolling-stack-footer {
-    font-size: 7px;
-  }
-}
-
-/* =========================
-   REDUCED MOTION
-========================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .technology-cylinder {
-    transform: none !important;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
   }
 }
