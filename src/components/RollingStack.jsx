@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Terminal, Database, Layers, Sparkles, Wrench } from "lucide-react";
 import { playClickSound, playHoverSound } from "../utils/audio";
+import TechCore3D from "./TechCore3D";
 import "./RollingStack.css";
 
 const technologies = [
@@ -119,6 +120,7 @@ const RollingStack = () => {
 
           {/* Center */}
           <div className="cylinder-center">
+            <TechCore3D />
             <span className="center-small">FULL STACK</span>
             <span className="center-main">MERN</span>
             <span className="center-small">ENGINEER</span>

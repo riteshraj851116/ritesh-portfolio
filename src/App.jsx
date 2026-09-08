@@ -4,6 +4,7 @@ import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import CustomCursor from "./components/CustomCursor";
 import ScrollHUD from "./components/ScrollHUD";
+import GlobalCanvas from "./components/GlobalCanvas";
 import Hero from "./components/Hero";
 import RollingStack from "./components/RollingStack";
 import About from "./components/About";
@@ -16,7 +17,10 @@ function App() {
 
   return (
     <>
-      {/* CUSTOM CURSOR */}
+      {/* GLOBAL THREE.JS PARTICLE UNIVERSE */}
+      <GlobalCanvas />
+
+      {/* CUSTOM VELOCITY-STRETCH CURSOR */}
       <CustomCursor />
 
       {/* FLOATING SCROLL HUD */}
@@ -35,7 +39,7 @@ function App() {
         {/* 01 — HERO */}
         <Hero />
 
-        {/* 02 — SKILLS / 3D CYLINDER */}
+        {/* 02 — SKILLS / 3D CYLINDER & TECH CORE */}
         <RollingStack />
 
         {/* 03 — ABOUT */}
