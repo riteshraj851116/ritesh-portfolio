@@ -5,6 +5,9 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 import HeroScene from "./HeroScene";
 import profileImage from "../assets/Adobe Express - file.png";
+import { useMagnetic } from "../utils/magnetic";
+import { scrambleText } from "../utils/scramble";
+import { playClickSound, playHoverSound } from "../utils/audio";
 
 import "./Hero.css";
 
@@ -12,6 +15,8 @@ const Hero = () => {
   const heroRef = useRef(null);
   const imageRef = useRef(null);
   const sceneRef = useRef(null);
+  const magneticButtonRef = useMagnetic(0.4);
+  const magneticScrollRef = useMagnetic(0.3);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -199,13 +204,25 @@ const Hero = () => {
           <div className="hero-title">
 
             <div className="hero-title-mask">
-              <div className="hero-title-line">
+              <div
+                className="hero-title-line"
+                onMouseEnter={(e) => {
+                  scrambleText(e.currentTarget, "RITESH");
+                  playHoverSound();
+                }}
+              >
                 RITESH
               </div>
             </div>
 
             <div className="hero-title-mask">
-              <div className="hero-title-line hero-outline">
+              <div
+                className="hero-title-line hero-outline"
+                onMouseEnter={(e) => {
+                  scrambleText(e.currentTarget, "RAJ");
+                  playHoverSound();
+                }}
+              >
                 RAJ 
               </div>
             </div>
@@ -269,13 +286,19 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* FLOATING LABEL */}
+          {/* FLOATING LABEL WITH MAGNETIC ATTRACTION */}
 
-          <div className="hero-floating-label">
+          <a
+            href="#projects"
+            className="hero-floating-label"
+            ref={magneticButtonRef}
+            onClick={playClickSound}
+            onMouseEnter={playHoverSound}
+          >
             <span>VIEW WORK</span>
 
             <ArrowUpRight size={15} />
-          </div>
+          </a>
 
         </div>
       </div>
@@ -288,13 +311,19 @@ const Hero = () => {
           MERN STACK DEVELOPER
         </span>
 
-        <div className="hero-scroll">
+        <a
+          href="#skills"
+          className="hero-scroll"
+          ref={magneticScrollRef}
+          onClick={playClickSound}
+          onMouseEnter={playHoverSound}
+        >
           <ArrowDown size={15} />
 
           <span>
             SCROLL TO EXPLORE
           </span>
-        </div>
+        </a>
 
         <span>
           RRS / 2026

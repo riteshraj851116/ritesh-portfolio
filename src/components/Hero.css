@@ -279,9 +279,15 @@
 
   opacity: 0;
 
-  pointer-events: none;
+  pointer-events: auto;
 
-  z-index: 1;
+  cursor: grab;
+
+  z-index: 2;
+}
+
+.hero-scene-wrapper:active {
+  cursor: grabbing;
 }
 
 /* =========================

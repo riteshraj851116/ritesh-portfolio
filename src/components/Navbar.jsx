@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import MenuOverlay from "./MenuOverlay";
 import { isSoundEnabled, toggleSound, playClickSound, playHoverSound } from "../utils/audio";
+import { useMagnetic } from "../utils/magnetic";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
+  const soundBtnRef = useMagnetic(0.25);
+  const menuBtnRef = useMagnetic(0.35);
 
   useEffect(() => {
     setSoundOn(isSoundEnabled());
@@ -41,6 +44,7 @@ const Navbar = () => {
           {/* SOUND TOGGLE */}
           <button
             type="button"
+            ref={soundBtnRef}
             className={`navbar-sound-btn ${soundOn ? "active" : "muted"}`}
             onClick={handleToggleSound}
             onMouseEnter={playHoverSound}
@@ -60,6 +64,7 @@ const Navbar = () => {
           </span>
 
           <button
+            ref={menuBtnRef}
             className={`menu-button ${
               menuOpen ? "active" : ""
             }`}

@@ -1,13 +1,14 @@
-
 import { useState } from "react";
 
 import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import CustomCursor from "./components/CustomCursor";
+import ScrollHUD from "./components/ScrollHUD";
 import Hero from "./components/Hero";
 import RollingStack from "./components/RollingStack";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import TerminalSimulator from "./components/TerminalSimulator";
 import Contact from "./components/Contact";
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
     <>
       {/* CUSTOM CURSOR */}
       <CustomCursor />
+
+      {/* FLOATING SCROLL HUD */}
+      <ScrollHUD />
 
       {/* LOADER */}
       {loading && (
@@ -39,6 +43,9 @@ function App() {
 
         {/* 04 — PROJECTS */}
         <Projects />
+
+        {/* 04.1 — LIVE ARCHITECTURE ENGINE / TERMINAL SIMULATOR */}
+        <TerminalSimulator />
 
         {/* 05 — CONTACT */}
         <Contact />
