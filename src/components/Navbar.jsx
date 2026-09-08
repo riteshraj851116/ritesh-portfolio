@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import MenuOverlay from "./MenuOverlay";
@@ -13,7 +12,7 @@ const Navbar = () => {
         {/* LOGO */}
         <a href="#home" className="navbar-logo">
           <span>RITESH</span>
-          <span>RAJ </span>
+          <span>RAJ</span>
         </a>
 
         {/* RIGHT SIDE */}
@@ -53,4 +52,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

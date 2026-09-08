@@ -86,7 +86,7 @@ const Contact = () => {
             <span>GITHUB</span>
 
             <span className="contact-link-value">
-             https://github.com/riteshraj851116
+              @riteshraj851116
             </span>
 
             <ArrowUpRight size={22} />
@@ -101,7 +101,7 @@ const Contact = () => {
             <span>LINKEDIN</span>
 
             <span className="contact-link-value">
-              https://www.linkedin.com/in/ritesh-raj-9b52162a7/
+              in/ritesh-raj-9b52162a7
             </span>
 
             <ArrowUpRight size={22} />

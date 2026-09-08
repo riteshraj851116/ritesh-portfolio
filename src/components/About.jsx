@@ -45,7 +45,7 @@ const About = () => {
 
       <div className="about-top">
         <span className="about-reveal">
-          02 / ABOUT
+          03 / ABOUT
         </span>
 
         <span className="about-reveal">
@@ -99,7 +99,7 @@ const About = () => {
       {/* BOTTOM */}
 
       <div className="about-bottom">
-        <span>02</span>
+        <span>03</span>
 
         <span>CURIOUS BY DEFAULT</span>
 

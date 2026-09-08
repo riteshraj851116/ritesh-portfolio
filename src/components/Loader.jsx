@@ -1,13 +1,36 @@
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { Terminal, Sparkles } from "lucide-react";
 import "./Loader.css";
 
-const Loader = () => {
+const Loader = ({ onComplete }) => {
   const loaderRef = useRef(null);
+  const [progress, setProgress] = useState(0);
 
+  // Animate progress counter from 0 to 100
   useEffect(() => {
-    const tl = gsap.timeline();
+    let start = 0;
+    const interval = setInterval(() => {
+      start += Math.floor(Math.random() * 9) + 5;
+      if (start >= 100) {
+        start = 100;
+        setProgress(100);
+        clearInterval(interval);
+      } else {
+        setProgress(start);
+      }
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Main GSAP animation timeline
+  useEffect(() => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        if (onComplete) onComplete();
+      },
+    });
 
     tl.fromTo(
       ".loader-name-line",
@@ -16,7 +39,7 @@ const Loader = () => {
       },
       {
         y: "0%",
-        duration: 1.2,
+        duration: 1.1,
         stagger: 0.08,
         ease: "power4.out",
       }
@@ -32,26 +55,28 @@ const Loader = () => {
           scale: 1,
           opacity: 1,
           rotate: 0,
-          duration: 0.8,
+          duration: 0.7,
           ease: "back.out(1.7)",
         },
-        "-=0.7"
+        "-=0.6"
       )
       .fromTo(
-        ".loader-small-text",
+        ".loader-telemetry",
         {
           opacity: 0,
+          y: 15,
         },
         {
           opacity: 1,
+          y: 0,
           duration: 0.5,
         },
         "-=0.4"
       )
-      .to({}, { duration: 1 })
+      .to({}, { duration: 1.1 })
       .to(".loader-name-line", {
         y: "-110%",
-        duration: 0.9,
+        duration: 0.8,
         stagger: 0.05,
         ease: "power4.in",
       })
@@ -60,24 +85,24 @@ const Loader = () => {
         {
           scale: 0,
           opacity: 0,
-          duration: 0.5,
+          duration: 0.4,
           ease: "power3.in",
         },
-        "-=0.7"
+        "-=0.6"
       )
       .to(
-        ".loader-small-text",
+        ".loader-telemetry",
         {
           opacity: 0,
           duration: 0.3,
         },
-        "-=0.5"
+        "-=0.4"
       )
       .to(
         loaderRef.current,
         {
           yPercent: -100,
-          duration: 1.1,
+          duration: 0.9,
           ease: "power4.inOut",
         },
         "-=0.1"
@@ -86,29 +111,30 @@ const Loader = () => {
         display: "none",
       });
 
-    return () => tl.kill();
-  }, []);
+    return () => {
+      tl.kill();
+    };
+  }, [onComplete]);
 
   return (
-    <div
-      className="loader"
-      ref={loaderRef}
-    >
+    <div className="loader" ref={loaderRef}>
+      {/* TOP STATUS BAR */}
       <div className="loader-top">
-        <span>RRS / 2026</span>
+        <div className="loader-status-pill">
+          <span className="live-dot-pulse"></span>
+          <span>RRS / SYSTEM BOOT</span>
+        </div>
 
-        <span>PORTFOLIO</span>
+        <span>RITESH RAJ SINGH</span>
+
+        <span>PORTFOLIO / 2026</span>
       </div>
 
+      {/* CENTER HERO NAME */}
       <div className="loader-center">
         <div className="loader-name">
-          <div className="loader-name-line">
-            RITESH
-          </div>
-
-          <div className="loader-name-line loader-outline">
-            RAJ 
-          </div>
+          <div className="loader-name-line">RITESH</div>
+          <div className="loader-name-line loader-outline">RAJ</div>
         </div>
 
         <div className="loader-icon">
@@ -117,17 +143,35 @@ const Loader = () => {
           <span></span>
         </div>
 
-        <div className="loader-small-text">
-          <span>LOADING</span>
-          <span>FULL STACK DEVELOPER</span>
+        {/* PROGRESS & TELEMETRY */}
+        <div className="loader-telemetry">
+          <div className="telemetry-bar">
+            <div
+              className="telemetry-fill"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+
+          <div className="telemetry-info">
+            <span className="telemetry-item">
+              <Terminal size={11} />
+              <span>INITIALIZING MERN STACK</span>
+            </span>
+
+            <span className="telemetry-percentage">{progress}%</span>
+
+            <span className="telemetry-item">
+              <Sparkles size={11} />
+              <span>SYSTEM READY</span>
+            </span>
+          </div>
         </div>
       </div>
 
+      {/* BOTTOM FOOTER */}
       <div className="loader-bottom">
         <span>DESIGN / CODE / MOTION</span>
-
-        <span>INDIA</span>
-
+        <span>MERN · THREE.JS · GSAP</span>
         <span>SCROLL TO EXPLORE ↓</span>
       </div>
     </div>
@@ -135,4 +179,3 @@ const Loader = () => {
 };
 
 export default Loader;
-

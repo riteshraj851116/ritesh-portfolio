@@ -34,7 +34,7 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 35px;
 }
 
 .navbar-location {
