@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Sparkles } from "lucide-react";
 import { playClickSound, playHoverSound } from "../utils/audio";
 import "./About.css";
 
@@ -11,44 +11,75 @@ const metrics = [
   { value: "03+", label: "PRODUCTION BUILDS", desc: "Full-Stack MERN & High-Perf SPA" },
   { value: "40+", label: "REST ENDPOINTS", desc: "Clean, Scalable Node/Express APIs" },
   { value: "<50ms", label: "CHAT LATENCY", desc: "Real-time Bi-directional Socket.IO" },
-  { value: "90+", label: "LIGHTHOUSE SCORE", desc: "Vite Bundling & CSS Performance" },
+  { value: "200+", label: "DSA SOLVED (JAVA)", desc: "Apna College Certified Algorithmics" },
+];
+
+const educationList = [
+  {
+    institution: "Galgotias University",
+    location: "Greater Noida, India",
+    degree: "B.Tech in Computer Science and Engineering",
+    period: "2023 — 2027",
+    score: "CGPA: 7.3 / 10",
+    highlights: "Focus on Data Structures, OOP, Database Management Systems, and Web Engineering.",
+  },
+  {
+    institution: "Vikas Vidyalaya",
+    location: "Begusarai, Bihar",
+    degree: "Senior Secondary (Class XII) — CBSE",
+    period: "2021 — 2023",
+    score: "68.4%",
+    highlights: "Science stream with Physics, Chemistry, and Mathematics foundation.",
+  },
+  {
+    institution: "DAV HFC Barauni",
+    location: "Begusarai, Bihar",
+    degree: "Secondary School (Class X) — CBSE",
+    period: "2021",
+    score: "77.2%",
+    highlights: "Secondary education with strong academic foundation in science & logic.",
+  },
+];
+
+const certificationsList = [
+  {
+    title: "MERN Stack Web Development Course",
+    provider: "CodeHelp (Love Babbar)",
+    year: "2025",
+    link: "https://www.linkedin.com/posts/ritesh-raj-9b52162a7_share-7492473688705875968-sIML",
+    details:
+      "Completed 150+ hours of full-stack development curriculum, building scalable applications with React, Node.js, and MongoDB. Mastered REST API architecture, asynchronous operations, state management, and full-stack security practices.",
+  },
+  {
+    title: "Data Structures & Algorithms (DSA) in Java",
+    provider: "Apna College",
+    year: "2025",
+    link: "https://www.linkedin.com/posts/ritesh-raj-9b52162a7_share-7492476226008358913-u7y5",
+    details:
+      "Solved 200+ algorithm problems spanning Arrays, Linked Lists, Binary Trees, Graphs, and Dynamic Programming. Focused on optimizing Time and Space complexity analysis across computational problems.",
+  },
 ];
 
 const capabilities = [
   {
     title: "MERN Stack Architecture",
-    description: "End-to-end web engineering with React 19, Node.js runtime, Express routing, and MongoDB schema indexing.",
+    description: "End-to-end web engineering with React, Node.js runtime, Express routing, and MongoDB schema indexing.",
     badge: "CORE STACK",
   },
   {
     title: "Real-time Event Systems",
-    description: "Low-latency bidirectional WebSocket communication with Socket.IO for instant live messaging and active user states.",
+    description: "Low-latency bidirectional WebSocket communication with Socket.IO for instant live messaging under 50ms.",
     badge: "REAL-TIME",
   },
   {
     title: "Database Optimization",
     description: "Complex MongoDB aggregation pipelines, Mongoose indexing, relational modeling, and query execution under 200ms.",
-    badge: "BACKEND",
+    badge: "BACKEND & DB",
   },
   {
-    title: "Interactive 3D & GSAP",
-    description: "Creative web development using Three.js, React Three Fiber, and GSAP ScrollTrigger for fluid, tactile interfaces.",
-    badge: "CREATIVE UI",
-  },
-];
-
-const journeyTimeline = [
-  {
-    period: "2024 — PRESENT",
-    role: "Full Stack MERN Developer",
-    organization: "Independent Product Engineering",
-    details: "Architected JobSphere (full-stack job portal with live Socket.IO chat) and VeloceDrive (car rental system with owner analytics).",
-  },
-  {
-    period: "2021 — 2025",
-    role: "Computer Science & Engineering",
-    organization: "Bachelor of Technology (B.Tech)",
-    details: "Deep grounding in Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, and Web Technologies.",
+    title: "Algorithmics & Core CS",
+    description: "Robust understanding of Data Structures & Algorithms in Java (200+ problems solved), OOP paradigms, and DBMS.",
+    badge: "CORE CS",
   },
 ];
 
@@ -90,7 +121,7 @@ const About = () => {
     <section className="about" id="about" ref={sectionRef}>
       {/* TOP */}
       <div className="about-top">
-        <span className="about-reveal">03 / ABOUT & CAPABILITIES</span>
+        <span className="about-reveal">03 / ABOUT & CREDENTIALS</span>
         <span className="about-reveal">ARCHITECTING FOR SCALABILITY & AESTHETICS</span>
       </div>
 
@@ -133,18 +164,25 @@ const About = () => {
               01 // OVERVIEW
             </button>
             <button
-              className={`about-tab-btn ${activeTab === "journey" ? "active" : ""}`}
-              onClick={() => handleTabChange("journey")}
+              className={`about-tab-btn ${activeTab === "education" ? "active" : ""}`}
+              onClick={() => handleTabChange("education")}
               onMouseEnter={playHoverSound}
             >
-              02 // JOURNEY
+              02 // EDUCATION
+            </button>
+            <button
+              className={`about-tab-btn ${activeTab === "certifications" ? "active" : ""}`}
+              onClick={() => handleTabChange("certifications")}
+              onMouseEnter={playHoverSound}
+            >
+              03 // CERTIFICATIONS
             </button>
             <button
               className={`about-tab-btn ${activeTab === "capabilities" ? "active" : ""}`}
               onClick={() => handleTabChange("capabilities")}
               onMouseEnter={playHoverSound}
             >
-              03 // CAPABILITIES
+              04 // CAPABILITIES
             </button>
           </div>
 
@@ -152,53 +190,89 @@ const About = () => {
           {activeTab === "overview" && (
             <div className="about-tab-content">
               <p className="about-text">
-                I'm <strong>Ritesh Raj Singh</strong>, a full-stack engineer driven by building robust backend architectures and sleek, tactile frontend experiences.
+                I'm <strong>Ritesh Raj</strong>, a full-stack engineer and Computer Science undergraduate at <strong>Galgotias University</strong>. I specialize in the <strong>MERN stack</strong>, crafting secure REST APIs with Node.js & Express, performant MongoDB data models, and fluid interactive UIs with React and Three.js.
               </p>
 
               <p className="about-text">
-                My primary focus revolves around the <strong>MERN ecosystem</strong> — creating performant REST APIs with Node.js & Express, designing indexed MongoDB data schemas, and orchestrating reactive UIs with React and Three.js.
+                Certified in full-stack engineering by <strong>CodeHelp (Love Babbar)</strong> and in Java Data Structures & Algorithms by <strong>Apna College</strong>, I blend algorithmic discipline with modern software architecture.
               </p>
 
               <div className="about-info">
                 <div>
                   <span>LOCATION</span>
-                  <strong>INDIA (BIHAR)</strong>
+                  <strong>INDIA (BIHAR / GREATER NOIDA)</strong>
+                </div>
+                <div>
+                  <span>DEGREE</span>
+                  <strong>B.TECH CSE (GALGOTIAS UNIV, 2023-2027)</strong>
                 </div>
                 <div>
                   <span>STATUS</span>
                   <strong className="status-highlight">
-                    <span className="status-dot"></span> OPEN FOR OPPORTUNITIES
+                    <span className="status-dot"></span> OPEN FOR FULL-TIME & INTERNSHIPS
                   </strong>
                 </div>
                 <div>
                   <span>CORE SPECIALIZATION</span>
-                  <strong>FULL STACK MERN & 3D WEB</strong>
-                </div>
-                <div>
-                  <span>DEVELOPMENT PHILOSOPHY</span>
-                  <strong>CLEAN CODE · FAST QUERIES · USER DELIGHT</strong>
+                  <strong>MERN STACK · REAL-TIME SOCKET.IO · JAVA DSA</strong>
                 </div>
               </div>
             </div>
           )}
 
-          {/* TAB 2: JOURNEY */}
-          {activeTab === "journey" && (
+          {/* TAB 2: EDUCATION */}
+          {activeTab === "education" && (
             <div className="about-tab-content journey-list">
-              {journeyTimeline.map((item, idx) => (
+              {educationList.map((edu, idx) => (
                 <div key={idx} className="journey-card" onMouseEnter={playHoverSound}>
                   <div className="journey-header">
-                    <span className="journey-period">{item.period}</span>
-                    <span className="journey-org">{item.organization}</span>
+                    <span className="journey-period">{edu.period}</span>
+                    <span className="journey-org">{edu.location}</span>
                   </div>
-                  <h4 className="journey-role">{item.role}</h4>
-                  <p className="journey-details">{item.details}</p>
+                  <h4 className="journey-role">{edu.institution}</h4>
+                  <div className="education-degree-row">
+                    <span className="education-degree">{edu.degree}</span>
+                    <span className="education-score">{edu.score}</span>
+                  </div>
+                  <p className="journey-details">{edu.highlights}</p>
                 </div>
               ))}
             </div>
           )}
 
-          {/* TAB 3: CAPABILITIES */}
+          {/* TAB 3: CERTIFICATIONS */}
+          {activeTab === "certifications" && (
+            <div className="about-tab-content certifications-list">
+              {certificationsList.map((cert, idx) => (
+                <div key={idx} className="cert-card" onMouseEnter={playHoverSound}>
+                  <div className="cert-top">
+                    <div>
+                      <div className="cert-provider-row">
+                        <span className="cert-provider">{cert.provider}</span>
+                        <span className="cert-year">{cert.year}</span>
+                      </div>
+                      <h4 className="cert-title">{cert.title}</h4>
+                    </div>
+
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cert-verify-btn"
+                      onClick={playClickSound}
+                      title="View Credential on LinkedIn"
+                    >
+                      <span>CREDENTIAL</span>
+                      <ExternalLink size={12} />
+                    </a>
+                  </div>
+                  <p className="cert-details">{cert.details}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* TAB 4: CAPABILITIES */}
           {activeTab === "capabilities" && (
             <div className="about-tab-content capabilities-list">
               {capabilities.map((cap, idx) => (
@@ -213,7 +287,7 @@ const About = () => {
             </div>
           )}
 
-          {/* RESUME & CONTACT CTA */}
+          {/* ACTIONS */}
           <div className="about-actions about-reveal">
             <a
               href="#contact"
@@ -221,7 +295,7 @@ const About = () => {
               onMouseEnter={playHoverSound}
               onClick={playClickSound}
             >
-              <span>DISCUSS A PROJECT</span>
+              <span>GET IN TOUCH</span>
               <ArrowUpRight size={16} />
             </a>
 
@@ -243,8 +317,8 @@ const About = () => {
       {/* BOTTOM */}
       <div className="about-bottom">
         <span>03 / 05</span>
-        <span>SCALABLE ARCHITECTURE · INTENTIONAL DESIGN</span>
-        <span>BUILD — SHIP — SCALE</span>
+        <span>RITESH RAJ · FULL STACK MERN SPECIALIST</span>
+        <span>CODEHELP BABBAR & APNA COLLEGE CERTIFIED</span>
       </div>
     </section>
   );

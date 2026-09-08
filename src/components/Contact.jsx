@@ -139,6 +139,17 @@ const Contact = () => {
             {/* LINKS */}
             <div className="contact-links">
               <a
+                href="tel:+919709721676"
+                className="contact-link"
+                onMouseEnter={playHoverSound}
+                onClick={playClickSound}
+              >
+                <span>PHONE</span>
+                <span className="contact-link-value">+91-9709721676</span>
+                <ArrowUpRight size={20} />
+              </a>
+
+              <a
                 href="mailto:riteshraj851116@gmail.com"
                 className="contact-link"
                 onMouseEnter={playHoverSound}

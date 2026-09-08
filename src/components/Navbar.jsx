@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowUpRight, Volume2, VolumeX } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import MenuOverlay from "./MenuOverlay";
 import { isSoundEnabled, toggleSound, playClickSound, playHoverSound } from "../utils/audio";
 import "./Navbar.css";

@@ -48,7 +48,7 @@ export const playHoverSound = () => {
 
     osc.start();
     osc.stop(ctx.currentTime + 0.04);
-  } catch (e) {
+  } catch {
     // Ignore audio failures gracefully
   }
 };
@@ -74,7 +74,7 @@ export const playClickSound = () => {
 
     osc.start();
     osc.stop(ctx.currentTime + 0.07);
-  } catch (e) {
+  } catch {
     // Ignore
   }
 };
@@ -108,7 +108,7 @@ export const playSuccessSound = () => {
     gain2.connect(ctx.destination);
     osc2.start(now + 0.08);
     osc2.stop(now + 0.25);
-  } catch (e) {
+  } catch {
     // Ignore
   }
 };

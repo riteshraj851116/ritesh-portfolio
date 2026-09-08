@@ -1,43 +1,57 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Terminal, Database, Layers, Sparkles } from "lucide-react";
+import { Terminal, Database, Layers, Sparkles, Wrench } from "lucide-react";
 import { playClickSound, playHoverSound } from "../utils/audio";
 import "./RollingStack.css";
 
 const technologies = [
-  "MERN",
-  "REACT",
+  "REACT.JS",
   "NODE.JS",
   "EXPRESS",
   "MONGODB",
-  "JAVASCRIPT",
   "SOCKET.IO",
-  "GSAP",
-  "THREE.JS",
+  "JAVASCRIPT",
+  "JAVA (DSA)",
   "REST APIS",
-  "GITHUB",
+  "TAILWIND",
+  "THREE.JS",
 ];
 
 const skillCategories = [
   { id: "all", label: "ALL TECH", icon: Sparkles },
-  { id: "frontend", label: "FRONTEND & 3D", icon: Layers },
+  { id: "frontend", label: "FRONTEND & UI", icon: Layers },
   { id: "backend", label: "BACKEND & APIS", icon: Terminal },
   { id: "data", label: "DATA & REALTIME", icon: Database },
+  { id: "tools", label: "TOOLS & CORE CS", icon: Wrench },
 ];
 
 const detailedSkills = [
-  { name: "React.js (19)", category: "frontend", proficiency: "Expert", role: "SPA Architecture & Hooks" },
-  { name: "Node.js", category: "backend", proficiency: "Advanced", role: "Event-Driven Runtime & APIs" },
-  { name: "Express.js", category: "backend", proficiency: "Advanced", role: "REST Endpoints & Middleware" },
-  { name: "MongoDB", category: "data", proficiency: "Advanced", role: "Document Modeling & Aggregation" },
-  { name: "Socket.IO", category: "data", proficiency: "Proficient", role: "Sub-50ms Real-Time WebSockets" },
-  { name: "Three.js & R3F", category: "frontend", proficiency: "Creative", role: "3D Viewports & Shaders" },
-  { name: "GSAP & ScrollTrigger", category: "frontend", proficiency: "Creative", role: "Fluid Choreographed Motion" },
-  { name: "JavaScript (ES6+)", category: "frontend", proficiency: "Core", role: "Async, Event Loop, Closures" },
-  { name: "JWT & Bcrypt", category: "backend", proficiency: "Secure", role: "Token Authorization & Hashing" },
-  { name: "Mongoose ODM", category: "data", proficiency: "Advanced", role: "Schema Validation & Indexing" },
-  { name: "Git & GitHub", category: "tools", proficiency: "Standard", role: "Version Control & CI/CD" },
-  { name: "RESTful API Architecture", category: "backend", proficiency: "Advanced", role: "40+ Production Endpoints" },
+  // Frontend
+  { name: "React.js", category: "frontend", proficiency: "Expert", role: "SPA, Hooks, Virtual DOM" },
+  { name: "React Router", category: "frontend", proficiency: "Advanced", role: "Client-side Routing & Guards" },
+  { name: "Vite", category: "frontend", proficiency: "Advanced", role: "Lightning Fast ESM Bundling" },
+  { name: "Tailwind CSS", category: "frontend", proficiency: "Advanced", role: "Responsive Modern Utility Styling" },
+  { name: "Three.js & GSAP", category: "frontend", proficiency: "Creative", role: "Interactive 3D & Web Motion" },
+  { name: "JavaScript (ES6+)", category: "frontend", proficiency: "Core", role: "Async/Await, Closures, Event Loop" },
+
+  // Backend & APIs
+  { name: "Node.js", category: "backend", proficiency: "Advanced", role: "Event-Driven Scalable Runtime" },
+  { name: "Express.js", category: "backend", proficiency: "Advanced", role: "40+ REST API Endpoints & Middleware" },
+  { name: "Socket.IO", category: "data", proficiency: "Advanced", role: "Sub-50ms Real-Time Chat Channels" },
+  { name: "JWT Authentication", category: "backend", proficiency: "Secure", role: "Stateless Tokens & Route Guards" },
+  { name: "Bcrypt Hashing", category: "backend", proficiency: "Secure", role: "Salted Password Encryption" },
+
+  // Database
+  { name: "MongoDB", category: "data", proficiency: "Advanced", role: "NoSQL Schemas & Aggregation" },
+  { name: "Mongoose ORM", category: "data", proficiency: "Advanced", role: "Optimized Indexing (<200ms)" },
+  { name: "SQL", category: "data", proficiency: "Proficient", role: "Relational Queries & Tables" },
+
+  // Tools & Core CS
+  { name: "Java (DSA)", category: "tools", proficiency: "200+ Solved", role: "Apna College Certified Algorithmics" },
+  { name: "Git & GitHub", category: "tools", proficiency: "Advanced", role: "Version Control & Git Workflows" },
+  { name: "Postman", category: "tools", proficiency: "Advanced", role: "API Testing & Mocking" },
+  { name: "Vercel & Render", category: "tools", proficiency: "Production", role: "Cloud Deployment & Continuous CI" },
+  { name: "OOP & DBMS", category: "tools", proficiency: "Core CS", role: "Academic Grounding (Galgotias Univ)" },
 ];
 
 const RollingStack = () => {
@@ -50,7 +64,7 @@ const RollingStack = () => {
 
     const animation = gsap.to(cylinder, {
       rotateY: 360,
-      duration: 24,
+      duration: 26,
       repeat: -1,
       ease: "none",
     });
@@ -73,8 +87,8 @@ const RollingStack = () => {
     <section className="rolling-stack" id="skills">
       {/* HEADER */}
       <div className="rolling-stack-header">
-        <span>02 / TECHNOLOGY</span>
-        <span>MY STACK & TOOLING</span>
+        <span>02 / TECHNICAL MATRIX</span>
+        <span>MERN · REAL-TIME · CORE CS</span>
       </div>
 
       {/* 3D VIEWPORT */}
@@ -94,13 +108,10 @@ const RollingStack = () => {
                   className="cylinder-item"
                   key={tech}
                   style={{
-                    transform: `
-                      rotateY(${angle}deg)
-                      translateZ(420px)
-                    `,
+                    transform: `rotateY(${angle}deg) translateZ(460px)`,
                   }}
                 >
-                  <span>{tech}</span>
+                  <span className="cylinder-pill">{tech}</span>
                 </div>
               );
             })}
@@ -110,7 +121,7 @@ const RollingStack = () => {
           <div className="cylinder-center">
             <span className="center-small">FULL STACK</span>
             <span className="center-main">MERN</span>
-            <span className="center-small">SPECIALIST</span>
+            <span className="center-small">ENGINEER</span>
           </div>
         </div>
       </div>
@@ -153,9 +164,9 @@ const RollingStack = () => {
 
       {/* BOTTOM */}
       <div className="rolling-stack-footer">
-        <span>MERN SPECIALIST</span>
-        <span>EVENT-DRIVEN ARCHITECTURES</span>
-        <span>HIGH-FIDELITY WEB APPS</span>
+        <span>GALGOTIAS UNIVERSITY · CSE (2023-2027)</span>
+        <span>PRODUCTION-GRADE MERN ARCHITECTURES</span>
+        <span>LATENCY OPTIMIZED · SUB-50MS</span>
       </div>
     </section>
   );
