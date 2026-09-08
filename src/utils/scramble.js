@@ -1,3 +1,5 @@
+import { playScrambleTick } from "./audio";
+
 const GLYPHS = "!<>-_\\/[]{}—=+*^?#01XYZ";
 
 export const scrambleText = (element, finalWord, duration = 600) => {
@@ -21,6 +23,11 @@ export const scrambleText = (element, finalWord, duration = 600) => {
         return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
       })
       .join("");
+
+    // Play cyber typewriter sound tick every 2 iterations
+    if (iteration % 2 === 0) {
+      playScrambleTick();
+    }
 
     if (iteration >= maxIterations) {
       element.innerText = original;

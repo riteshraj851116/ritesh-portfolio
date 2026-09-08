@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Terminal, Sparkles } from "lucide-react";
+import { playLoaderTick, playBootSound } from "../utils/audio";
 import "./Loader.css";
 
 const Loader = ({ onComplete }) => {
   const loaderRef = useRef(null);
   const [progress, setProgress] = useState(0);
 
-  // Animate progress counter from 0 to 100
+  // Animate progress counter from 0 to 100 with audio telemetry ticks
   useEffect(() => {
     let start = 0;
     const interval = setInterval(() => {
@@ -15,11 +16,13 @@ const Loader = ({ onComplete }) => {
       if (start >= 100) {
         start = 100;
         setProgress(100);
+        playBootSound();
         clearInterval(interval);
       } else {
         setProgress(start);
+        playLoaderTick(start);
       }
-    }, 40);
+    }, 45);
 
     return () => clearInterval(interval);
   }, []);
