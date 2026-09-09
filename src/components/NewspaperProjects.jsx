@@ -1,5 +1,12 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { playHoverBlip, playClickSound } from "../utils/audio";
 import "./NewspaperProjects.css";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const projectsData = [
   {
@@ -38,8 +45,82 @@ const projectsData = [
 ];
 
 const NewspaperProjects = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Editorial Header Reveal
+      gsap.fromTo(
+        ".projects-editorial-header",
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".projects-editorial-header",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 2. Project Cards Stagger Entrance
+      gsap.fromTo(
+        ".project-broadsheet-card",
+        { opacity: 0, y: 50, scale: 0.98 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.16,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".projects-broadsheet-grid",
+            start: "top 82%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // GSAP 3D Perspective Tilt on Mouse Movement
+  const handleCardMouseMove = (e, cardEl) => {
+    if (!cardEl) return;
+    const rect = cardEl.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotateY = (x / (rect.width / 2)) * 6;
+    const rotateX = -(y / (rect.height / 2)) * 6;
+
+    gsap.to(cardEl, {
+      rotateX,
+      rotateY,
+      transformPerspective: 1000,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleCardMouseLeave = (cardEl) => {
+    if (!cardEl) return;
+    gsap.to(cardEl, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  };
+
   return (
-    <section className="newspaper-projects-section" id="work">
+    <section className="newspaper-projects-section" id="work" ref={sectionRef}>
       {/* SECTION HEADER EDITORIAL SPREAD */}
       <div className="projects-editorial-header">
         <div className="header-column-left">
@@ -58,12 +139,14 @@ const NewspaperProjects = () => {
         </div>
       </div>
 
-      {/* BROADSHEET PROJECT GRID */}
+      {/* BROADSHEET PROJECT GRID WITH GSAP 3D TILT */}
       <div className="projects-broadsheet-grid">
         {projectsData.map((project, index) => (
           <article
             key={project.id}
             className="project-broadsheet-card"
+            onMouseMove={(e) => handleCardMouseMove(e, e.currentTarget)}
+            onMouseLeave={(e) => handleCardMouseLeave(e.currentTarget)}
             onMouseEnter={() => {
               try { playHoverBlip(); } catch (e) {}
             }}

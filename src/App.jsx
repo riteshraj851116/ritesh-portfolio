@@ -3,10 +3,10 @@ import Lenis from "lenis";
 
 import Loader from "./components/Loader";
 import CustomCursor from "./components/CustomCursor";
-import PaperCanvas3D from "./components/PaperCanvas3D";
 import NewspaperHeader from "./components/NewspaperHeader";
 import NewspaperMenu from "./components/NewspaperMenu";
 import NewspaperHero from "./components/NewspaperHero";
+import NewspaperSkills3D from "./components/NewspaperSkills3D";
 import NewspaperProjects from "./components/NewspaperProjects";
 import NewspaperMetrics from "./components/NewspaperMetrics";
 import NewspaperPlaybook from "./components/NewspaperPlaybook";
@@ -46,9 +46,6 @@ function App() {
       {/* 00 — HELLO MULTILINGUAL BROADSHEET LOADER */}
       {loading && <Loader onComplete={() => setLoading(false)} />}
 
-      {/* THREE.JS SUBTLE 3D INK & PAPER PARTICLE CANVAS */}
-      <PaperCanvas3D />
-
       {/* INK CUSTOM CURSOR */}
       <CustomCursor />
 
@@ -63,7 +60,10 @@ function App() {
         {/* 01 — ALL WORK! SELECTION, INVERTED BANNER 'RITESH', ARTISAN SPREAD & STAMP */}
         <NewspaperHero />
 
-        {/* 02 — BROADSHEET PROJECTS CATALOG */}
+        {/* 02 — 3D MOVING SKILLS MATRIX */}
+        <NewspaperSkills3D />
+
+        {/* 03 — BROADSHEET PROJECTS CATALOG */}
         <NewspaperProjects />
 
         {/* 03 — EDITORIAL METRICS & STATS STRIP */}

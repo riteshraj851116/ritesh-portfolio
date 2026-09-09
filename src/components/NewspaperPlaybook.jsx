@@ -1,4 +1,12 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { playHoverBlip } from "../utils/audio";
 import "./NewspaperPlaybook.css";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const endorsements = [
   {
@@ -36,8 +44,81 @@ const endorsements = [
 ];
 
 const NewspaperPlaybook = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Stitched Ticket Cards Stagger Entrance
+      gsap.fromTo(
+        ".stitched-ticket-card",
+        { opacity: 0, y: 40, rotateX: 10 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".stitched-cards-grid",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 2. Statement Spread Reveal
+      gsap.fromTo(
+        ".playbook-statement-spread",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".playbook-statement-spread",
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleCardMouseMove = (e, el) => {
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotateY = (x / (rect.width / 2)) * 5;
+    const rotateX = -(y / (rect.height / 2)) * 5;
+
+    gsap.to(el, {
+      rotateX,
+      rotateY,
+      transformPerspective: 800,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleCardMouseLeave = (el) => {
+    if (!el) return;
+    gsap.to(el, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  };
+
   return (
-    <section className="newspaper-playbook-section" id="playbook">
+    <section className="newspaper-playbook-section" id="playbook" ref={sectionRef}>
       {/* 01 — INVERTED BLACK BANNER: CREDENTIALS (AUTHENTIC OLD ENGLISH BLACKLETTER) */}
       <div className="inverted-black-banner">
         <h2 className="banner-gigantic-title font-blackletter" title="Credentials">
@@ -67,10 +148,18 @@ const NewspaperPlaybook = () => {
         </div>
       </div>
 
-      {/* 03 — STITCHED COUPON TICKET CARDS */}
+      {/* 03 — STITCHED COUPON TICKET CARDS WITH GSAP 3D TILT */}
       <div className="stitched-cards-grid">
         {endorsements.map((item, idx) => (
-          <div key={idx} className="stitched-ticket-card">
+          <div
+            key={idx}
+            className="stitched-ticket-card"
+            onMouseMove={(e) => handleCardMouseMove(e, e.currentTarget)}
+            onMouseLeave={(e) => handleCardMouseLeave(e.currentTarget)}
+            onMouseEnter={() => {
+              try { playHoverBlip(); } catch (e) {}
+            }}
+          >
             <div className="ticket-inner">
               <div>
                 <span className="side-col-badge">{item.badge}</span>

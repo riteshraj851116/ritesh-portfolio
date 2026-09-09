@@ -6,11 +6,91 @@
   height: 100vh;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.85;
+  opacity: 0.92;
 }
 
 .paper-3d-canvas-container canvas {
   width: 100% !important;
   height: 100% !important;
   display: block;
+}
+
+/* EDITORIAL 3D HUD BADGE */
+.threejs-broadsheet-hud {
+  position: fixed;
+  bottom: 24px;
+  left: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: var(--paper-light);
+  border: 1px solid var(--ink-rule);
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-stamp);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--ink-black);
+  z-index: 800;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px rgba(29, 29, 27, 0.4);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.threejs-broadsheet-hud:hover {
+  border-color: var(--terracotta);
+  background-color: #f7f3ed;
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0px var(--terracotta);
+}
+
+.hud-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--terracotta);
+  animation: hudPulse 2s infinite ease-in-out;
+}
+
+@keyframes hudPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.4;
+  }
+}
+
+.hud-code {
+  letter-spacing: 0.06em;
+}
+
+.hud-metric {
+  color: var(--ink-muted);
+  border-left: 1px solid var(--ink-rule);
+  padding-left: 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.hud-action {
+  color: var(--terracotta);
+  font-weight: 700;
+  border-left: 1px solid var(--ink-rule);
+  padding-left: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .threejs-broadsheet-hud {
+    bottom: 16px;
+    left: 16px;
+    font-size: 0.6rem;
+  }
+  .hud-metric,
+  .hud-action {
+    display: none;
+  }
 }

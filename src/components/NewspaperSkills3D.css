@@ -1,0 +1,271 @@
+/* ==========================================================================
+   NEWSPAPER 3D MOVING SKILLS CARDS SHOWCASE
+   Spatial 3D perspective grid, interactive kinetic cards & broadsheet styling
+   ========================================================================== */
+
+.newspaper-skills-section {
+  background-color: var(--paper-bg);
+  border-top: 2px solid var(--ink-black);
+  border-bottom: 2px solid var(--ink-black);
+  padding: 3.5rem clamp(1rem, 4vw, 3rem);
+  position: relative;
+  width: 100%;
+}
+
+/* SECTION HEADER */
+.skills-editorial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--ink-rule);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.skills-header-left {
+  max-width: 720px;
+}
+
+.skills-kicker {
+  font-size: 1.15rem;
+  color: var(--terracotta);
+  display: block;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.skills-headline {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink-black);
+  margin-bottom: 0.75rem;
+}
+
+.skills-lead {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.55;
+  color: #3f3e3a;
+}
+
+.skills-meta-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--ink-black);
+  color: #f7f3e8;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 2px 2px 0 var(--terracotta);
+}
+
+.meta-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--terracotta);
+  animation: metaPulse 2s infinite ease-in-out;
+}
+
+@keyframes metaPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* 3D STAGE & GRID */
+.skills-3d-stage {
+  perspective: 1400px;
+  perspective-origin: center center;
+  padding: 1rem 0 2rem;
+}
+
+.skills-3d-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+}
+
+/* INDIVIDUAL 3D CARD */
+.skill-3d-card {
+  position: relative;
+  background-color: var(--paper-light);
+  border: 1.5px solid var(--ink-black);
+  box-shadow: 4px 4px 0px var(--ink-black);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+
+.skill-3d-card:hover {
+  border-color: var(--terracotta);
+  box-shadow: 6px 12px 24px rgba(29, 29, 27, 0.16), 4px 4px 0px var(--terracotta);
+}
+
+.card-3d-inner {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transform: translateZ(1px);
+}
+
+/* CARD TOP STATUS */
+.card-3d-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed var(--ink-rule);
+}
+
+.card-3d-cat {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--terracotta);
+}
+
+.card-3d-icon {
+  font-size: 1.25rem;
+}
+
+/* CARD TITLE */
+.card-3d-title {
+  font-family: var(--font-headline);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--ink-black);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.45rem;
+  line-height: 1.15;
+}
+
+.card-3d-rating-badge {
+  margin-bottom: 1rem;
+}
+
+.rating-pill {
+  display: inline-block;
+  background-color: var(--ink-black);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+
+.card-3d-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #4a4944;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+/* TECH CHIPS */
+.card-3d-tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.tech-chip {
+  background-color: rgba(29, 29, 27, 0.05);
+  border: 1px solid rgba(29, 29, 27, 0.15);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--ink-black);
+  padding: 2px 6px;
+}
+
+/* FOOTER BENCHMARK */
+.card-3d-footer {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ink-rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.footer-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #7d7870;
+}
+
+.footer-highlight {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--terracotta);
+  text-align: right;
+}
+
+/* FOOTER STRIP */
+.skills-footer-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ink-rule);
+}
+
+.strip-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.strip-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--terracotta);
+  letter-spacing: 0.06em;
+}
+
+.strip-item p {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #4a4944;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 1024px) {
+  .skills-3d-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skills-footer-strip {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .skills-3d-grid {
+    grid-template-columns: 1fr;
+  }
+}
