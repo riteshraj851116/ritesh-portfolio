@@ -112,7 +112,6 @@ const Navbar = ({ onOpenAbout }) => {
     { id: "on-off-code", label: "03 DUALITY", href: "#on-off-code" },
     { id: "dossier", label: "04 DOSSIER", href: "#dossier" },
     { id: "tech-stack", label: "05 TECH", href: "#tech-stack" },
-    { id: "about", label: "06 ABOUT", href: "#about", isAbout: true },
   ];
 
   return (

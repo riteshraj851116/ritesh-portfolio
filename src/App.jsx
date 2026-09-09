@@ -15,7 +15,6 @@ import FeaturedFlagship from "./components/FeaturedFlagship";
 import EngineeringPlaybook from "./components/EngineeringPlaybook";
 import TechCollabs from "./components/TechCollabs";
 import Contact from "./components/Contact";
-import KentaAbout from "./components/KentaAbout";
 import {
   initScrollVelocitySkew,
   initMagneticElements,
@@ -23,32 +22,10 @@ import {
 } from "./utils/gsapKinematics";
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [view, setView] = useState(() => {
-    if (typeof window !== "undefined" && window.location.hash === "#work") {
-      return "work";
-    }
-    // Default to Kenta Toshikura 100% About replica per user request
-    return "about";
-  });
+  const [loading, setLoading] = useState(true);
 
-  // Listen to hash changes for smooth back/forward navigation
+  // Initialize Lenis smooth scroll
   useEffect(() => {
-    const handleHashChange = () => {
-      if (window.location.hash === "#work") {
-        setView("work");
-      } else if (window.location.hash === "#about") {
-        setView("about");
-      }
-    };
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
-  // Initialize Lenis smooth scroll for Work portfolio
-  useEffect(() => {
-    if (view !== "work") return;
-
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -77,30 +54,11 @@ function App() {
       cleanupMagnetic();
       cleanupKinetic();
     };
-  }, [view]);
+  }, []);
 
-  // View: Kenta Toshikura 100% Copy
-  if (view === "about") {
-    return (
-      <>
-        {/* CUSTOM VELOCITY-STRETCH CURSOR */}
-        <CustomCursor />
-
-        {/* KENTA TOSHIKURA 1:1 ABOUT REPLICA */}
-        <KentaAbout
-          onSwitchToWork={() => {
-            setView("work");
-            window.location.hash = "#work";
-          }}
-        />
-      </>
-    );
-  }
-
-  // View: Work Portfolio Showcase
   return (
     <>
-      {/* 3D PAGE FLIP DOSSIER INITIALIZATION LOADER */}
+      {/* 00 — HELLO MULTILINGUAL EDITORIAL INITIALIZATION LOADER */}
       {loading && <Loader onComplete={() => setLoading(false)} />}
 
       {/* AMBIENT 3D SLIPSTREAM UNIVERSE */}
@@ -113,14 +71,9 @@ function App() {
       <ScrollHUD />
 
       {/* FLOATING PILL NAVBAR */}
-      <Navbar
-        onOpenAbout={() => {
-          setView("about");
-          window.location.hash = "#about";
-        }}
-      />
+      <Navbar />
 
-      {/* MAIN LANDO NORRIS INSPIRED PORTFOLIO */}
+      {/* MAIN CINEMATIC ATHLETIC FULL-STACK PORTFOLIO */}
       <main>
         {/* 01 — HERO (CINEMATIC ATHLETIC SHOWCASE) */}
         <Hero />
