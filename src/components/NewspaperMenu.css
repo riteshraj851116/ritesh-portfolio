@@ -1,0 +1,132 @@
+/* ==========================================================================
+   NICCOLÒ MIRANDA FULLSCREEN NEWSPAPER MENU OVERLAY
+   Dark broadsheet menu with giant condensed titles & terracotta strikethrough
+   ========================================================================== */
+
+.newspaper-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #1a1918;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
+  animation: menuFadeIn 0.3s var(--cubic-paper) forwards;
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(232, 227, 219, 0.15);
+  padding-bottom: 1rem;
+}
+
+.menu-masthead {
+  font-family: var(--font-masthead);
+  font-size: 1.65rem;
+  color: #e8e3db;
+}
+
+.menu-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: #e8e3db;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.menu-close-btn:hover {
+  transform: scale(1.15);
+  color: var(--terracotta);
+}
+
+/* LINKS CONTAINER */
+.menu-links-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: auto 0;
+}
+
+.menu-link-wrapper {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.menu-link-item {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-headline);
+  font-size: clamp(3.5rem, 8.5vw, 8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #d8d1c9;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.menu-link-item:hover {
+  color: #ffffff;
+  transform: scale(1.02);
+}
+
+/* SIGNATURE TERRACOTTA STRIKETHROUGH ON ACTIVE ITEM */
+.is-active .link-strikethrough {
+  position: absolute;
+  left: -5%;
+  top: 50%;
+  width: 110%;
+  height: clamp(4px, 0.6vw, 8px);
+  background-color: var(--terracotta);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* FOOTER SOCIALS */
+.menu-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(232, 227, 219, 0.15);
+  font-family: var(--font-editorial);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.menu-footer-link {
+  color: #a8a29a;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.menu-footer-link:hover {
+  color: #ffffff;
+  text-decoration: line-through;
+  text-decoration-color: var(--terracotta);
+}
+
+.menu-footer .bullet {
+  color: rgba(232, 227, 219, 0.3);
+}

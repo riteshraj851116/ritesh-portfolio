@@ -1,30 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Lenis from "lenis";
 
 import Loader from "./components/Loader";
-import Navbar from "./components/Navbar";
 import CustomCursor from "./components/CustomCursor";
-import ScrollHUD from "./components/ScrollHUD";
-import GlobalCanvas from "./components/GlobalCanvas";
-import Hero from "./components/Hero";
-import MarqueeStream from "./components/MarqueeStream";
-import CareerTrack from "./components/CareerTrack";
-import OnTrackOffTrack from "./components/OnTrackOffTrack";
-import Projects from "./components/Projects";
-import FeaturedFlagship from "./components/FeaturedFlagship";
-import EngineeringPlaybook from "./components/EngineeringPlaybook";
-import TechCollabs from "./components/TechCollabs";
-import Contact from "./components/Contact";
-import {
-  initScrollVelocitySkew,
-  initMagneticElements,
-  initSectionKineticEntrances,
-} from "./utils/gsapKinematics";
+import PaperCanvas3D from "./components/PaperCanvas3D";
+import NewspaperHeader from "./components/NewspaperHeader";
+import NewspaperMenu from "./components/NewspaperMenu";
+import NewspaperHero from "./components/NewspaperHero";
+import NewspaperProjects from "./components/NewspaperProjects";
+import NewspaperMetrics from "./components/NewspaperMetrics";
+import NewspaperPlaybook from "./components/NewspaperPlaybook";
+import NewspaperMarquee from "./components/NewspaperMarquee";
+import NewspaperFooter from "./components/NewspaperFooter";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Initialize Lenis smooth scroll
+  // Initialize Lenis smooth scroll for effortless broadsheet reading
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -43,64 +36,47 @@ function App() {
 
     requestAnimationFrame(raf);
 
-    // Initialize Advanced GSAP Kinematics
-    const cleanupSkew = initScrollVelocitySkew();
-    const cleanupMagnetic = initMagneticElements();
-    const cleanupKinetic = initSectionKineticEntrances();
-
     return () => {
       lenis.destroy();
-      cleanupSkew();
-      cleanupMagnetic();
-      cleanupKinetic();
     };
   }, []);
 
   return (
     <>
-      {/* 00 — HELLO MULTILINGUAL EDITORIAL INITIALIZATION LOADER */}
+      {/* 00 — HELLO MULTILINGUAL BROADSHEET LOADER */}
       {loading && <Loader onComplete={() => setLoading(false)} />}
 
-      {/* AMBIENT 3D SLIPSTREAM UNIVERSE */}
-      <GlobalCanvas />
+      {/* THREE.JS SUBTLE 3D INK & PAPER PARTICLE CANVAS */}
+      <PaperCanvas3D />
 
-      {/* CUSTOM VELOCITY-STRETCH CURSOR */}
+      {/* INK CUSTOM CURSOR */}
       <CustomCursor />
 
-      {/* FLOATING SCROLL HUD */}
-      <ScrollHUD />
+      {/* PINNED NEWSPAPER HEADER (Masthead, Location & Menu Trigger) */}
+      <NewspaperHeader onOpenMenu={() => setMenuOpen(true)} />
 
-      {/* FLOATING PILL NAVBAR */}
-      <Navbar />
+      {/* FULLSCREEN DARK NEWSPAPER NAVIGATION OVERLAY */}
+      <NewspaperMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
-      {/* MAIN CINEMATIC ATHLETIC FULL-STACK PORTFOLIO */}
-      <main>
-        {/* 01 — HERO (CINEMATIC ATHLETIC SHOWCASE) */}
-        <Hero />
+      {/* MAIN BROADSHEET EDITORIAL PORTFOLIO */}
+      <main className="paper-portfolio-main">
+        {/* 01 — ALL WORK! SELECTION, INVERTED BANNER 'RITESH', ARTISAN SPREAD & STAMP */}
+        <NewspaperHero />
 
-        {/* 02 — MARQUEE STREAM & MANIFESTO */}
-        <MarqueeStream />
+        {/* 02 — BROADSHEET PROJECTS CATALOG */}
+        <NewspaperProjects />
 
-        {/* 03 — CAREER TRACK (HORIZONTAL MILESTONES & CREDENTIALS) */}
-        <CareerTrack />
+        {/* 03 — EDITORIAL METRICS & STATS STRIP */}
+        <NewspaperMetrics />
 
-        {/* 04 — ON CODE / OFF CODE (INTERACTIVE SPLIT) */}
-        <OnTrackOffTrack />
+        {/* 04 — ARCHITECT INVERTED BANNER & STITCHED COUPON CARDS */}
+        <NewspaperPlaybook />
 
-        {/* 05 — PROJECTS HALL OF FAME (NOTCHED POLYGON FRAMES) */}
-        <Projects />
+        {/* 05 — CONTINUOUS EMAIL ME MARQUEE RIBBON */}
+        <NewspaperMarquee />
 
-        {/* 06 — FEATURED FLAGSHIP (JOBSPHERE RECRUITMENT ENGINE) */}
-        <FeaturedFlagship />
-
-        {/* 07 — 3D INTERACTIVE FLIPPING PAPER DOSSIER & PLAYBOOK */}
-        <EngineeringPlaybook />
-
-        {/* 08 — TECH STACK & TOOLCHAIN (PARTNERS STYLE) */}
-        <TechCollabs />
-
-        {/* 09 — SOCIALS, DISPATCH & MASKED FOOTER */}
-        <Contact />
+        {/* 06 — BROADSHEET COLOPHON FOOTER */}
+        <NewspaperFooter />
       </main>
     </>
   );

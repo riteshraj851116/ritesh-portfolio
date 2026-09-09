@@ -1,0 +1,96 @@
+/* ==========================================================================
+   NICCOLÒ MIRANDA NEWSPAPER MARQUEE RIBBON
+   ========================================================================== */
+
+.newspaper-marquee-wrapper {
+  background-color: var(--paper-bg);
+  border-bottom: 1px solid var(--ink-rule);
+  padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.newspaper-marquee-wrapper:hover {
+  background-color: #d6cecc;
+}
+
+.marquee-scroller-inner {
+  display: flex;
+  width: max-content;
+  animation: marqueeLoop 26s linear infinite;
+}
+
+.newspaper-marquee-wrapper:hover .marquee-scroller-inner {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeLoop {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-content-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  padding-right: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* BLACK INVERTED BLOCK: EMAIL ME */
+.marquee-black-pill {
+  display: inline-block;
+  background-color: #171615;
+  color: #d8d1c9;
+  font-family: var(--font-headline);
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  padding: 0.2rem 1.4rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+/* SCRIPT PHRASE */
+.marquee-script-phrase {
+  font-family: var(--font-editorial);
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-black);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* TOAST ON COPY */
+.copied-broadside-toast {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--terracotta);
+  color: #ffffff;
+  font-family: var(--font-stamp);
+  font-size: 0.82rem;
+  padding: 8px 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  animation: toastPop 0.25s ease forwards;
+}
+
+@keyframes toastPop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

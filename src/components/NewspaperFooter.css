@@ -1,0 +1,86 @@
+/* ==========================================================================
+   NICCOLÒ MIRANDA NEWSPAPER FOOTER
+   ========================================================================== */
+
+.newspaper-footer-broadsheet {
+  background-color: var(--paper-bg);
+  padding: 1.5rem clamp(1.5rem, 4vw, 3.5rem);
+  border-top: 1px solid var(--ink-rule);
+  width: 100%;
+}
+
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-left-col {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-brand {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--ink-black);
+}
+
+.footer-stamp-mini {
+  display: flex;
+  align-items: center;
+}
+
+.footer-colophon {
+  font-family: var(--font-stamp);
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+.footer-right-col {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.footer-social-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-social-anchor {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ink-black);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.footer-social-anchor:hover {
+  color: var(--terracotta);
+  text-decoration: line-through;
+  text-decoration-color: var(--terracotta);
+  text-decoration-thickness: 2px;
+}
+
+.footer-dot {
+  color: rgba(29, 29, 27, 0.35);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

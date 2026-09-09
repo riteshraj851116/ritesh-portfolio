@@ -17,22 +17,21 @@
   left: -4px;
   width: 8px;
   height: 8px;
-  background-color: var(--color--brown-vibrant, #92400e);
+  background-color: var(--ink-black);
   border-radius: 50%;
   pointer-events: none;
   will-change: transform;
-  box-shadow: 0 0 10px rgba(146, 64, 14, 0.45);
   transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
   z-index: 1000000;
 }
 
 .cursor-ring {
   position: fixed;
-  top: -20px;
-  left: -20px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(146, 64, 14, 0.35);
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(29, 29, 27, 0.4);
   border-radius: 50%;
   pointer-events: none;
   will-change: transform;
@@ -41,35 +40,19 @@
               top 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               left 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.25s ease,
-              background-color 0.25s ease,
-              box-shadow 0.25s ease;
+              background-color 0.25s ease;
   z-index: 999999;
 }
 
 .cursor-ring.hovered {
-  top: -28px;
-  left: -28px;
-  width: 56px;
-  height: 56px;
-  border-color: var(--color--brown-vibrant, #92400e);
-  background-color: rgba(146, 64, 14, 0.08);
-  box-shadow: 0 0 16px rgba(146, 64, 14, 0.2);
-  backdrop-filter: blur(1px);
+  top: -24px;
+  left: -24px;
+  width: 48px;
+  height: 48px;
+  border-color: var(--terracotta);
+  background-color: rgba(192, 63, 19, 0.08);
 }
 
 .cursor-dot.hovered {
-  opacity: 0.8;
-  transform: scale(0.65);
-}
-
-.cursor-ring.clicking {
-  transform: scale(0.85);
-  border-color: var(--color--brown-vibrant, #92400e);
-  box-shadow: 0 0 20px rgba(146, 64, 14, 0.4);
-}
-
-@media (pointer: coarse), (max-width: 768px) {
-  .custom-cursor-container {
-    display: none !important;
-  }
+  background-color: var(--terracotta);
 }

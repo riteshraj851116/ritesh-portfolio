@@ -722,3 +722,86 @@ export const playBootSound = () => {
   }
 };
 
+/**
+ * 13. BROADSHEET HOVER BLIP (Gentle acoustic micro-tap for vintage newspaper cards)
+ */
+export const playHoverBlip = () => {
+  if (!soundEnabled) return;
+  try {
+    const ctx = initAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(320, now);
+    osc.frequency.exponentialRampToValueAtTime(180, now + 0.03);
+
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(600, now);
+
+    gain.gain.setValueAtTime(0.04, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.03);
+    notifySoundPlayed(0.2);
+  } catch {
+    // ignore
+  }
+};
+
+/**
+ * 14. VINTAGE POSTAGE RUBBER STAMP THUD
+ * Crisp mechanical contact followed by heavy ink-soaked rubber resonance
+ */
+export const playStampThud = () => {
+  if (!soundEnabled) return;
+  try {
+    const ctx = initAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    // Contact punch
+    const snapOsc = ctx.createOscillator();
+    const snapGain = ctx.createGain();
+    snapOsc.type = "triangle";
+    snapOsc.frequency.setValueAtTime(600, now);
+    snapOsc.frequency.exponentialRampToValueAtTime(80, now + 0.04);
+
+    snapGain.gain.setValueAtTime(0.25, now);
+    snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+    snapOsc.connect(snapGain);
+    snapGain.connect(ctx.destination);
+    snapOsc.start(now);
+    snapOsc.stop(now + 0.04);
+
+    // Deep wooden desk & rubber thud resonance
+    const thudOsc = ctx.createOscillator();
+    const thudGain = ctx.createGain();
+    thudOsc.type = "sine";
+    thudOsc.frequency.setValueAtTime(95, now + 0.005);
+    thudOsc.frequency.exponentialRampToValueAtTime(35, now + 0.12);
+
+    thudGain.gain.setValueAtTime(0.35, now + 0.005);
+    thudGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+    thudOsc.connect(thudGain);
+    thudGain.connect(ctx.destination);
+    thudOsc.start(now + 0.005);
+    thudOsc.stop(now + 0.12);
+
+    notifySoundPlayed(0.85);
+  } catch {
+    // ignore
+  }
+};
+

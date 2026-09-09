@@ -21,61 +21,45 @@
 }
 
 :root {
-  /* PURE OBSIDIAN DARK LUXURY PALETTE: PITCH BLACK, SLEEK GLASS, GOLDEN AMBER ACCENTS */
-  --bg-primary: #080709;
-  --bg-surface: #0f0e12;
-  --bg-card: rgba(20, 19, 24, 0.72);
-  --text-primary: #f4f4f6;
-  --text-muted: #a1a1aa;
-  --text-dim: #71717a;
+  /* NICCOLÒ MIRANDA "THE PAPER PORTFOLIO" DESIGN SYSTEM */
+  --paper-bg: #cdc6be;
+  --paper-surface: #d8d1c9;
+  --paper-light: #e8e3db;
+  --paper-card: #d4cdc5;
+  --ink-black: #1d1d1b;
+  --ink-pure: #111110;
+  --ink-muted: #4e4e4a;
+  --ink-faint: #787873;
+  --ink-rule: rgba(29, 29, 27, 0.22);
+  --ink-rule-dark: rgba(29, 29, 27, 0.5);
 
-  /* Pure Obsidian & Golden Amber Scale */
-  --color--amber-gold: #f59e0b;
-  --color--amber-bright: #fbbf24;
-  --color--amber-deep: #d97706;
-  --color--amber-glow: rgba(245, 158, 11, 0.35);
-  --color--amber-tint: rgba(245, 158, 11, 0.1);
+  /* Terracotta Red-Orange Accents */
+  --terracotta: #c03f13;
+  --terracotta-bright: #d64817;
+  --terracotta-tint: rgba(192, 63, 19, 0.12);
 
-  /* Legacy aliases mapped to Obsidian & Golden Amber */
-  --color--brown-vibrant: #f59e0b;
-  --color--brown-bright: #fbbf24;
-  --color--brown-deep: #d97706;
-  --color--brown-tint: rgba(245, 158, 11, 0.12);
-  --color--ivory-white: #080709;
-  --color--ivory-surface: #0f0e12;
+  /* Legacy variable mappings for seamless compatibility */
+  --bg-primary: #cdc6be;
+  --bg-surface: #d8d1c9;
+  --bg-card: #d4cdc5;
+  --text-primary: #1d1d1b;
+  --text-muted: #4e4e4a;
+  --text-dim: #787873;
+  --accent-primary: #c03f13;
 
-  /* Unified tokens */
-  --color--white: #f4f4f6;
-  --color--pure-white: #ffffff;
-  --color--black: #080709;
-  --color--pure-black: #000000;
-  --color--lime: #f59e0b;
-  --color--lime-off: #fbbf24;
-  --color--lime-glow: rgba(245, 158, 11, 0.35);
-  --color--dark-green: #0e0d11;
-  --color--green-off-white-1: #f4f4f5;
-  --color--green-off-white-2: #a1a1aa;
-  --color--dark-green-tint-1: #18171d;
-  --color--dark-green-tint-2: #27262d;
-  --color--grey-on-track: #18171d;
-  --color--grey-1: #f4f4f5;
-  --color--grey-2: #a1a1aa;
+  /* Authentic Typography Stack */
+  --font-masthead: "Pirata One", "Cinzel", cursive, serif;
+  --font-headline: "Big Shoulders Display", "Bebas Neue", sans-serif;
+  --font-editorial: "Playfair Display", "Newsreader", serif;
+  --font-body: "Newsreader", "Playfair Display", Georgia, serif;
+  --font-stamp: "Special Elite", "Courier Prime", monospace;
+  --font-mono: "JetBrains Mono", monospace;
 
-  /* Unique Typography Families */
-  --font-primary: "Outfit", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Syne", "Space Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", "Chakra Petch", monospace;
-  --font-technical: "Chakra Petch", "JetBrains Mono", monospace;
+  --font-primary: var(--font-body);
+  --font-display: var(--font-headline);
 
-  /* Fluid Spacing & Sizing */
-  --cubic-default: cubic-bezier(0.65, 0.05, 0, 1);
-  --duration-default: 0.65s;
-  --animation-default: var(--duration-default) var(--cubic-default);
-  --nav-height: 4.5rem;
-  --container-max: 1728px;
-  --container-padding: clamp(1.25rem, 4vw, 3.5rem);
-
-  --accent-primary: #f59e0b;
+  --cubic-paper: cubic-bezier(0.25, 1, 0.5, 1);
+  --container-max: 1680px;
 }
 
 /* BASE RESET */
@@ -90,23 +74,27 @@
 }
 
 html {
-  font-family: var(--font-primary);
-  background-color: #080709;
-  color: #f4f4f6;
+  font-family: var(--font-body);
+  background-color: var(--paper-bg);
+  color: var(--ink-black);
   font-size: 16px;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: #27262d #080709;
+  scrollbar-color: var(--ink-muted) var(--paper-bg);
   overflow-x: hidden;
 }
 
 body {
+  background-color: var(--paper-bg);
+  color: var(--ink-black);
   min-height: 100vh;
-  background-color: #080709;
-  color: #f4f4f6;
-  line-height: 1.4;
-  overflow-x: hidden;
   position: relative;
+  /* Authentic subtle paper grain texture overlay */
+  background-image: 
+    radial-gradient(rgba(29, 29, 27, 0.04) 1px, transparent 0),
+    radial-gradient(rgba(29, 29, 27, 0.02) 1px, transparent 0);
+  background-size: 24px 24px, 48px 48px;
+  background-position: 0 0, 12px 12px;
 }
 
 /* HIDE DEFAULT SCROLLBAR ON WEBKIT IF NEEDED */
@@ -115,28 +103,28 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #080709;
+  background: var(--paper-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27262d;
-  border-radius: 4px;
+  background: rgba(29, 29, 27, 0.4);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+  background: var(--terracotta);
 }
 
-/* SELECTION STYLING (Lando Norris electric neon lime) */
+/* SELECTION STYLING (Editorial Terracotta on white) */
 ::selection {
-  background-color: var(--color--lime);
-  color: var(--color--black);
+  background-color: var(--terracotta);
+  color: #ffffff;
   text-shadow: none;
 }
 
 ::-moz-selection {
-  background-color: var(--color--lime);
-  color: var(--color--black);
+  background-color: var(--terracotta);
+  color: #ffffff;
   text-shadow: none;
 }
 

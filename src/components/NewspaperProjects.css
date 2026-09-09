@@ -1,0 +1,263 @@
+/* ==========================================================================
+   NICCOLÒ MIRANDA NEWSPAPER PROJECTS SECTION
+   ========================================================================== */
+
+.newspaper-projects-section {
+  background-color: var(--paper-bg);
+  border-bottom: 1px solid var(--ink-rule);
+  position: relative;
+  width: 100%;
+}
+
+/* SECTION HEADER SPREAD */
+.projects-editorial-header {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  border-bottom: 1px solid var(--ink-rule);
+}
+
+.header-column-left {
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border-right: 1px solid var(--ink-rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-label {
+  font-family: var(--font-stamp);
+  font-size: 0.8rem;
+  color: var(--terracotta);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
+  display: inline-block;
+}
+
+.projects-headline-lead {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 1.8vw, 1.65rem);
+  color: var(--ink-black);
+  line-height: 1.38;
+  max-width: 520px;
+}
+
+.header-column-right {
+  padding: clamp(2rem, 4vw, 3.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #c7bfb6;
+}
+
+.projects-headline-huge {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-headline);
+  font-size: clamp(2.8rem, 5vw, 5.2rem);
+  font-weight: 900;
+  line-height: 0.88;
+  color: var(--ink-black);
+  letter-spacing: -0.02em;
+}
+
+.deliver-word {
+  color: var(--ink-black);
+}
+
+/* BROADSHEET PROJECT GRID */
+.projects-broadsheet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+}
+
+.project-broadsheet-card {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--paper-bg);
+  transition: background-color 0.25s ease;
+}
+
+.project-broadsheet-card:not(:last-child) {
+  border-right: 1px solid var(--ink-rule);
+}
+
+.project-broadsheet-card:hover {
+  background-color: #d5cec5;
+}
+
+.card-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-edition-num {
+  font-family: var(--font-stamp);
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+}
+
+.card-badge {
+  background-color: var(--terracotta);
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* VISUAL FRAME */
+.card-visual-frame {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  background-color: #171615;
+  border: 1px solid rgba(29, 29, 27, 0.2);
+  margin-bottom: 1.5rem;
+}
+
+.card-visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05) saturate(0.9);
+  transition: transform 0.45s var(--cubic-paper), filter 0.45s ease;
+}
+
+.project-broadsheet-card:hover .card-visual-img {
+  transform: scale(1.05);
+  filter: contrast(1.1) saturate(1.05);
+}
+
+.visual-overlay-stamp {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: rgba(23, 22, 21, 0.85);
+  padding: 3px 7px;
+  border: 1px solid rgba(232, 227, 219, 0.2);
+}
+
+.visual-overlay-stamp span {
+  font-family: var(--font-stamp);
+  font-size: 0.65rem;
+  color: #e8e3db;
+  letter-spacing: 0.06em;
+}
+
+/* CARD BODY */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-title {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 0.95;
+  color: var(--ink-black);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+
+.card-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink-muted);
+  margin-bottom: 0.85rem;
+  line-height: 1.35;
+}
+
+.card-description {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.card-tech-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.75rem;
+}
+
+.tech-pill {
+  font-family: var(--font-stamp);
+  font-size: 0.72rem;
+  background-color: rgba(29, 29, 27, 0.08);
+  color: var(--ink-black);
+  padding: 3px 8px;
+  border: 1px solid rgba(29, 29, 27, 0.15);
+}
+
+.card-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.action-link-fill {
+  background-color: var(--ink-black);
+  color: #cdc6be;
+  font-family: var(--font-headline);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1.15rem;
+  text-decoration: none;
+  border: 1px solid var(--ink-black);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.action-link-fill:hover {
+  background-color: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #ffffff;
+}
+
+.action-link-line {
+  color: var(--ink-black);
+  font-family: var(--font-headline);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1.15rem;
+  text-decoration: none;
+  border: 1px solid var(--ink-black);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.action-link-line:hover {
+  background-color: var(--ink-black);
+  color: #cdc6be;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .projects-editorial-header {
+    grid-template-columns: 1fr;
+  }
+  .header-column-left {
+    border-right: none;
+    border-bottom: 1px solid var(--ink-rule);
+  }
+  .projects-broadsheet-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-broadsheet-card:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--ink-rule);
+  }
+}

@@ -1,0 +1,174 @@
+/* ==========================================================================
+   NICCOLÒ MIRANDA NEWSPAPER PLAYBOOK & STITCHED TICKETS
+   ========================================================================== */
+
+.newspaper-playbook-section {
+  background-color: var(--paper-bg);
+  border-bottom: 1px solid var(--ink-rule);
+  position: relative;
+  width: 100%;
+}
+
+/* STATEMENT SPREAD */
+.playbook-statement-spread {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  border-bottom: 1px solid var(--ink-rule);
+}
+
+.statement-lead-col {
+  padding: clamp(2rem, 4vw, 4rem);
+  border-right: 1px solid var(--ink-rule);
+}
+
+.statement-paragraph {
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+  line-height: 1.45;
+  color: var(--ink-black);
+  margin-bottom: 2rem;
+}
+
+.statement-tags {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.statement-tag {
+  font-family: var(--font-stamp);
+  font-size: 0.78rem;
+  background-color: rgba(29, 29, 27, 0.08);
+  padding: 4px 10px;
+  border: 1px solid rgba(29, 29, 27, 0.18);
+  color: var(--ink-black);
+}
+
+.statement-side-col {
+  padding: clamp(2rem, 4vw, 4rem);
+  background-color: #c7bfb6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.side-col-badge {
+  font-family: var(--font-stamp);
+  font-size: 0.75rem;
+  color: var(--terracotta);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.side-col-title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--ink-black);
+  margin-bottom: 1rem;
+}
+
+.side-col-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+
+/* 03 — STITCHED COUPON TICKETS */
+.stitched-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: var(--paper-bg);
+}
+
+.stitched-ticket-card {
+  padding: clamp(1.25rem, 2.2vw, 2rem);
+  border-right: 1px solid var(--ink-rule);
+  display: flex;
+}
+
+.stitched-ticket-card:last-child {
+  border-right: none;
+}
+
+/* STITCHED TICKET BORDER */
+.ticket-inner {
+  width: 100%;
+  background-color: #d6cfc6;
+  border: 1px solid rgba(29, 29, 27, 0.35);
+  border-radius: 4px;
+  outline: 1px dashed rgba(29, 29, 27, 0.45);
+  outline-offset: -6px;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s var(--cubic-paper), background-color 0.25s ease;
+}
+
+.stitched-ticket-card:hover .ticket-inner {
+  transform: translateY(-4px);
+  background-color: #ded8d0;
+}
+
+.ticket-quote {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  line-height: 1.5;
+  color: var(--ink-black);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.ticket-author-bar {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(29, 29, 27, 0.15);
+  padding-top: 0.75rem;
+}
+
+.ticket-author {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--ink-black);
+}
+
+.ticket-role {
+  font-family: var(--font-stamp);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 1024px) {
+  .playbook-statement-spread {
+    grid-template-columns: 1fr;
+  }
+  .statement-lead-col {
+    border-right: none;
+    border-bottom: 1px solid var(--ink-rule);
+  }
+  .stitched-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stitched-ticket-card:nth-child(2) {
+    border-right: none;
+  }
+  .stitched-ticket-card:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--ink-rule);
+  }
+}
+
+@media (max-width: 600px) {
+  .stitched-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .stitched-ticket-card {
+    border-right: none !important;
+    border-bottom: 1px solid var(--ink-rule);
+  }
+}

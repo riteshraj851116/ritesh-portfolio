@@ -1,0 +1,81 @@
+/* ==========================================================================
+   NICCOLÒ MIRANDA VINTAGE PERFORATED POSTAGE STAMP
+   ========================================================================== */
+
+.paper-postage-stamp {
+  width: 220px;
+  background-color: #ded8cf;
+  padding: 14px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(29, 29, 27, 0.08);
+  /* Scalloped postage stamp edges via border-image or pseudo elements */
+  border: 1px solid rgba(29, 29, 27, 0.2);
+  outline: 6px dashed #cdc6be;
+  outline-offset: -3px;
+  transition: transform 0.3s var(--cubic-paper), box-shadow 0.3s var(--cubic-paper);
+}
+
+.paper-postage-stamp:hover {
+  transform: translateY(-4px) rotate(1deg);
+  box-shadow: 0 14px 32px rgba(29, 29, 27, 0.14);
+}
+
+.stamp-perforations {
+  border: 1px solid rgba(29, 29, 27, 0.25);
+  padding: 1.25rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: #e5ded5;
+}
+
+.stamp-sunburst-container {
+  width: 90px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stamp-sunburst {
+  width: 100%;
+  height: 100%;
+}
+
+.stamp-signature-wrapper {
+  width: 140px;
+  height: 40px;
+}
+
+.stamp-signature {
+  width: 100%;
+  height: 100%;
+}
+
+.stamp-metadata {
+  width: 100%;
+  border-top: 1px solid rgba(29, 29, 27, 0.15);
+  padding-top: 0.75rem;
+  font-family: var(--font-stamp);
+  font-size: 0.76rem;
+  color: var(--ink-black);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stamp-meta-row {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.3;
+}
+
+.stamp-meta-label {
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+}
+
+.stamp-meta-val {
+  font-weight: 600;
+}

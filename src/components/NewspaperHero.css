@@ -1,0 +1,385 @@
+/* ==========================================================================
+   NICCOLÒ MIRANDA NEWSPAPER HERO SECTION
+   Broadsheet multi-column layout, giant inverted black banners & artisan spread
+   ========================================================================== */
+
+.newspaper-hero-section {
+  padding-top: 64px; /* header offset */
+  background-color: var(--paper-bg);
+  position: relative;
+  width: 100%;
+}
+
+/* 01 — TOP BROADSHEET TRIPTYCH */
+.broadsheet-triptych {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  border-bottom: 1px solid var(--ink-rule);
+  min-height: 380px;
+}
+
+.triptych-col {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.triptych-col:not(:last-child) {
+  border-right: 1px solid var(--ink-rule);
+}
+
+/* PROJECT PREVIEWS */
+.preview-img-frame {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background-color: #201f1e;
+  border: 1px solid rgba(29, 29, 27, 0.2);
+  margin-bottom: 1.25rem;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05) saturate(0.95);
+  transition: transform 0.4s var(--cubic-paper);
+}
+
+.preview-img-frame:hover .preview-img {
+  transform: scale(1.04);
+}
+
+.preview-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.caption-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.project-brand {
+  font-family: var(--font-headline);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink-black);
+}
+
+.badge-new {
+  background-color: var(--terracotta);
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+.project-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+/* CENTER COLUMN: ALL WORK! */
+.editorial-title-col {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.editorial-all-work {
+  font-family: var(--font-headline);
+  font-size: clamp(3.2rem, 5.5vw, 5.8rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  color: var(--ink-black);
+  margin-bottom: 1.25rem;
+}
+
+.editorial-lead {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  line-height: 1.4;
+  color: var(--ink-black);
+  max-width: 320px;
+  margin-bottom: 2rem;
+}
+
+.editorial-tip {
+  font-family: var(--font-stamp);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+/* 02 — INVERTED BLACK BANNER */
+.inverted-black-banner {
+  background-color: #171615;
+  width: 100%;
+  padding: clamp(0.75rem, 2vw, 1.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ink-rule);
+}
+
+.banner-gigantic-title {
+  font-family: var(--font-headline);
+  font-size: clamp(6.5rem, 19vw, 23rem);
+  font-weight: 900;
+  line-height: 0.82;
+  color: #d8d1c9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  user-select: none;
+  width: 100%;
+  text-align: center;
+}
+
+/* 03 — SOFTWARE ARTISAN SPREAD */
+.broadsheet-artisan-spread {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  border-bottom: 1px solid var(--ink-rule);
+}
+
+.artisan-left-col {
+  padding: clamp(2rem, 4vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--ink-rule);
+}
+
+.artisan-headline {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-headline);
+  font-size: clamp(3.5rem, 6.5vw, 6.8rem);
+  font-weight: 900;
+  line-height: 0.88;
+  color: var(--ink-black);
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+.artisan-accent {
+  color: var(--ink-black);
+}
+
+.artisan-pullquote {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.4vw, 1.28rem);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 460px;
+  margin-bottom: 2.5rem;
+}
+
+.artisan-pullquote strong {
+  color: var(--ink-black);
+}
+
+.artisan-action-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.broadsheet-btn-fill {
+  display: inline-block;
+  background-color: var(--ink-black);
+  color: #cdc6be;
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.6rem;
+  text-decoration: none;
+  border: 1px solid var(--ink-black);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.broadsheet-btn-fill:hover {
+  background-color: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #ffffff;
+}
+
+.broadsheet-btn-outline {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--ink-black);
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.6rem;
+  text-decoration: none;
+  border: 1px solid var(--ink-black);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.broadsheet-btn-outline:hover {
+  background-color: var(--ink-black);
+  color: #cdc6be;
+}
+
+/* ARTISAN RIGHT: PORTRAIT */
+.artisan-right-col {
+  padding: clamp(2rem, 4vw, 3.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c7bfb6;
+}
+
+.portrait-editorial-frame {
+  max-width: 540px;
+  width: 100%;
+  position: relative;
+  background-color: #ded8cf;
+  border: 1px solid rgba(29, 29, 27, 0.25);
+  box-shadow: 0 16px 40px rgba(29, 29, 27, 0.12);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.portrait-editorial-frame:hover {
+  box-shadow: 0 24px 50px rgba(29, 29, 27, 0.18);
+}
+
+.portrait-image-wrapper {
+  width: 100%;
+  height: 520px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 32%, #f1ece4 0%, #ded7cc 70%, #cdc5ba 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.portrait-image-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(29, 29, 27, 0.02) 3px,
+    rgba(29, 29, 27, 0.02) 6px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.portrait-editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: contrast(1.06) saturate(0.92);
+  display: block;
+  z-index: 1;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.portrait-editorial-frame:hover .portrait-editorial-img {
+  transform: scale(1.02);
+}
+
+.portrait-caption-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  background-color: #171615;
+  color: #cdc6be;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 3;
+}
+
+.portrait-label {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.portrait-sub {
+  font-family: var(--font-stamp);
+  font-size: 0.75rem;
+  color: #a8a29a;
+}
+
+/* 04 — INVERTED BANNER & POSTAGE STAMP ROW */
+.inverted-banner-stamp-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border-bottom: 1px solid var(--ink-rule);
+  align-items: center;
+  background-color: #171615;
+}
+
+.banner-engineer {
+  border-bottom: none;
+  border-right: 1px solid rgba(232, 227, 219, 0.15);
+}
+
+.hero-stamp-slot {
+  padding: 1.5rem clamp(1.5rem, 3vw, 2.5rem);
+  background-color: var(--paper-bg);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .broadsheet-triptych {
+    grid-template-columns: 1fr;
+  }
+  .triptych-col:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--ink-rule);
+  }
+  .broadsheet-artisan-spread {
+    grid-template-columns: 1fr;
+  }
+  .artisan-left-col {
+    border-right: none;
+    border-bottom: 1px solid var(--ink-rule);
+  }
+  .inverted-banner-stamp-row {
+    grid-template-columns: 1fr;
+  }
+  .banner-engineer {
+    border-right: none;
+    border-bottom: 1px solid rgba(232, 227, 219, 0.15);
+  }
+}
