@@ -1,16 +1,16 @@
 /* ==========================================================================
-   LANDO NORRIS ON CODE / OFF CODE SPLIT SECTION STYLES
+   TECHNICAL DOSSIER ON CODE / OFF CODE SPLIT SECTION STYLES
    ========================================================================== */
 
 .ln-otoc-section {
   position: relative;
   width: 100%;
   min-height: 85vh;
-  background-color: var(--color--black);
+  background-color: #ffffff;
   display: flex;
   align-items: stretch;
   overflow: hidden;
-  border-bottom: 1px solid rgba(244, 244, 237, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .ln-otoc-container {
@@ -31,12 +31,12 @@
 }
 
 .ln-otoc-col.is-on-code {
-  background: radial-gradient(circle at 20% 50%, rgba(40, 44, 32, 0.85) 0%, rgba(17, 17, 18, 0.98) 75%);
-  border-right: 1px solid rgba(244, 244, 237, 0.08);
+  background: #faf8f5;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .ln-otoc-col.is-off-code {
-  background: radial-gradient(circle at 80% 50%, rgba(30, 33, 24, 0.85) 0%, rgba(17, 17, 18, 0.98) 75%);
+  background: #ffffff;
 }
 
 .ln-otoc-col.is-expanded {
@@ -59,13 +59,13 @@
 }
 
 .otoc-badge {
-  color: var(--color--lime);
-  font-weight: 700;
+  color: var(--color--brown-vibrant, #92400e);
+  font-weight: 800;
   letter-spacing: 0.06em;
 }
 
 .otoc-status {
-  color: var(--color--green-off-white-2);
+  color: #71717a;
   letter-spacing: 0.04em;
 }
 
@@ -79,6 +79,7 @@
   font-size: clamp(3.5rem, 8vw, 7.5rem);
   font-weight: 700;
   letter-spacing: -0.04em;
+  color: #09090b;
 }
 
 .otoc-super-mona {
@@ -87,13 +88,14 @@
   font-weight: 900;
   letter-spacing: -0.04em;
   text-transform: uppercase;
+  color: #09090b;
 }
 
 .otoc-description {
   font-family: var(--font-primary);
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   line-height: 1.5;
-  color: var(--color--green-off-white-1);
+  color: #52525b;
 }
 
 .otoc-highlights {
@@ -106,9 +108,9 @@
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--color--white);
-  background: rgba(40, 44, 32, 0.6);
-  border: 1px solid rgba(244, 244, 237, 0.15);
+  color: var(--color--brown, #78350f);
+  background: rgba(146, 64, 14, 0.08);
+  border: 1px solid rgba(146, 64, 14, 0.22);
   padding: 0.4rem 0.8rem;
   border-radius: 9999px;
 }
@@ -127,25 +129,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color--lime);
-  color: var(--color--black);
+  background: var(--color--brown-vibrant, #92400e);
+  color: #ffffff;
   text-decoration: none;
   transition: all 0.35s var(--cubic-default);
-  box-shadow: 0 4px 20px rgba(210, 255, 0, 0.25);
+  box-shadow: 0 4px 20px rgba(146, 64, 14, 0.25);
 }
 
 .otoc-circle-btn:hover {
-  background: #fff;
+  background: #09090b;
   transform: scale(1.1) translateX(4px);
-  box-shadow: 0 8px 30px rgba(210, 255, 0, 0.45);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
 }
 
 .otoc-action-label {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.06em;
-  color: var(--color--white);
+  color: #09090b;
   text-transform: uppercase;
 }
 
@@ -160,6 +162,7 @@
 
   .ln-otoc-col.is-on-code {
     border-right: none;
-    border-bottom: 1px solid rgba(244, 244, 237, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 }
+

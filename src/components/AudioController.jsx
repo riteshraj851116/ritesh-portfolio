@@ -103,21 +103,21 @@ const AudioController = () => {
 
         <div className="audio-label-wrap">
           <span className="audio-mode-tag">
-            {enabled ? (ambientActive ? "COCKPIT HUM" : "FX ON") : "MUTED"}
+            {enabled ? (ambientActive ? "ARCHIVAL BED" : "HAPTIC ON") : "MUTED"}
           </span>
         </div>
 
         {enabled ? (
-          <Volume2 size={12} className="audio-icon text-lime" />
+          <Volume2 size={13} className="audio-icon text-brown" />
         ) : (
-          <VolumeX size={12} className="audio-icon text-muted" />
+          <VolumeX size={13} className="audio-icon text-muted" />
         )}
       </button>
 
       {/* FLYOUT QUICK SOUND PANEL ON HOVER */}
       <div className={`ln-audio-flyout ${showMenu ? "is-visible" : ""}`}>
         <div className="flyout-header">
-          <span className="flyout-title">MOTORSPORT AUDIO SUITE</span>
+          <span className="flyout-title">ACOUSTIC HAPTIC SUITE</span>
           <span className="flyout-badge">WEB AUDIO API</span>
         </div>
 
@@ -127,8 +127,8 @@ const AudioController = () => {
             onClick={handleTestRev}
             onMouseEnter={playHoverSound}
           >
-            <Zap size={12} className="text-lime" />
-            <span>REV F1 ENGINE</span>
+            <Zap size={13} className="text-brown" />
+            <span>STUDIO CHORUS REV</span>
           </button>
 
           <button
@@ -136,8 +136,8 @@ const AudioController = () => {
             onClick={handleToggleAmbient}
             onMouseEnter={playHoverSound}
           >
-            <Radio size={12} className={ambientActive ? "text-lime" : ""} />
-            <span>{ambientActive ? "STOP COCKPIT HUM" : "COCKPIT AMBIENT"}</span>
+            <Radio size={13} className={ambientActive ? "text-brown" : ""} />
+            <span>{ambientActive ? "STOP AMBIENT BED" : "ARCHIVAL AMBIENCE"}</span>
           </button>
         </div>
       </div>

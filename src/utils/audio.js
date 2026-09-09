@@ -1,11 +1,16 @@
-// Web Audio API High-Performance Motorsport & Cyber Sound Engine
-// 100% synthesized in real-time - Zero external asset dependencies
+// Web Audio API Studio-Grade Acoustic & Haptic Sound Engine
+// Designed for High-End Archival & Engineering Portfolio
+// 100% real-time synthesis - Zero external audio file dependencies
 
 let audioCtx = null;
 let soundEnabled = true;
 let ambientDroneNode = null;
 let ambientGainNode = null;
 let isAmbientActive = false;
+
+// Cooldown limiter to prevent hover sound spamming
+let lastHoverTime = 0;
+const HOVER_COOLDOWN_MS = 65;
 
 // Event listeners for UI Equalizer animation
 const audioListeners = new Set();
@@ -53,7 +58,7 @@ if (typeof window !== "undefined") {
   window.addEventListener("keydown", unlock, { passive: true });
   window.addEventListener("mousemove", unlock, { once: true, passive: true });
 
-  // Dedicated touch sound on any interactive element
+  // Dedicated touch sound on any interactive element (mobile taps)
   window.addEventListener(
     "touchstart",
     (e) => {
@@ -67,7 +72,7 @@ if (typeof window !== "undefined") {
           target.closest(".about-tab-btn") ||
           target.closest(".contact-link") ||
           target.closest(".project-card") ||
-          target.closest(".ln-helmet-frame-box") ||
+          target.closest(".playbook-turn-btn") ||
           target.closest("[role='button']"))
       ) {
         playTouchSound();
@@ -90,7 +95,10 @@ export const toggleSound = () => {
   return soundEnabled;
 };
 
-// 1. TACTILE TOUCH SOUND (Mobile taps)
+/**
+ * 1. TACTILE TOUCH PULSE (Mobile taps)
+ * Ultra-subtle Apple-style Taptic haptic pulse: warm, low-frequency damped impulse.
+ */
 export const playTouchSound = () => {
   if (!soundEnabled) return;
   try {
@@ -100,56 +108,82 @@ export const playTouchSound = () => {
     const now = ctx.currentTime;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
 
+    // Warm sub-frequency thump (mimicking mechanical linear resonance)
     osc.type = "sine";
-    osc.frequency.setValueAtTime(750, now);
-    osc.frequency.exponentialRampToValueAtTime(260, now + 0.05);
+    osc.frequency.setValueAtTime(110, now);
+    osc.frequency.exponentialRampToValueAtTime(45, now + 0.045);
 
-    gain.gain.setValueAtTime(0.24, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(240, now);
 
-    osc.connect(gain);
+    gain.gain.setValueAtTime(0.18, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+
+    osc.connect(filter);
+    filter.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start(now);
-    osc.stop(now + 0.05);
-    notifySoundPlayed(0.6);
-  } catch {
-    // Ignore
-  }
-};
-
-// 2. HIGH-TECH HOVER TICK (Subtle cyber blip)
-export const playHoverSound = (pitchOffset = 0) => {
-  if (!soundEnabled) return;
-  try {
-    const ctx = initAudioContext();
-    if (!ctx) return;
-
-    const now = ctx.currentTime;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-
-    const baseFreq = 540 + pitchOffset;
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(baseFreq, now);
-    osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.5, now + 0.04);
-
-    gain.gain.setValueAtTime(0.12, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    osc.start(now);
-    osc.stop(now + 0.04);
+    osc.stop(now + 0.045);
     notifySoundPlayed(0.4);
   } catch {
     // Ignore
   }
 };
 
-// 3. MECHANICAL RELAY / SHUTTER CLICK
+/**
+ * 2. REFINED ACOUSTIC HOVER TICK
+ * Subtle, warm wooden/glass micro-tap (like a high-end camera wheel or tactile dial).
+ * Rate-limited so mouse movements never create a chaotic buzz.
+ */
+export const playHoverSound = (pitchOffset = 0) => {
+  if (!soundEnabled) return;
+
+  const nowMs = performance.now();
+  if (nowMs - lastHoverTime < HOVER_COOLDOWN_MS) return;
+  lastHoverTime = nowMs;
+
+  try {
+    const ctx = initAudioContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+
+    // Body tone: warm resonant sine blip
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    const baseFreq = Math.min(420, Math.max(180, 240 + pitchOffset * 0.4));
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(baseFreq, now);
+    osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.85, now + 0.03);
+
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(800, now);
+
+    // Very gentle volume envelope
+    gain.gain.setValueAtTime(0.035, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.03);
+    notifySoundPlayed(0.25);
+  } catch {
+    // Ignore
+  }
+};
+
+/**
+ * 3. PRECISION LEICA MECHANICAL SHUTTER / TACTILE RELAY CLICK
+ * Dual-stage impulse: crisp transient micro-snap + warm damped mechanical body thud.
+ */
 export const playClickSound = () => {
   if (!soundEnabled) return;
   try {
@@ -158,29 +192,56 @@ export const playClickSound = () => {
 
     const now = ctx.currentTime;
 
-    // Transient noise click
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
+    // Stage 1: Ultra-fast mechanical snap transient
+    const snapOsc = ctx.createOscillator();
+    const snapGain = ctx.createGain();
+    const snapFilter = ctx.createBiquadFilter();
 
-    osc.type = "triangle";
-    osc.frequency.setValueAtTime(780, now);
-    osc.frequency.exponentialRampToValueAtTime(140, now + 0.06);
+    snapOsc.type = "triangle";
+    snapOsc.frequency.setValueAtTime(950, now);
+    snapOsc.frequency.exponentialRampToValueAtTime(220, now + 0.02);
 
-    gain.gain.setValueAtTime(0.28, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+    snapFilter.type = "bandpass";
+    snapFilter.frequency.setValueAtTime(850, now);
+    snapFilter.Q.setValueAtTime(1.8, now);
 
-    osc.connect(gain);
-    gain.connect(ctx.destination);
+    snapGain.gain.setValueAtTime(0.16, now);
+    snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.02);
 
-    osc.start(now);
-    osc.stop(now + 0.06);
-    notifySoundPlayed(0.8);
+    snapOsc.connect(snapFilter);
+    snapFilter.connect(snapGain);
+    snapGain.connect(ctx.destination);
+
+    snapOsc.start(now);
+    snapOsc.stop(now + 0.02);
+
+    // Stage 2: Woody mechanical body thud (120Hz damped)
+    const bodyOsc = ctx.createOscillator();
+    const bodyGain = ctx.createGain();
+
+    bodyOsc.type = "sine";
+    bodyOsc.frequency.setValueAtTime(140, now + 0.004);
+    bodyOsc.frequency.exponentialRampToValueAtTime(55, now + 0.05);
+
+    bodyGain.gain.setValueAtTime(0.22, now + 0.004);
+    bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
+    bodyOsc.connect(bodyGain);
+    bodyGain.connect(ctx.destination);
+
+    bodyOsc.start(now + 0.004);
+    bodyOsc.stop(now + 0.05);
+
+    notifySoundPlayed(0.65);
   } catch {
     // Ignore
   }
 };
 
-// 4. F1 RACING ENGINE THROTTLE REV (Visceral Motorsport Power Unit Synth)
+/**
+ * 4. PRECISION TURBINE / SPEED ACCELERATION SOUND (Replacing harsh raw noise)
+ * Warm, aerodynamic frequency whoosh with rich harmonic resonance.
+ */
 export const playEngineRevSound = () => {
   if (!soundEnabled) return;
   try {
@@ -188,80 +249,63 @@ export const playEngineRevSound = () => {
     if (!ctx) return;
 
     const now = ctx.currentTime;
-    const duration = 0.55;
+    const duration = 0.6;
 
-    // Low-end combustion rumble (Sawtooth)
-    const engineOsc = ctx.createOscillator();
-    const engineGain = ctx.createGain();
+    // Fundamental warm turbine hum
+    const osc = ctx.createOscillator();
+    const oscGain = ctx.createGain();
     const filter = ctx.createBiquadFilter();
 
-    engineOsc.type = "sawtooth";
-    // Pitch rev from 95Hz to 520Hz then decelerate to 310Hz
-    engineOsc.frequency.setValueAtTime(95, now);
-    engineOsc.frequency.exponentialRampToValueAtTime(540, now + 0.28);
-    engineOsc.frequency.exponentialRampToValueAtTime(280, now + duration);
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(130, now);
+    osc.frequency.exponentialRampToValueAtTime(380, now + 0.25);
+    osc.frequency.exponentialRampToValueAtTime(220, now + duration);
 
-    // Turbocharger whine (Square / high harmonic)
-    const turboOsc = ctx.createOscillator();
-    const turboGain = ctx.createGain();
-    turboOsc.type = "sine";
-    turboOsc.frequency.setValueAtTime(450, now);
-    turboOsc.frequency.exponentialRampToValueAtTime(1600, now + 0.28);
-    turboOsc.frequency.exponentialRampToValueAtTime(900, now + duration);
-
-    turboGain.gain.setValueAtTime(0.01, now);
-    turboGain.gain.linearRampToValueAtTime(0.08, now + 0.24);
-    turboGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-
-    // Dynamic low-pass filter sweep for roaring open throttle
     filter.type = "lowpass";
-    filter.frequency.setValueAtTime(320, now);
-    filter.frequency.exponentialRampToValueAtTime(3600, now + 0.26);
-    filter.frequency.exponentialRampToValueAtTime(600, now + duration);
-    filter.Q.setValueAtTime(4.5, now);
+    filter.frequency.setValueAtTime(400, now);
+    filter.frequency.exponentialRampToValueAtTime(1800, now + 0.25);
+    filter.frequency.exponentialRampToValueAtTime(500, now + duration);
+    filter.Q.setValueAtTime(3.0, now);
 
-    // Overall engine amplitude envelope
-    engineGain.gain.setValueAtTime(0.05, now);
-    engineGain.gain.linearRampToValueAtTime(0.35, now + 0.22);
-    engineGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    oscGain.gain.setValueAtTime(0.04, now);
+    oscGain.gain.linearRampToValueAtTime(0.22, now + 0.22);
+    oscGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
-    // Exhaust crackle pop towards end
-    const crackleOsc = ctx.createOscillator();
-    const crackleGain = ctx.createGain();
-    crackleOsc.type = "triangle";
-    crackleOsc.frequency.setValueAtTime(140, now + 0.32);
-    crackleOsc.frequency.linearRampToValueAtTime(60, now + 0.44);
-    crackleGain.gain.setValueAtTime(0, now);
-    crackleGain.gain.setValueAtTime(0.18, now + 0.32);
-    crackleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+    // Warm sub-bass body
+    const subOsc = ctx.createOscillator();
+    const subGain = ctx.createGain();
+    subOsc.type = "triangle";
+    subOsc.frequency.setValueAtTime(65, now);
+    subOsc.frequency.exponentialRampToValueAtTime(190, now + 0.25);
+    subOsc.frequency.exponentialRampToValueAtTime(110, now + duration);
 
-    // Routing
-    engineOsc.connect(filter);
-    filter.connect(engineGain);
-    engineGain.connect(ctx.destination);
+    subGain.gain.setValueAtTime(0.02, now);
+    subGain.gain.linearRampToValueAtTime(0.18, now + 0.2);
+    subGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
-    turboOsc.connect(turboGain);
-    turboGain.connect(ctx.destination);
+    osc.connect(filter);
+    filter.connect(oscGain);
+    oscGain.connect(ctx.destination);
 
-    crackleOsc.connect(crackleGain);
-    crackleGain.connect(ctx.destination);
+    subOsc.connect(subGain);
+    subGain.connect(ctx.destination);
 
-    engineOsc.start(now);
-    engineOsc.stop(now + duration);
+    osc.start(now);
+    osc.stop(now + duration);
 
-    turboOsc.start(now);
-    turboOsc.stop(now + duration);
+    subOsc.start(now);
+    subOsc.stop(now + duration);
 
-    crackleOsc.start(now + 0.32);
-    crackleOsc.stop(now + 0.45);
-
-    notifySoundPlayed(1.0);
+    notifySoundPlayed(0.85);
   } catch {
     // Ignore
   }
 };
 
-// 5. CYBER TELEMETRY SCAN (For switching tabs, milestones, inspection)
+/**
+ * 5. WARM ANALOG TELEMETRY CASCADE (Replacing piercing robotic beeps)
+ * Soft, tranquil pentatonic glass marimba trickle.
+ */
 export const playTelemetryScan = () => {
   if (!soundEnabled) return;
   try {
@@ -269,69 +313,31 @@ export const playTelemetryScan = () => {
     if (!ctx) return;
 
     const now = ctx.currentTime;
-    const steps = [880, 1174.66, 1479.98, 1760];
+    // Warm mid-range acoustic frequencies: F4, A4, C5, E5
+    const steps = [349.23, 440.0, 523.25, 659.25];
 
     steps.forEach((freq, i) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      const noteTime = now + i * 0.035;
+      const filter = ctx.createBiquadFilter();
+      const noteTime = now + i * 0.045;
 
       osc.type = "sine";
       osc.frequency.setValueAtTime(freq, noteTime);
 
-      gain.gain.setValueAtTime(0.14, noteTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.08);
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(1200, noteTime);
 
-      osc.connect(gain);
+      gain.gain.setValueAtTime(0.08, noteTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.12);
+
+      osc.connect(filter);
+      filter.connect(gain);
       gain.connect(ctx.destination);
 
       osc.start(noteTime);
-      osc.stop(noteTime + 0.08);
+      osc.stop(noteTime + 0.12);
     });
-
-    notifySoundPlayed(0.7);
-  } catch {
-    // Ignore
-  }
-};
-
-// 6. AERODYNAMIC COCKPIT WHOOSH (Card hover & modal entry)
-export const playCockpitWhoosh = () => {
-  if (!soundEnabled) return;
-  try {
-    const ctx = initAudioContext();
-    if (!ctx) return;
-
-    const now = ctx.currentTime;
-    const bufferSize = ctx.sampleRate * 0.22;
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-
-    for (let i = 0; i < bufferSize; i++) {
-      data[i] = Math.random() * 2 - 1;
-    }
-
-    const noise = ctx.createBufferSource();
-    noise.buffer = buffer;
-
-    const filter = ctx.createBiquadFilter();
-    filter.type = "bandpass";
-    filter.frequency.setValueAtTime(250, now);
-    filter.frequency.exponentialRampToValueAtTime(1400, now + 0.1);
-    filter.frequency.exponentialRampToValueAtTime(300, now + 0.22);
-    filter.Q.setValueAtTime(2.0, now);
-
-    const gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.02, now);
-    gain.gain.linearRampToValueAtTime(0.16, now + 0.09);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-
-    noise.connect(filter);
-    filter.connect(gain);
-    gain.connect(ctx.destination);
-
-    noise.start(now);
-    noise.stop(now + 0.22);
 
     notifySoundPlayed(0.5);
   } catch {
@@ -339,7 +345,63 @@ export const playCockpitWhoosh = () => {
   }
 };
 
-// 7. TRANSMISSION SUCCESS CHIME (Form dispatched or copied)
+/**
+ * 6. SILKY AERODYNAMIC AIR DISPLACEMENT WHOOSH
+ * Warm, organic air sweep for card reveals and page transitions.
+ */
+export const playCockpitWhoosh = () => {
+  if (!soundEnabled) return;
+  try {
+    const ctx = initAudioContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+    const duration = 0.26;
+    const bufferSize = Math.floor(ctx.sampleRate * duration);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    // Warm pink-ish noise texture
+    let b0 = 0, b1 = 0, b2 = 0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      b0 = 0.99886 * b0 + white * 0.0555179;
+      b1 = 0.99332 * b1 + white * 0.0750759;
+      b2 = 0.96900 * b2 + white * 0.1538520;
+      data[i] = (b0 + b1 + b2) * 0.4;
+    }
+
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(320, now);
+    filter.frequency.exponentialRampToValueAtTime(980, now + 0.11);
+    filter.frequency.exponentialRampToValueAtTime(260, now + duration);
+    filter.Q.setValueAtTime(1.5, now);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.01, now);
+    gain.gain.linearRampToValueAtTime(0.14, now + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    noise.start(now);
+    noise.stop(now + duration);
+
+    notifySoundPlayed(0.4);
+  } catch {
+    // Ignore
+  }
+};
+
+/**
+ * 7. TRANSMISSION SUCCESS CHIME (Warm acoustic dual bell)
+ */
 export const playSuccessSound = () => {
   if (!soundEnabled) return;
   try {
@@ -347,33 +409,45 @@ export const playSuccessSound = () => {
     if (!ctx) return;
 
     const now = ctx.currentTime;
-    const chords = [587.33, 739.99, 880.0, 1174.66]; // D-major cyber arpeggio
+    // Rich harmonic chord: D4 + A4 + F#5
+    const notes = [
+      { freq: 293.66, time: 0.0, dur: 0.5, vol: 0.15 },
+      { freq: 440.0, time: 0.06, dur: 0.6, vol: 0.16 },
+      { freq: 739.99, time: 0.14, dur: 0.8, vol: 0.12 },
+    ];
 
-    chords.forEach((freq, idx) => {
+    notes.forEach(({ freq, time, dur, vol }) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      const noteTime = now + idx * 0.06;
+      const filter = ctx.createBiquadFilter();
+      const noteTime = now + time;
 
       osc.type = "sine";
       osc.frequency.setValueAtTime(freq, noteTime);
 
-      gain.gain.setValueAtTime(0.18, noteTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.25);
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(1800, noteTime);
 
-      osc.connect(gain);
+      gain.gain.setValueAtTime(vol, noteTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, noteTime + dur);
+
+      osc.connect(filter);
+      filter.connect(gain);
       gain.connect(ctx.destination);
 
       osc.start(noteTime);
-      osc.stop(noteTime + 0.25);
+      osc.stop(noteTime + dur);
     });
 
-    notifySoundPlayed(0.9);
+    notifySoundPlayed(0.75);
   } catch {
     // Ignore
   }
 };
 
-// 8. MATRIX / TEXT SCRAMBLE SHUFFLING TICK
+/**
+ * 8. TEXT SCRAMBLE SHUFFLING TICK (Soft, muffled parchment micro-clicks)
+ */
 export const playScrambleTick = () => {
   if (!soundEnabled) return;
   try {
@@ -383,26 +457,33 @@ export const playScrambleTick = () => {
     const now = ctx.currentTime;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
 
-    const randomFreq = 850 + Math.random() * 750;
+    const randomFreq = 260 + Math.random() * 180;
     osc.type = "sine";
     osc.frequency.setValueAtTime(randomFreq, now);
 
-    gain.gain.setValueAtTime(0.07, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(600, now);
 
-    osc.connect(gain);
+    gain.gain.setValueAtTime(0.02, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.02);
+
+    osc.connect(filter);
+    filter.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start(now);
-    osc.stop(now + 0.025);
-    notifySoundPlayed(0.2);
+    osc.stop(now + 0.02);
+    notifySoundPlayed(0.15);
   } catch {
     // Ignore
   }
 };
 
-// 9. AMBIENT COCKPIT IDLE DRONE (Optional subtle racecar / spaceship cockpit background hum)
+/**
+ * 9. AMBIENT ARCHIVAL BED (Soft, soothing warm room presence)
+ */
 export const startAmbientDrone = () => {
   if (!soundEnabled || isAmbientActive) return;
   try {
@@ -411,34 +492,27 @@ export const startAmbientDrone = () => {
 
     const now = ctx.currentTime;
 
+    // Warm analog sub-bed
     const osc = ctx.createOscillator();
-    const subOsc = ctx.createOscillator();
     const filter = ctx.createBiquadFilter();
     const gain = ctx.createGain();
 
-    // 55Hz sub-bass engine idle
-    osc.type = "sawtooth";
-    osc.frequency.setValueAtTime(55, now);
-
-    subOsc.type = "sine";
-    subOsc.frequency.setValueAtTime(110, now);
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(65.41, now); // C2 warm tone
 
     filter.type = "lowpass";
-    filter.frequency.setValueAtTime(180, now);
-    filter.Q.setValueAtTime(2.0, now);
+    filter.frequency.setValueAtTime(160, now);
 
     gain.gain.setValueAtTime(0.001, now);
-    gain.gain.linearRampToValueAtTime(0.04, now + 1.5); // Very soft, non-intrusive
+    gain.gain.linearRampToValueAtTime(0.03, now + 2.0); // Ultra-gentle background presence
 
     osc.connect(filter);
-    subOsc.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start(now);
-    subOsc.start(now);
 
-    ambientDroneNode = { osc, subOsc, filter };
+    ambientDroneNode = { osc, filter };
     ambientGainNode = gain;
     isAmbientActive = true;
   } catch {
@@ -452,12 +526,11 @@ export const stopAmbientDrone = () => {
     const ctx = initAudioContext();
     if (ctx && ambientGainNode) {
       const now = ctx.currentTime;
-      ambientGainNode.gain.linearRampToValueAtTime(0.001, now + 0.5);
+      ambientGainNode.gain.linearRampToValueAtTime(0.001, now + 0.6);
       setTimeout(() => {
         try {
           if (ambientDroneNode) {
             ambientDroneNode.osc.stop();
-            ambientDroneNode.subOsc.stop();
           }
         } catch {
           // Ignore
@@ -465,7 +538,7 @@ export const stopAmbientDrone = () => {
         ambientDroneNode = null;
         ambientGainNode = null;
         isAmbientActive = false;
-      }, 600);
+      }, 700);
     }
   } catch {
     isAmbientActive = false;
@@ -485,8 +558,9 @@ export const toggleAmbientDrone = () => {
 export const isAmbientPlaying = () => isAmbientActive;
 
 /**
- * High-fidelity tactile paper flip / page turn sound effect
- * Synthesized using filtered noise burst with resonant bandpass sweep and air whoosh.
+ * 10. REALISTIC JAPANESE ARCHIVAL PAPER FLIP SOUND
+ * Multi-layer tactile parchment friction + gentle air displacement puff.
+ * Designed to sound like genuine heavy rag paper turning in a luxury leather dossier.
  */
 export const playPaperFlipSound = () => {
   if (!soundEnabled) return;
@@ -496,64 +570,75 @@ export const playPaperFlipSound = () => {
     const now = ctx.currentTime;
     const duration = 0.28;
 
-    // 1. Noise buffer for paper texture & friction rustle
+    // Layer 1: Filtered parchment surface rustle
     const bufferSize = Math.floor(ctx.sampleRate * duration);
     const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
+
+    let b0 = 0, b1 = 0;
     for (let i = 0; i < bufferSize; i++) {
-      output[i] = Math.random() * 2 - 1;
+      const white = Math.random() * 2 - 1;
+      b0 = 0.95 * b0 + white * 0.15;
+      b1 = 0.90 * b1 + white * 0.25;
+      output[i] = (b0 + b1) * 0.5;
     }
 
-    const whiteNoise = ctx.createBufferSource();
-    whiteNoise.buffer = noiseBuffer;
+    const noiseSource = ctx.createBufferSource();
+    noiseSource.buffer = noiseBuffer;
 
-    // Dynamic bandpass filter simulating the sliding paper sheet
-    const filter = ctx.createBiquadFilter();
-    filter.type = "bandpass";
-    filter.frequency.setValueAtTime(900, now);
-    filter.frequency.exponentialRampToValueAtTime(3200, now + 0.08);
-    filter.frequency.exponentialRampToValueAtTime(700, now + duration);
-    filter.Q.setValueAtTime(3.2, now);
+    // Resonant bandpass filter sweeping to mimic sliding paper grain
+    const bandpass = ctx.createBiquadFilter();
+    bandpass.type = "bandpass";
+    bandpass.frequency.setValueAtTime(1400, now);
+    bandpass.frequency.exponentialRampToValueAtTime(650, now + duration);
+    bandpass.Q.setValueAtTime(2.2, now);
 
     const noiseGain = ctx.createGain();
     noiseGain.gain.setValueAtTime(0.01, now);
-    noiseGain.gain.linearRampToValueAtTime(0.24, now + 0.04);
+    noiseGain.gain.linearRampToValueAtTime(0.18, now + 0.04);
     noiseGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
-    // 2. Air displacement tone (subtle low-frequency whoosh)
-    const airOsc = ctx.createOscillator();
-    const airGain = ctx.createGain();
-    airOsc.type = "sine";
-    airOsc.frequency.setValueAtTime(220, now);
-    airOsc.frequency.exponentialRampToValueAtTime(65, now + duration);
-
-    airGain.gain.setValueAtTime(0.02, now);
-    airGain.gain.linearRampToValueAtTime(0.12, now + 0.03);
-    airGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-
-    // Routing
-    whiteNoise.connect(filter);
-    filter.connect(noiseGain);
+    noiseSource.connect(bandpass);
+    bandpass.connect(noiseGain);
     noiseGain.connect(ctx.destination);
 
-    airOsc.connect(airGain);
-    airGain.connect(ctx.destination);
+    noiseSource.start(now);
+    noiseSource.stop(now + duration);
 
-    whiteNoise.start(now);
-    whiteNoise.stop(now + duration);
+    // Layer 2: Subtle low-frequency air puff as page turns over
+    const puffOsc = ctx.createOscillator();
+    const puffGain = ctx.createGain();
+    const puffFilter = ctx.createBiquadFilter();
 
-    airOsc.start(now);
-    airOsc.stop(now + duration);
-    notifySoundPlayed(0.45);
+    puffOsc.type = "sine";
+    puffOsc.frequency.setValueAtTime(120, now);
+    puffOsc.frequency.exponentialRampToValueAtTime(50, now + duration);
+
+    puffFilter.type = "lowpass";
+    puffFilter.frequency.setValueAtTime(160, now);
+
+    puffGain.gain.setValueAtTime(0.01, now);
+    puffGain.gain.linearRampToValueAtTime(0.11, now + 0.035);
+    puffGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+    puffOsc.connect(puffFilter);
+    puffFilter.connect(puffGain);
+    puffGain.connect(ctx.destination);
+
+    puffOsc.start(now);
+    puffOsc.stop(now + duration);
+
+    notifySoundPlayed(0.55);
   } catch {
     // Ignore audio failures
   }
 };
 
 /**
- * High-speed loader telemetry progress tick
+ * 11. DELICATE WOODEN ESCAPEMENT TICK (Precision horology micro-click)
+ * Fired only on milestone intervals, never in continuous repetitive bursts.
  */
-export const playLoaderTick = (percentage = 0) => {
+export const playLoaderTick = () => {
   if (!soundEnabled) return;
   try {
     const ctx = initAudioContext();
@@ -562,28 +647,34 @@ export const playLoaderTick = (percentage = 0) => {
 
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
 
-    const freq = 440 + percentage * 6; // ascends with progress
-    osc.type = "triangle";
-    osc.frequency.setValueAtTime(freq, now);
-    osc.frequency.exponentialRampToValueAtTime(freq * 1.2, now + 0.025);
+    // Very soft acoustic watch escapement click
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(280, now);
+    osc.frequency.exponentialRampToValueAtTime(140, now + 0.02);
 
-    gain.gain.setValueAtTime(0.04, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(450, now);
 
-    osc.connect(gain);
+    gain.gain.setValueAtTime(0.018, now);
+    gain.gain.exponentialRampToValueAtTime(0.0005, now + 0.02);
+
+    osc.connect(filter);
+    filter.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start(now);
-    osc.stop(now + 0.025);
-    notifySoundPlayed(0.2);
+    osc.stop(now + 0.02);
+    notifySoundPlayed(0.12);
   } catch {
     // ignore
   }
 };
 
 /**
- * System boot / 100% completion chime
+ * 12. LUXURY STUDIO BOOT CHORD (Rich D-Major 9th Analog Harmonic Chime)
+ * World-class initialization chord: warm, spacious, breathtaking.
  */
 export const playBootSound = () => {
   if (!soundEnabled) return;
@@ -592,27 +683,42 @@ export const playBootSound = () => {
     if (!ctx) return;
     const now = ctx.currentTime;
 
-    const chords = [523.25, 659.25, 783.99, 1046.5]; // C-major chord
-    chords.forEach((freq, idx) => {
+    // D Major 9th Chord: D3 (146.83Hz), A3 (220.00Hz), F#4 (369.99Hz), C#5 (554.37Hz), E5 (659.25Hz)
+    const chordVoices = [
+      { freq: 146.83, delay: 0.0, dur: 1.4, vol: 0.16 },
+      { freq: 220.0, delay: 0.05, dur: 1.3, vol: 0.14 },
+      { freq: 369.99, delay: 0.1, dur: 1.2, vol: 0.12 },
+      { freq: 554.37, delay: 0.16, dur: 1.1, vol: 0.1 },
+      { freq: 659.25, delay: 0.22, dur: 1.0, vol: 0.08 },
+    ];
+
+    chordVoices.forEach(({ freq, delay, dur, vol }) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      const noteTime = now + idx * 0.06;
+      const filter = ctx.createBiquadFilter();
+      const startTime = now + delay;
 
       osc.type = "sine";
-      osc.frequency.setValueAtTime(freq, noteTime);
+      osc.frequency.setValueAtTime(freq, startTime);
 
-      gain.gain.setValueAtTime(0.12, noteTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.4);
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(1400, startTime);
 
-      osc.connect(gain);
+      gain.gain.setValueAtTime(0.001, startTime);
+      gain.gain.linearRampToValueAtTime(vol, startTime + 0.06);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + dur);
+
+      osc.connect(filter);
+      filter.connect(gain);
       gain.connect(ctx.destination);
 
-      osc.start(noteTime);
-      osc.stop(noteTime + 0.4);
+      osc.start(startTime);
+      osc.stop(startTime + dur);
     });
 
-    notifySoundPlayed(0.85);
+    notifySoundPlayed(0.9);
   } catch {
     // ignore
   }
 };
+

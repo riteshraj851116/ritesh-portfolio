@@ -1,12 +1,12 @@
 /* ==========================================================================
-   LANDO NORRIS TECH STACK & TOOLCHAIN (PARTNERS STYLE)
+   TECHNICAL DOSSIER TECH STACK & ARCHITECTURE TOOLCHAIN
    ========================================================================== */
 
 .ln-collabs-section {
   position: relative;
-  background-color: var(--color--black);
+  background-color: #ffffff;
   padding: 6.5rem 0;
-  border-bottom: 1px solid rgba(244, 244, 237, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .ln-collabs-header {
@@ -27,8 +27,8 @@
 .collabs-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--color--lime);
+  font-weight: 800;
+  color: var(--color--brown-vibrant, #92400e);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -39,7 +39,7 @@
   font-weight: 900;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  color: var(--color--white);
+  color: #09090b;
   line-height: 0.95;
 }
 
@@ -55,7 +55,7 @@
   font-family: var(--font-primary);
   font-size: 0.95rem;
   line-height: 1.5;
-  color: var(--color--green-off-white-2);
+  color: #52525b;
   text-align: right;
 }
 
@@ -63,13 +63,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(40, 44, 32, 0.7);
-  border: 1px solid rgba(210, 255, 0, 0.25);
+  background: rgba(146, 64, 14, 0.08);
+  border: 1px solid rgba(146, 64, 14, 0.25);
   border-radius: 9999px;
   padding: 0.4rem 0.9rem;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--color--lime);
+  color: var(--color--brown-vibrant, #92400e);
   font-weight: 700;
 }
 
@@ -81,8 +81,8 @@
 }
 
 .ln-tech-card {
-  background: rgba(22, 24, 18, 0.85);
-  border: 1px solid rgba(244, 244, 237, 0.1);
+  background: #faf8f5;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   padding: 1.6rem;
   display: flex;
@@ -91,13 +91,14 @@
   min-height: 180px;
   transition: all 0.3s var(--cubic-default);
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 .ln-tech-card:hover {
-  background: rgba(40, 44, 32, 0.85);
-  border-color: var(--color--lime);
+  background: #ffffff;
+  border-color: var(--color--brown-vibrant, #92400e);
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(210, 255, 0, 0.15);
+  box-shadow: 0 12px 30px rgba(146, 64, 14, 0.12);
 }
 
 .tech-card-top {
@@ -109,11 +110,13 @@
 }
 
 .tech-badge-cat {
-  color: var(--color--green-off-white-2);
+  color: var(--color--brown, #78350f);
+  font-weight: 700;
 }
 
 .tech-badge-level {
   font-weight: 700;
+  color: #71717a;
 }
 
 .tech-card-title {
@@ -121,14 +124,14 @@
   font-size: 1.4rem;
   font-weight: 900;
   letter-spacing: -0.02em;
-  color: var(--color--white);
+  color: #09090b;
   margin: 0.75rem 0 0.25rem;
 }
 
 .tech-card-desc {
   font-family: var(--font-primary);
   font-size: 0.8rem;
-  color: var(--color--green-off-white-2);
+  color: #52525b;
   line-height: 1.4;
 }
 
@@ -136,7 +139,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
   padding-top: 0.85rem;
   margin-top: 1rem;
 }
@@ -144,21 +147,21 @@
 .tech-card-num {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: #71717a;
 }
 
 .tech-card-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color--lime);
-  opacity: 0.5;
+  background: var(--color--brown-vibrant, #92400e);
+  opacity: 0.6;
   transition: opacity 0.3s ease;
 }
 
 .ln-tech-card:hover .tech-card-dot {
   opacity: 1;
-  box-shadow: 0 0 8px var(--color--lime);
+  box-shadow: 0 0 8px var(--color--brown-vibrant, #92400e);
 }
 
 @media (max-width: 1200px) {
@@ -178,3 +181,4 @@
     grid-template-columns: 1fr;
   }
 }
+
