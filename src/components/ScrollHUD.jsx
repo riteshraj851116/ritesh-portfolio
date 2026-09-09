@@ -110,29 +110,6 @@ const ScrollHUD = () => {
 
   return (
     <>
-      {/* COCKPIT SPEEDOMETER COCKPIT GAUGE DOCKED AT BOTTOM-RIGHT OF VIEWPORT */}
-      <div className="hud-telemetry-gauge">
-        <div className="gauge-header">
-          <Gauge size={10} className="text-lime" />
-          <span className="gauge-title">SPEED</span>
-        </div>
-        <div className="gauge-data">
-          <span className="gauge-speed-val">{velocity}</span>
-          <span className="gauge-unit">KM/H</span>
-        </div>
-        <div className="gauge-gear-badge">
-          <span className="gear-label">GEAR</span>
-          <span className="gear-val text-lime">{gear}</span>
-        </div>
-        {/* RPM REV BAR */}
-        <div className="gauge-rpm-bar">
-          <div
-            className="gauge-rpm-fill"
-            style={{ width: `${Math.min(100, (velocity / 350) * 100)}%` }}
-          ></div>
-        </div>
-      </div>
-
       {/* VERTICAL SECTION SPY RAIL & DOTS */}
       <aside className="scroll-hud" aria-label="Page Telemetry Navigation">
         {/* VERTICAL PROGRESS LINE */}

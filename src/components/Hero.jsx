@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ArrowUpRight, ArrowDown, Activity, ShieldCheck, Cpu, Terminal } from "lucide-react";
+import { ArrowUpRight, ArrowDown, Sparkles, Code2, Server, Zap } from "lucide-react";
 import profileImage from "../assets/Adobe Express - file.png";
 import { scrambleText } from "../utils/scramble";
 import {
@@ -15,7 +15,6 @@ import "./Hero.css";
 const Hero = () => {
   const heroRef = useRef(null);
   const imageRef = useRef(null);
-  const hudRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -28,32 +27,32 @@ const Hero = () => {
       )
         .fromTo(
           ".ln-hero-title-line",
-          { y: 90, opacity: 0 },
+          { y: 80, opacity: 0 },
           { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: "power4.out" },
           "-=0.5"
         )
         .fromTo(
           ".ln-hero-tagline",
-          { opacity: 0, y: 24 },
+          { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
           "-=0.6"
+        )
+        .fromTo(
+          ".ln-hero-actions",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+          "-=0.5"
         )
         .fromTo(
           imageRef.current,
-          { scale: 0.92, opacity: 0, y: 40 },
-          { scale: 1, opacity: 1, y: 0, duration: 1.1, ease: "power3.out" },
+          { scale: 0.94, opacity: 0, y: 30 },
+          { scale: 1, opacity: 1, y: 0, duration: 1.0, ease: "power3.out" },
           "-=0.7"
         )
         .fromTo(
-          hudRef.current,
-          { opacity: 0, y: 25 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-          "-=0.6"
-        )
-        .fromTo(
           ".ln-hero-hud-chip",
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.07, ease: "power3.out" },
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power3.out" },
           "-=0.5"
         );
     }, heroRef);
@@ -70,11 +69,9 @@ const Hero = () => {
 
       if (imageRef.current) {
         gsap.to(imageRef.current, {
-          x: x * 10,
-          y: y * 10,
-          rotateY: x * 6,
-          rotateX: -y * 6,
-          duration: 0.6,
+          rotateY: x * 7,
+          rotateX: -y * 7,
+          duration: 0.65,
           ease: "power2.out",
         });
       }
@@ -86,38 +83,19 @@ const Hero = () => {
 
   return (
     <section className="ln-hero-section" id="home" ref={heroRef}>
-      {/* HIGH-PERFORMANCE INTERACTIVE CYBER TELEMETRY CANVAS BACKDROP */}
+      {/* PURE OBSIDIAN AMBIENT CANVAS */}
       <HeroBackgroundCanvas />
 
       <div className="lando-container ln-hero-container">
-        {/* TOP STATUS BAR (MISSION CONTROL TELEMETRY) */}
-        <div className="ln-hero-topbar">
-          <div className="ln-topbar-item">
-            <span className="topbar-radar-dot"></span>
-            <span className="ln-topbar-label">SYSTEM TELEMETRY:</span>
-            <strong className="ln-topbar-val">LIVE // 24MS PING</strong>
-          </div>
-
-          <div className="ln-topbar-item center">
-            <span className="ln-topbar-label">ACADEMIC CREDENTIAL:</span>
-            <strong className="ln-topbar-val">GALGOTIAS UNIV · B.TECH CSE (2023-2027)</strong>
-          </div>
-
-          <div className="ln-topbar-item right">
-            <span className="pulse-beacon"></span>
-            <strong className="ln-topbar-val text-lime">AVAILABLE FOR HIRE 2026</strong>
-          </div>
-        </div>
-
         {/* MAIN HERO GRID */}
         <div className="ln-hero-main-grid">
-          {/* LEFT: MASSIVE F1 TYPOGRAPHY & IMPACT VALUE PROP */}
+          {/* LEFT: MASSIVE EDITORIAL TYPOGRAPHY & MANIFESTO */}
           <div className="ln-hero-left">
             <div className="ln-hero-eyebrow">
               <span className="eyebrow-beacon"></span>
-              <span className="eyebrow-pill">MERN ARCHITECTURE</span>
+              <span className="eyebrow-pill">FULL STACK ENGINEER</span>
               <span className="eyebrow-sep">/</span>
-              <span className="eyebrow-text">PRODUCTION WEB ENGINEERING</span>
+              <span className="eyebrow-text">MERN & REAL-TIME ARCHITECT</span>
             </div>
 
             <div className="ln-hero-title">
@@ -145,13 +123,12 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* HIGH-IMPACT STATEMENT */}
+            {/* HIGH-IMPACT EDITORIAL VALUE PROPOSITION */}
             <div className="ln-hero-tagline">
               <p className="ln-tagline-text">
-                <span className="tagline-highlight">Redefining limits</span>, fighting for{" "}
-                <span className="tagline-white">performance</span>, bringing precision to every
-                line of code. Architecting <span className="tagline-highlight">high-throughput MERN systems</span> and
-                ultra-fast distributed web applications.
+                Engineering <span className="tagline-highlight">high-throughput distributed systems</span>,
+                sub-50ms real-time <span className="tagline-white">Socket.IO pipelines</span>, and
+                high-performance full-stack web applications with mathematical precision and luxury aesthetics.
               </p>
             </div>
 
@@ -190,7 +167,7 @@ const Hero = () => {
               </a>
             </div>
 
-            {/* TELEMETRY METRICS CHIPS */}
+            {/* INTEGRATED METRICS CAPSULE STRIP */}
             <div className="ln-hero-hud-chips">
               <div
                 className="ln-hero-hud-chip"
@@ -198,10 +175,9 @@ const Hero = () => {
               >
                 <div className="chip-header">
                   <span className="chip-metric">03+</span>
-                  <span className="chip-pulse-dot"></span>
+                  <Code2 size={13} className="text-lime" />
                 </div>
                 <span className="chip-label">Production Apps</span>
-                <div className="chip-bar"><div className="chip-bar-fill" style={{ width: "95%" }}></div></div>
               </div>
 
               <div
@@ -210,10 +186,9 @@ const Hero = () => {
               >
                 <div className="chip-header">
                   <span className="chip-metric">40+</span>
-                  <span className="chip-pulse-dot"></span>
+                  <Server size={13} className="text-lime" />
                 </div>
                 <span className="chip-label">REST APIs Built</span>
-                <div className="chip-bar"><div className="chip-bar-fill" style={{ width: "90%" }}></div></div>
               </div>
 
               <div
@@ -222,10 +197,9 @@ const Hero = () => {
               >
                 <div className="chip-header">
                   <span className="chip-metric text-lime">&lt;50ms</span>
-                  <span className="chip-pulse-dot lime"></span>
+                  <Zap size={13} className="text-lime" />
                 </div>
                 <span className="chip-label">Socket.IO Delay</span>
-                <div className="chip-bar"><div className="chip-bar-fill fill-lime" style={{ width: "98%" }}></div></div>
               </div>
 
               <div
@@ -234,15 +208,14 @@ const Hero = () => {
               >
                 <div className="chip-header">
                   <span className="chip-metric">200+</span>
-                  <span className="chip-pulse-dot"></span>
+                  <Sparkles size={13} className="text-lime" />
                 </div>
                 <span className="chip-label">Java DSA Solved</span>
-                <div className="chip-bar"><div className="chip-bar-fill" style={{ width: "88%" }}></div></div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: ULTRA-LUXURY DRIVER TELEMETRY SHOWCASE */}
+          {/* RIGHT: LUXURY EDITORIAL PORTRAIT & CREDENTIAL MONOLITH */}
           <div className="ln-hero-right">
             <div
               className="ln-profile-card-container"
@@ -252,91 +225,49 @@ const Hero = () => {
               {/* BACKDROP AMBIENT GLOW */}
               <div className="card-ambient-spotlight"></div>
 
-              {/* HOLOGRAPHIC PROFILE FRAME */}
+              {/* HIGH-FASHION EDITORIAL PORTRAIT FRAME */}
               <div className="ln-profile-frame">
-                {/* HUD Precision Corner Calipers */}
-                <span className="caliper top-left"></span>
-                <span className="caliper top-right"></span>
-                <span className="caliper bottom-left"></span>
-                <span className="caliper bottom-right"></span>
-
-                {/* Laser scan line effect */}
-                <div className="hud-scan-beam"></div>
-
                 {/* Profile Image with subtle cinematic grading */}
                 <img
                   src={profileImage}
-                  alt="Ritesh Raj Singh"
+                  alt="Ritesh Raj — Full Stack Engineer"
                   className="ln-profile-img"
                 />
 
-                {/* Gradient bottom mask for clean transition */}
+                {/* Subtle dark gradient overlay for depth */}
                 <div className="profile-img-mask"></div>
 
                 {/* Floating Driver Badge */}
                 <div className="ln-profile-badge-overlay">
                   <div className="badge-left">
                     <span className="pulse-beacon"></span>
-                    <span className="badge-code">RRS // 2026</span>
+                    <span className="badge-code">RITESH RAJ</span>
                   </div>
                   <span className="badge-spec">FULL STACK SPECIALIST</span>
                 </div>
               </div>
 
-              {/* TELEMETRY STATUS DASHBOARD */}
-              <div className="ln-hero-telemetry-box" ref={hudRef}>
-                <div className="telemetry-header">
-                  <div className="telemetry-live-dot">
-                    <Activity size={12} className="text-lime" />
-                    <span>SYSTEM TELEMETRY // STABLE</span>
-                  </div>
-                  {/* Live Equalizer Bars */}
-                  <div className="telemetry-eq">
-                    <span className="eq-bar bar-1"></span>
-                    <span className="eq-bar bar-2"></span>
-                    <span className="eq-bar bar-3"></span>
-                    <span className="eq-bar bar-4"></span>
-                    <span className="eq-bar bar-5"></span>
-                  </div>
+              {/* REFINED CREDENTIAL CAPTION */}
+              <div className="hero-editorial-footer-bar">
+                <div className="editorial-stat-item">
+                  <span className="editorial-label">ACADEMIC CREDENTIAL</span>
+                  <strong className="editorial-val">GALGOTIAS UNIV · B.TECH CSE</strong>
                 </div>
-
-                <div className="telemetry-body">
-                  <div className="telemetry-row">
-                    <span className="t-label">
-                      <Cpu size={11} className="inline-icon" /> Core Stack:
-                    </span>
-                    <strong className="t-val text-lime">MERN Stack + Socket.IO</strong>
-                  </div>
-                  <div className="telemetry-row">
-                    <span className="t-label">
-                      <Terminal size={11} className="inline-icon" /> Certification:
-                    </span>
-                    <strong className="t-val">CodeHelp (Love Babbar) MERN</strong>
-                  </div>
-                  <div className="telemetry-row">
-                    <span className="t-label">
-                      <ShieldCheck size={11} className="inline-icon" /> Algorithms:
-                    </span>
-                    <strong className="t-val">Apna College Java DSA (200+)</strong>
-                  </div>
-                  <div className="telemetry-row">
-                    <span className="t-label">
-                      <Activity size={11} className="inline-icon" /> Academics:
-                    </span>
-                    <strong className="t-val">B.Tech CSE · CGPA 7.3</strong>
-                  </div>
+                <div className="editorial-stat-item right">
+                  <span className="editorial-label">AVAILABILITY</span>
+                  <strong className="editorial-val text-lime">OPEN FOR ROLES 2026</strong>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* BOTTOM TELEMETRY TICKER */}
+        {/* BOTTOM MINIMALIST SCROLL PROMPT */}
         <div className="ln-hero-bottom-bar">
           <div className="bottom-bar-left">
-            <span className="text-muted">SCROLL VELOCITY ACTIVE</span>
+            <span className="text-muted">SYSTEM ONLINE</span>
             <span className="bar-sep">·</span>
-            <span className="text-lime">100% AUTHENTIC CREDENTIALS</span>
+            <span className="text-lime">100% PRODUCTION VERIFIED</span>
           </div>
 
           <a
@@ -345,12 +276,12 @@ const Hero = () => {
             onClick={playClickSound}
             onMouseEnter={() => playHoverSound(50)}
           >
-            <span>DISCOVER JOURNEY</span>
+            <span>EXPLORE TIMELINE</span>
             <ArrowDown size={14} className="bounce-arrow" />
           </a>
 
           <div className="bottom-bar-right">
-            <span>GALGOTIAS UNIVERSITY CSE // BIHAR → GREATER NOIDA</span>
+            <span>GREATER NOIDA, INDIA · GLOBAL DISPATCH</span>
           </div>
         </div>
       </div>

@@ -308,7 +308,7 @@ const Contact = () => {
           >
             <path
               d="M0 0 C 480 80, 960 80, 1440 0 L 1440 80 L 0 80 Z"
-              fill="#0d0e0a"
+              fill="#080709"
             />
           </svg>
         </div>

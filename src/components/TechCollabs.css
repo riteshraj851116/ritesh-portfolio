@@ -1,12 +1,13 @@
 /* ==========================================================================
    TECHNICAL DOSSIER TECH STACK & ARCHITECTURE TOOLCHAIN
+   PURE OBSIDIAN DARK LUXURY AESTHETIC
    ========================================================================== */
 
 .ln-collabs-section {
   position: relative;
-  background-color: #ffffff;
+  background-color: #080709;
   padding: 6.5rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ln-collabs-header {
@@ -28,7 +29,7 @@
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 800;
-  color: var(--color--brown-vibrant, #92400e);
+  color: var(--color--amber-gold);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -39,7 +40,7 @@
   font-weight: 900;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  color: #09090b;
+  color: #ffffff;
   line-height: 0.95;
 }
 
@@ -55,7 +56,7 @@
   font-family: var(--font-primary);
   font-size: 0.95rem;
   line-height: 1.5;
-  color: #52525b;
+  color: #a1a1aa;
   text-align: right;
 }
 
@@ -63,13 +64,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(146, 64, 14, 0.08);
-  border: 1px solid rgba(146, 64, 14, 0.25);
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
   border-radius: 9999px;
   padding: 0.4rem 0.9rem;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--color--brown-vibrant, #92400e);
+  color: #fbbf24;
   font-weight: 700;
 }
 
@@ -81,8 +82,10 @@
 }
 
 .ln-tech-card {
-  background: #faf8f5;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(20, 19, 24, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   padding: 1.6rem;
   display: flex;
@@ -91,14 +94,14 @@
   min-height: 180px;
   transition: all 0.3s var(--cubic-default);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .ln-tech-card:hover {
-  background: #ffffff;
-  border-color: var(--color--brown-vibrant, #92400e);
+  background: rgba(26, 24, 32, 0.88);
+  border-color: var(--color--amber-gold);
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(146, 64, 14, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(245, 158, 11, 0.15);
 }
 
 .tech-card-top {
@@ -110,13 +113,13 @@
 }
 
 .tech-badge-cat {
-  color: var(--color--brown, #78350f);
+  color: #fbbf24;
   font-weight: 700;
 }
 
 .tech-badge-level {
   font-weight: 700;
-  color: #71717a;
+  color: #a1a1aa;
 }
 
 .tech-card-title {
@@ -124,14 +127,14 @@
   font-size: 1.4rem;
   font-weight: 900;
   letter-spacing: -0.02em;
-  color: #09090b;
+  color: #ffffff;
   margin: 0.75rem 0 0.25rem;
 }
 
 .tech-card-desc {
   font-family: var(--font-primary);
   font-size: 0.8rem;
-  color: #52525b;
+  color: #a1a1aa;
   line-height: 1.4;
 }
 
@@ -139,7 +142,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 0.85rem;
   margin-top: 1rem;
 }
@@ -147,21 +150,21 @@
 .tech-card-num {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: #71717a;
+  color: #a1a1aa;
 }
 
 .tech-card-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color--brown-vibrant, #92400e);
-  opacity: 0.6;
+  background: var(--color--amber-gold);
+  opacity: 0.75;
   transition: opacity 0.3s ease;
 }
 
 .ln-tech-card:hover .tech-card-dot {
   opacity: 1;
-  box-shadow: 0 0 8px var(--color--brown-vibrant, #92400e);
+  box-shadow: 0 0 10px var(--color--amber-gold);
 }
 
 @media (max-width: 1200px) {
@@ -181,4 +184,3 @@
     grid-template-columns: 1fr;
   }
 }
-

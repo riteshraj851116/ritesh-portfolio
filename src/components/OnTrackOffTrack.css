@@ -1,16 +1,17 @@
 /* ==========================================================================
    TECHNICAL DOSSIER ON CODE / OFF CODE SPLIT SECTION STYLES
+   PURE OBSIDIAN DARK LUXURY AESTHETIC
    ========================================================================== */
 
 .ln-otoc-section {
   position: relative;
   width: 100%;
   min-height: 85vh;
-  background-color: #ffffff;
+  background-color: #080709;
   display: flex;
   align-items: stretch;
   overflow: hidden;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ln-otoc-container {
@@ -31,12 +32,12 @@
 }
 
 .ln-otoc-col.is-on-code {
-  background: #faf8f5;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  background: #0e0d13;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ln-otoc-col.is-off-code {
-  background: #ffffff;
+  background: #080709;
 }
 
 .ln-otoc-col.is-expanded {
@@ -59,13 +60,13 @@
 }
 
 .otoc-badge {
-  color: var(--color--brown-vibrant, #92400e);
+  color: var(--color--amber-gold);
   font-weight: 800;
   letter-spacing: 0.06em;
 }
 
 .otoc-status {
-  color: #71717a;
+  color: #a1a1aa;
   letter-spacing: 0.04em;
 }
 
@@ -79,7 +80,7 @@
   font-size: clamp(3.5rem, 8vw, 7.5rem);
   font-weight: 700;
   letter-spacing: -0.04em;
-  color: #09090b;
+  color: #ffffff;
 }
 
 .otoc-super-mona {
@@ -88,14 +89,14 @@
   font-weight: 900;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  color: #09090b;
+  color: #ffffff;
 }
 
 .otoc-description {
   font-family: var(--font-primary);
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   line-height: 1.5;
-  color: #52525b;
+  color: #a1a1aa;
 }
 
 .otoc-highlights {
@@ -108,9 +109,9 @@
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--color--brown, #78350f);
-  background: rgba(146, 64, 14, 0.08);
-  border: 1px solid rgba(146, 64, 14, 0.22);
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
   padding: 0.4rem 0.8rem;
   border-radius: 9999px;
 }
@@ -129,17 +130,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color--brown-vibrant, #92400e);
-  color: #ffffff;
+  background: var(--color--amber-gold);
+  color: #080709;
   text-decoration: none;
   transition: all 0.35s var(--cubic-default);
-  box-shadow: 0 4px 20px rgba(146, 64, 14, 0.25);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
 }
 
 .otoc-circle-btn:hover {
-  background: #09090b;
+  background: #fbbf24;
   transform: scale(1.1) translateX(4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.6);
 }
 
 .otoc-action-label {
@@ -147,7 +148,7 @@
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.06em;
-  color: #09090b;
+  color: #ffffff;
   text-transform: uppercase;
 }
 
@@ -162,7 +163,6 @@
 
   .ln-otoc-col.is-on-code {
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
-

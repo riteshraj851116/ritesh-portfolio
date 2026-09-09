@@ -13,10 +13,10 @@ const ParticleField = ({ count = 650 }) => {
     const col = new Float32Array(count * 3);
 
     const colorPalette = [
-      new THREE.Color("#d2ff00"), // neon lime
-      new THREE.Color("#ffffff"), // bright white
-      new THREE.Color("#f4f4ed"), // off-white
-      new THREE.Color("#282c20"), // deep racing olive
+      new THREE.Color("#f59e0b"), // radiant golden amber
+      new THREE.Color("#fbbf24"), // bright gold
+      new THREE.Color("#ffffff"), // luminous star white
+      new THREE.Color("#d97706"), // deep bronze amber
     ];
 
     for (let i = 0; i < count; i++) {

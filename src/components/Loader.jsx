@@ -30,17 +30,15 @@ const Loader = ({ onComplete }) => {
         prog = 100;
         setProgress(100);
         clearInterval(progressInterval);
-        playBootSound();
+        try { playBootSound(); } catch (e) {}
       } else {
         setProgress(prog);
       }
     }, 32);
 
     const greetingInterval = setInterval(() => {
-      setCurrentIndex((prev) => {
-        playLoaderTick();
-        return (prev + 1) % greetings.length;
-      });
+      try { playLoaderTick(); } catch (e) {}
+      setCurrentIndex((prev) => (prev + 1) % greetings.length);
     }, 240);
 
     return () => {

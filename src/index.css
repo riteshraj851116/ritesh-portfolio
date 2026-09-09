@@ -21,43 +21,51 @@
 }
 
 :root {
-  /* LUXURY EDITORIAL PALETTE: WHITE BACKGROUND, RICH BROWN, AND CRISP BLACK */
-  --bg-primary: #ffffff;
-  --bg-surface: #fbfbfb;
-  --bg-card: #ffffff;
-  --text-primary: #09090b;
-  --text-muted: #52525b;
+  /* PURE OBSIDIAN DARK LUXURY PALETTE: PITCH BLACK, SLEEK GLASS, GOLDEN AMBER ACCENTS */
+  --bg-primary: #080709;
+  --bg-surface: #0f0e12;
+  --bg-card: rgba(20, 19, 24, 0.72);
+  --text-primary: #f4f4f6;
+  --text-muted: #a1a1aa;
   --text-dim: #71717a;
 
-  /* Luxury Warm Brown Scale (Cognac, Saddle Leather & Espresso Bronze) */
-  --color--brown-deep: #451a03;
-  --color--brown: #78350f;
-  --color--brown-vibrant: #92400e;
-  --color--brown-caramel: #b45309;
-  --color--brown-glow: rgba(146, 64, 14, 0.25);
-  --color--brown-tint: rgba(146, 64, 14, 0.08);
+  /* Pure Obsidian & Golden Amber Scale */
+  --color--amber-gold: #f59e0b;
+  --color--amber-bright: #fbbf24;
+  --color--amber-deep: #d97706;
+  --color--amber-glow: rgba(245, 158, 11, 0.35);
+  --color--amber-tint: rgba(245, 158, 11, 0.1);
+
+  /* Legacy aliases mapped to Obsidian & Golden Amber */
+  --color--brown-vibrant: #f59e0b;
+  --color--brown-bright: #fbbf24;
+  --color--brown-deep: #d97706;
+  --color--brown-tint: rgba(245, 158, 11, 0.12);
+  --color--ivory-white: #080709;
+  --color--ivory-surface: #0f0e12;
 
   /* Unified tokens */
-  --color--white: #09090b; /* mapped to dark text on light backgrounds */
+  --color--white: #f4f4f6;
   --color--pure-white: #ffffff;
-  --color--black: #ffffff; /* mapped to light background */
-  --color--pure-black: #09090b;
-  --color--lime: var(--color--brown-vibrant);
-  --color--lime-off: var(--color--brown-caramel);
-  --color--lime-glow: var(--color--brown-glow);
-  --color--dark-green: #fbf9f6;
-  --color--green-off-white-1: #27272a;
-  --color--green-off-white-2: #71717a;
-  --color--dark-green-tint-1: #f4f4f5;
-  --color--dark-green-tint-2: #e4e4e7;
-  --color--grey-on-track: #52525b;
-  --color--grey-1: #18181b;
-  --color--grey-2: #71717a;
+  --color--black: #080709;
+  --color--pure-black: #000000;
+  --color--lime: #f59e0b;
+  --color--lime-off: #fbbf24;
+  --color--lime-glow: rgba(245, 158, 11, 0.35);
+  --color--dark-green: #0e0d11;
+  --color--green-off-white-1: #f4f4f5;
+  --color--green-off-white-2: #a1a1aa;
+  --color--dark-green-tint-1: #18171d;
+  --color--dark-green-tint-2: #27262d;
+  --color--grey-on-track: #18171d;
+  --color--grey-1: #f4f4f5;
+  --color--grey-2: #a1a1aa;
 
-  /* Typography Families */
-  --font-primary: "Mona Sans Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Mona Sans Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", "Space Grotesk", monospace;
+  /* Unique Typography Families */
+  --font-primary: "Outfit", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Syne", "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", "Chakra Petch", monospace;
+  --font-technical: "Chakra Petch", "JetBrains Mono", monospace;
 
   /* Fluid Spacing & Sizing */
   --cubic-default: cubic-bezier(0.65, 0.05, 0, 1);
@@ -67,7 +75,7 @@
   --container-max: 1728px;
   --container-padding: clamp(1.25rem, 4vw, 3.5rem);
 
-  --accent-primary: var(--color--brown-vibrant);
+  --accent-primary: #f59e0b;
 }
 
 /* BASE RESET */
@@ -83,19 +91,19 @@
 
 html {
   font-family: var(--font-primary);
-  background-color: #ffffff;
-  color: #09090b;
+  background-color: #080709;
+  color: #f4f4f6;
   font-size: 16px;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: #e4e4e7 #ffffff;
+  scrollbar-color: #27262d #080709;
   overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
-  background-color: #ffffff;
-  color: #09090b;
+  background-color: #080709;
+  color: #f4f4f6;
   line-height: 1.4;
   overflow-x: hidden;
   position: relative;
@@ -107,21 +115,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: #080709;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color--dark-green-tint-2);
-  border-radius: 3px;
+  background: #27262d;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color--lime);
+  background: #f59e0b;
 }
 
 /* SELECTION STYLING (Lando Norris electric neon lime) */
