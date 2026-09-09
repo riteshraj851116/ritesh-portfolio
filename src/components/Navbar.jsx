@@ -37,7 +37,7 @@ const LinkedinIcon = ({ size = 16 }) => (
   </svg>
 );
 
-const Navbar = () => {
+const Navbar = ({ onOpenAbout }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [localTime, setLocalTime] = useState("");
@@ -112,6 +112,7 @@ const Navbar = () => {
     { id: "on-off-code", label: "03 DUALITY", href: "#on-off-code" },
     { id: "dossier", label: "04 DOSSIER", href: "#dossier" },
     { id: "tech-stack", label: "05 TECH", href: "#tech-stack" },
+    { id: "about", label: "06 ABOUT", href: "#about", isAbout: true },
   ];
 
   return (
@@ -145,7 +146,15 @@ const Navbar = () => {
                   key={link.id}
                   href={link.href}
                   className={`ln-nav-item ${isActive ? "is-active" : ""}`}
-                  onClick={playClickSound}
+                  onClick={(e) => {
+                    if (link.isAbout && onOpenAbout) {
+                      e.preventDefault();
+                      playClickSound();
+                      onOpenAbout();
+                    } else {
+                      playClickSound();
+                    }
+                  }}
                   onMouseEnter={playHoverSound}
                 >
                   <span className="ln-item-text">{link.label}</span>
@@ -225,14 +234,22 @@ const Navbar = () => {
             { label: "04 // 3D PLAYBOOK DOSSIER", href: "#dossier" },
             { label: "05 // TECH TELEMETRY", href: "#tech-stack" },
             { label: "06 // TRANSMISSION DISPATCH", href: "#contact" },
+            { label: "07 // KENTA EDITORIAL ABOUT", href: "#about", isAbout: true },
           ].map((link, idx) => (
             <a
               key={idx}
               href={link.href}
               className="ln-drawer-item"
-              onClick={() => {
-                playClickSound();
-                setMenuOpen(false);
+              onClick={(e) => {
+                if (link.isAbout && onOpenAbout) {
+                  e.preventDefault();
+                  playClickSound();
+                  setMenuOpen(false);
+                  onOpenAbout();
+                } else {
+                  playClickSound();
+                  setMenuOpen(false);
+                }
               }}
             >
               <span>{link.label}</span>
