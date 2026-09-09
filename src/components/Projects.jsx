@@ -1,34 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState, useEffect } from "react";
+import { ArrowUpRight, ExternalLink, CheckCircle2, X, Globe, Zap } from "lucide-react";
 import {
-  ArrowUpRight,
-  ExternalLink,
-  Layers,
-  Sparkles,
-  Eye,
-  CheckCircle2,
-  X,
-  Code2,
-  Terminal,
-  Activity,
-  Server,
-  Zap,
-  Search,
-  Cpu,
-  MonitorPlay,
-  Flame,
-  Globe,
-  Radio,
-  Clock,
-  ChevronRight,
-  BookmarkCheck,
-} from "lucide-react";
+  playClickSound,
+  playHoverSound,
+  playTelemetryScan,
+  playEngineRevSound,
+  playCockpitWhoosh,
+} from "../utils/audio";
+import { attach3DCardTilt } from "../utils/gsapKinematics";
 import "./Projects.css";
 
-gsap.registerPlugin(ScrollTrigger);
-
-// Custom GitHub Icon SVG
 const GithubIcon = ({ size = 15 }) => (
   <svg
     width={size}
@@ -50,733 +31,411 @@ const projectsData = [
     id: "01",
     number: "01",
     name: "JOBSPHERE",
-    categoryKey: "fullstack",
-    subtitle: "FULL STACK JOB PORTAL",
-    category: "CAREER RECRUITMENT & REAL-TIME PLATFORM",
+    subtitle: "FULL STACK RECRUITMENT PLATFORM",
+    category: "CAREER PORTAL & REAL-TIME CHAT",
+    badge: "MERN & SOCKET.IO",
+    year: "2025",
     tagline: "Full-stack job portal connecting job seekers & recruiters with real-time Socket.IO chat.",
     description:
-      "A full-stack job portal designed to connect job seekers and recruiters smoothly on a single unified platform. Features secure JWT/bcrypt authentication, 40+ REST API endpoints for job search and profiles, and real-time live messaging powered by Socket.IO with sub-50ms message latency.",
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "Socket.IO", "bcrypt", "REST APIs"],
+      "A complete full-stack job portal designed to connect job seekers and recruiters smoothly on a single platform. Features secure JWT/bcrypt authentication, 40+ REST API endpoints for job search, application pipelines, and real-time live messaging powered by Socket.IO with sub-50ms message latency.",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Socket.IO", "JWT Auth", "Bcrypt", "REST APIs"],
     highlights: [
-      "Secure user authentication with JWT and bcrypt ensuring 100% data protection for passwords",
+      "Secure user authentication with JWT and bcrypt ensuring complete data protection",
       "Clean RESTful APIs (40+ endpoints) in Node.js to handle job postings, profiles, and queries",
       "Socket.IO integration for real-time live chat between users with message delay under 50ms",
       "Dynamic candidate search, recruiter ATS pipeline, and status tracking",
     ],
-    accentColor: "#10b981",
-    accentGlow: "rgba(16, 185, 129, 0.28)",
+    metrics: { "REST APIs": "40+ Endpoints", "Chat Latency": "<50ms", "Auth Security": "JWT + Bcrypt", "Pipeline": "Automated ATS" },
+    accentColor: "#d2ff00",
     liveUrl: "https://riteshraj851116.github.io/jobsphere/",
     githubUrl: "https://github.com/riteshraj851116/jobsphere",
-    badge: "MERN & SOCKET.IO",
-    architecture: "Event-driven MERN stack architecture with JWT authorization and Socket.IO bidirectional channels.",
-    status: "Live Project",
-    metrics: { "REST Endpoints": "40+ APIs", "Chat Delay": "<50ms", "Data Security": "JWT + Bcrypt", "Recruiter ATS": "100% Automated" },
     terminalCode: {
-      framework: "Express / Socket.IO",
-      auth: "JWT + Bcrypt Encryption",
-      dbQuery: "db.jobs.aggregate([{$match: {status: 'ACTIVE'}}])",
-      uptime: "99.98% Healthy",
+      framework: "Express.js / Socket.IO",
+      security: "JWT + Bcrypt Encryption",
+      query: "db.jobs.aggregate([{$match: {status: 'ACTIVE'}}])",
+      health: "200 OK — Production Live",
     },
   },
   {
     id: "02",
     number: "02",
     name: "VELOCEDRIVE",
-    categoryKey: "fullstack",
     subtitle: "CAR RENTAL MANAGEMENT SYSTEM",
-    category: "FLEET BOOKING & VEHICLE MANAGEMENT",
+    category: "FLEET BOOKING & VEHICLE ENGINE",
+    badge: "MERN STACK",
+    year: "2025",
     tagline: "Complete car rental platform with Mongoose dynamic filter engine and owner dashboard.",
     description:
       "A comprehensive car rental application handling everything from searching verified cars to final booking. Built with a fast search and filter system in Mongoose (<200ms latency), a dedicated owner dashboard with 15+ reusable React components, and secure Express middleware.",
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "REST APIs", "Tailwind CSS"],
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Mongoose", "Tailwind CSS", "JWT Auth", "REST APIs"],
     highlights: [
       "End-to-end car rental booking lifecycle from search queries to final reservation",
       "Fast Mongoose query optimization enabling vehicle filtering in under 200ms",
       "Dedicated owner admin dashboard crafted with 15+ reusable, modular React components",
       "Secured backend operations and sensitive data using industry-standard Express middleware",
     ],
-    accentColor: "#3b82f6",
-    accentGlow: "rgba(59, 130, 246, 0.28)",
+    metrics: { "Query Latency": "<200ms", "UI Components": "15+ Modular", "Backend Shield": "Express Middleware", "Fleet Logic": "Full Lifecycle" },
+    accentColor: "#38bdf8",
     liveUrl: "https://riteshraj851116.github.io/teracar/",
     githubUrl: "https://github.com/riteshraj851116/teracar",
-    badge: "MERN STACK",
-    architecture: "RESTful MERN architecture with Mongoose indexing, JWT auth, and modular React component design.",
-    status: "Production Ready",
-    metrics: { "Query Speed": "<200ms", "UI Components": "15+ Reusable", "API Security": "Express Shield", "Fleet Engine": "Full Lifecycle" },
     terminalCode: {
-      framework: "Node.js / Express",
-      orm: "Mongoose Indexed Models",
-      bookingLogic: "Vehicle.find({available: true, dates: {$nin: range}})",
-      protection: "Helmet + JWT Middleware",
+      framework: "Node.js / Express / Mongoose",
+      orm: "Indexed MongoDB Collections",
+      query: "Vehicle.find({available: true, dates: {$nin: range}})",
+      health: "Production Ready",
     },
   },
   {
     id: "03",
     number: "03",
     name: "RCB FAN TEAM",
-    categoryKey: "frontend",
     subtitle: "HIGH-PERFORMANCE FRONTEND WEB",
     category: "SPORTS PORTAL & TEAM EXPERIENCE",
+    badge: "REACT & VITE",
+    year: "2024",
     tagline: "Ultra-responsive fan website scoring 90+ on Lighthouse with real-time roster updates.",
     description:
       "A fast, modern, and responsive fan website built using React.js and Vite, achieving a 90+ score on Lighthouse performance audits. Features seamless React state management for live match updates and team rosters without page reloads, styled with responsive CSS Grid and Flexbox.",
-    tech: ["React.js", "JavaScript (ES6+)", "HTML5", "CSS3", "Vite", "CSS Grid & Flexbox"],
+    tech: ["React.js", "JavaScript ES6+", "HTML5", "CSS3 Grid/Flexbox", "Vite ESM Bundler"],
     highlights: [
       "Scored 90+ on Lighthouse performance audits through optimized Vite builds",
       "React state management delivering live match updates and roster views without reloads",
       "Pixel-perfect responsive layouts crafted with CSS Grid & Flexbox across all screen sizes",
       "Smooth micro-interactions and high-fidelity team showcase visual layout",
     ],
-    accentColor: "#ef4444",
-    accentGlow: "rgba(239, 68, 68, 0.28)",
+    metrics: { "Lighthouse": "90+ Score", "Build Tool": "Vite ESM", "Layout Model": "Grid & Flexbox", "Reloads": "Zero / SPA" },
+    accentColor: "#f43f5e",
     liveUrl: "https://riteshraj851116.github.io/rcb-fan-website/",
     githubUrl: "https://github.com/riteshraj851116/rcb-fan-website",
-    badge: "REACT & VITE",
-    architecture: "Optimized Vite build pipeline with atomic component structure and responsive CSS architecture.",
-    status: "90+ Lighthouse",
-    metrics: { "Lighthouse Score": "90+ Performance", "Bundle Engine": "Vite ESM", "Layout Architecture": "Grid & Flexbox", "Page Reloads": "Zero / SPA" },
     terminalCode: {
       bundler: "Vite Rollup ESM",
-      performance: "Lighthouse 90+ Verified",
+      audit: "Lighthouse 90+ Verified",
       renderEngine: "React 19 Concurrent UI",
-      styling: "Pure CSS Architecture",
+      health: "Ultra Fast SPA",
     },
   },
 ];
 
-const categories = [
-  { id: "all", label: "ALL WORK" },
-  { id: "fullstack", label: "FULL STACK / MERN" },
-  { id: "frontend", label: "FRONTEND & UI" },
-];
-
 const Projects = () => {
-  const sectionRef = useRef(null);
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedProject, setSelectedProject] = useState(null);
-  const [activeCardTab, setActiveCardTab] = useState({}); // { [projectId]: 'terminal' | 'metrics' | 'architecture' }
-  const [copiedId, setCopiedId] = useState(null);
+  const [activeTabs, setActiveTabs] = useState({});
 
-  const getTabForProject = (id) => activeCardTab[id] || "terminal";
-
-  const setTabForProject = (id, tab) => {
-    setActiveCardTab((prev) => ({ ...prev, [id]: tab }));
-  };
-
-  const handleCopyLink = (url, id) => {
-    navigator.clipboard.writeText(url);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
-  };
-
-  const filteredProjects = projectsData.filter((p) => {
-    const matchesCategory =
-      activeCategory === "all" || p.categoryKey === activeCategory;
-    const matchesSearch =
-      searchQuery.trim() === "" ||
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.tech.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  const getTab = (id) => activeTabs[id] || "config";
+  const setTab = (id, tab) => setActiveTabs((prev) => ({ ...prev, [id]: tab }));
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const rows = gsap.utils.toArray(".project-row");
-
-      rows.forEach((row, index) => {
-        gsap.fromTo(
-          row,
-          {
-            opacity: 0,
-            y: 50,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: index * 0.05,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: row,
-              start: "top 90%",
-              once: true,
-            },
-          }
-        );
-      });
-    }, sectionRef);
-
-    ScrollTrigger.refresh();
-
-    return () => ctx.revert();
-  }, [activeCategory, searchQuery]);
-
-  const openProjectModal = (project) => {
-    setSelectedProject(project);
-  };
-
-  const handleMouseMove = (event) => {
-    if (window.innerWidth <= 768) return;
-
-    const row = event.currentTarget;
-    const card = row.querySelector(".project-card");
-    const cardContent = row.querySelector(".project-card-content");
-    const giantText = row.querySelector(".project-giant-text");
-
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const percentX = (mouseX - centerX) / centerX;
-    const percentY = (mouseY - centerY) / centerY;
-
-    const rotateY = percentX * 14;
-    const rotateX = percentY * -10;
-
-    gsap.to(card, {
-      rotateX,
-      rotateY,
-      rotateZ: percentX * 1.5,
-      scale: 1.02,
-      duration: 0.4,
-      ease: "power2.out",
-      overwrite: "auto",
+    const cards = document.querySelectorAll(".ln-helmet-card-wrap");
+    const cleanups = [];
+    cards.forEach((card) => {
+      cleanups.push(attach3DCardTilt(card, { maxTilt: 7, perspective: 1000 }));
     });
-
-    if (cardContent) {
-      gsap.to(cardContent, {
-        x: percentX * 15,
-        y: percentY * 15,
-        z: 45,
-        duration: 0.5,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-
-    if (giantText) {
-      gsap.to(giantText, {
-        x: percentX * -10,
-        y: percentY * -6,
-        duration: 0.6,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-  };
-
-  const handleMouseEnter = (event) => {
-    if (window.innerWidth <= 768) return;
-    const row = event.currentTarget;
-    const card = row.querySelector(".project-card");
-    if (!card) return;
-
-    gsap.to(card, {
-      scale: 1.02,
-      duration: 0.4,
-      ease: "power2.out",
-    });
-  };
-
-  const handleMouseLeave = (event) => {
-    const row = event.currentTarget;
-    const card = row.querySelector(".project-card");
-    const cardContent = row.querySelector(".project-card-content");
-    const giantText = row.querySelector(".project-giant-text");
-
-    if (!card) return;
-
-    gsap.to(card, {
-      rotateX: 0,
-      rotateY: 0,
-      rotateZ: 0,
-      scale: 1,
-      duration: 0.8,
-      ease: "power3.out",
-      overwrite: "auto",
-    });
-
-    if (cardContent) {
-      gsap.to(cardContent, {
-        x: 0,
-        y: 0,
-        z: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
-    }
-
-    if (giantText) {
-      gsap.to(giantText, {
-        x: 0,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
-    }
-  };
+    return () => cleanups.forEach((c) => c());
+  }, []);
 
   return (
-    <section className="projects-section" id="projects" ref={sectionRef}>
-      {/* SECTION HEADER */}
-      <div className="projects-top">
-        <div className="projects-top-left">
-          <span className="projects-tag">04 / SELECTED WORK</span>
-          <span className="projects-subtag">ENGINEERED FOR PRODUCTION</span>
-        </div>
-
-        <div className="projects-top-right">
-          <span className="live-status-pill">
-            <Radio size={12} className="pulse-icon text-green" />
-            <span>ALL PROJECTS LIVE</span>
-          </span>
-          <span className="projects-count-indicator">
-            {filteredProjects.length.toString().padStart(2, "0")} OF {projectsData.length.toString().padStart(2, "0")} SHOWCASED
-          </span>
-        </div>
-      </div>
-
-      {/* FILTER CATEGORY PILLS & LIVE SEARCH */}
-      <div className="projects-filter-bar">
-        <div className="projects-filter-left">
-          <div className="projects-filter-label">
-            <Layers size={13} />
-            <span>FILTER STACK</span>
+    <section className="ln-helmets-section" id="hall-of-fame">
+      <div className="lando-container">
+        {/* TITLE LAYOUT (EXACT LANDONORRIS.COM HELMETS TITLE) */}
+        <div className="ln-helmets-header">
+          <div className="helmets-header-left">
+            <span className="helmets-eyebrow">04 // SELECTED PRODUCTIONS</span>
+            <h2 className="helmets-title">
+              PROJECTS
+              <br />
+              <span className="font-display text-lime-off">HALL OF FAME</span>
+            </h2>
           </div>
-          <div className="projects-filters">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`filter-btn ${activeCategory === cat.id ? "active" : ""}`}
-                onClick={() => setActiveCategory(cat.id)}
-              >
-                <span>{cat.label}</span>
-                {cat.id === "all" ? (
-                  <span className="filter-count">{projectsData.length}</span>
-                ) : (
-                  <span className="filter-count">
-                    {projectsData.filter((p) => p.categoryKey === cat.id).length}
-                  </span>
-                )}
-              </button>
-            ))}
+
+          <div className="helmets-header-right">
+            <p className="helmets-desc">
+              From real-time Socket.IO architectures with sub-50ms latency to high-performance Vite builds and complex MERN applications, each project represents full-stack precision engineered for production.
+            </p>
+            <div className="helmets-status-badge">
+              <span className="pulse-beacon"></span>
+              <span>ALL 3 PRODUCTIONS VERIFIED & LIVE</span>
+            </div>
           </div>
         </div>
 
-        {/* LIVE SEARCH BAR */}
-        <div className="projects-search-box">
-          <Search size={13} className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search projects (e.g. JobSphere, VeloceDrive, RCB)..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="projects-search-input"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery("")}
-              className="search-clear-btn"
-              aria-label="Clear search"
-            >
-              <X size={12} />
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* PROJECTS LIST */}
-      <div className="projects-list">
-        {filteredProjects.length === 0 ? (
-          <div className="no-projects-found">
-            <span>NO MATCHING PROJECTS FOUND FOR "{searchQuery}"</span>
-            <button
-              className="reset-search-btn"
-              onClick={() => {
-                setSearchQuery("");
-                setActiveCategory("all");
-              }}
-            >
-              RESET FILTERS
-            </button>
-          </div>
-        ) : (
-          filteredProjects.map((project) => (
-            <article
-              className="project-row"
-              key={project.id}
-              onMouseMove={handleMouseMove}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              style={{ "--project-accent": project.accentColor, "--project-glow": project.accentGlow }}
-            >
-              {/* LEFT NUMBER */}
-              <div className="project-number-col">
-                <span className="project-number">{project.number}</span>
-                <span className="project-dot" style={{ backgroundColor: project.accentColor }}></span>
-              </div>
-
-              {/* CENTER DETAILS */}
-              <div className="project-details">
-                <div className="project-heading-group">
-                  <div className="project-heading">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-title-link"
-                    >
-                      <h2>{project.name}</h2>
-                    </a>
-                    <button
-                      className="project-round-arrow"
-                      onClick={() => openProjectModal(project)}
-                      title="View Project Specifications"
-                      aria-label={`View ${project.name} details`}
-                    >
-                      <ArrowUpRight size={18} />
-                    </button>
-                  </div>
-
-                  <div className="project-meta-badges">
-                    <span className="project-category-badge">{project.subtitle}</span>
-                    <span className="project-status-badge">
-                      <span className="live-indicator-dot"></span>
-                      {project.status}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="project-description-block">
-                  <p className="project-summary">{project.description}</p>
-
-                  {/* HIGHLIGHT FEATURES BULLETS */}
-                  <div className="project-features-list">
-                    {project.highlights.slice(0, 3).map((highlight, idx) => (
-                      <div key={idx} className="feature-item">
-                        <CheckCircle2 size={12} className="feature-check" />
-                        <span>{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* TECH STACK BADGES */}
-                  <div className="project-tech-tags">
-                    {project.tech.map((t, idx) => (
-                      <span key={idx} className="tech-badge">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* ACTION BUTTONS */}
-                <div className="project-actions">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-btn project-btn-primary"
-                  >
-                    <Globe size={14} />
-                    <span>LAUNCH LIVE DEMO</span>
-                    <ExternalLink size={13} />
-                  </a>
-
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-btn project-btn-secondary"
-                  >
-                    <GithubIcon size={15} />
-                    <span>VIEW GITHUB REPO</span>
-                  </a>
-
-                  <button
-                    onClick={() => openProjectModal(project)}
-                    className="project-btn project-btn-details"
-                  >
-                    <Eye size={14} />
-                    <span>SPECS & ARCHITECTURE</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* RIGHT 3D INTERACTIVE VISUAL CARD */}
-              <div className="project-visual">
-                <div
-                  className="project-card"
-                  role="region"
-                  aria-label={`${project.name} interactive card`}
+        {/* HELMETS GRID (EXACT LANDO NOTCHED POLYGON CARD GRID) */}
+        <div className="ln-helmets-grid">
+          {projectsData.map((project) => (
+            <div key={project.id} className="ln-helmet-card-wrap">
+              {/* THE NOTCHED CUT-CORNER SVG BORDER */}
+              <div className="ln-helmet-frame-box">
+                {/* LIME HOVER FRAME */}
+                <svg
+                  className="ln-helmet-svg is-hover"
+                  viewBox="0 0 407 411"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <div className="project-card-background"></div>
-                  <div className="project-lines"></div>
-                  <div
-                    className="project-glow"
-                    style={{ background: project.accentGlow }}
-                  ></div>
+                  <path
+                    d="M8 1h390.89a7 7 0 0 1 7 7v356.983a7 7 0 0 1-7 7H263.329a23.999 23.999 0 0 0-18.766 9.038l-16.499 20.694A21.999 21.999 0 0 1 210.862 410H8a7 7 0 0 1-7-7V8a7 7 0 0 1 7-7Z"
+                    stroke="var(--color--lime)"
+                    strokeWidth="2.5"
+                  />
+                </svg>
 
-                  {/* GIANT BACKGROUND TITLE */}
-                  <div className="project-giant-text">{project.name}</div>
+                {/* BASE CARBON FRAME */}
+                <svg
+                  className="ln-helmet-svg is-base"
+                  viewBox="0 0 407 411"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 .5h390.89a7.5 7.5 0 0 1 7.5 7.5v356.983a7.5 7.5 0 0 1-7.5 7.5H263.329a23.502 23.502 0 0 0-18.375 8.849l-16.499 20.695a22.502 22.502 0 0 1-17.593 8.473H8A7.5 7.5 0 0 1 .5 403V8A7.5 7.5 0 0 1 8 .5Z"
+                    stroke="rgba(244, 244, 237, 0.2)"
+                    strokeWidth="2"
+                  />
+                </svg>
 
-                  {/* CARD CONTENT LAYER */}
-                  <div className="project-card-content">
-                    {/* CARD HEADER */}
-                    <div className="card-top">
-                      <div className="card-top-id">
-                        <span className="card-badge" style={{ borderColor: project.accentColor }}>
-                          {project.badge}
-                        </span>
-                        <span>RRS / {project.number}</span>
-                      </div>
-
-                      <div className="card-view-switchers">
-                        <button
-                          className={`switch-tab ${getTabForProject(project.id) === "terminal" ? "active" : ""}`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setTabForProject(project.id, "terminal");
-                          }}
-                        >
-                          CONFIG
-                        </button>
-                        <button
-                          className={`switch-tab ${getTabForProject(project.id) === "metrics" ? "active" : ""}`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setTabForProject(project.id, "metrics");
-                          }}
-                        >
-                          METRICS
-                        </button>
-                      </div>
+                {/* INNER CARD BODY */}
+                <div className="ln-helmet-inner">
+                  {/* CARD TOP INFO */}
+                  <div className="ln-card-top-row">
+                    <div className="ln-card-pills">
+                      <span className="ln-project-badge">{project.badge}</span>
+                      <span className="ln-project-num">#{project.number}</span>
                     </div>
 
-                    {/* CARD TERMINAL / DASHBOARD BODY */}
-                    <div className="card-center">
-                      <div className="card-mockup-window">
-                        <div className="window-bar">
-                          <div className="window-dots">
-                            <span className="w-dot red"></span>
-                            <span className="w-dot yellow"></span>
-                            <span className="w-dot green"></span>
-                          </div>
-                          <span className="window-title">
-                            <Terminal size={10} /> {project.name.toLowerCase().replace(/\s+/g, "-")}.config.js
-                          </span>
-                          <span className="window-status-pill">LIVE DEPLOY</span>
-                        </div>
-
-                        {getTabForProject(project.id) === "terminal" ? (
-                          <div className="window-body">
-                            <div className="code-line">
-                              <span className="c-keyword">const</span>{" "}
-                              <span className="c-var">{project.name.replace(/\s+/g, "")}</span> = {"{"}
-                            </div>
-                            <div className="code-line indent">
-                              <span className="c-prop">framework:</span>{" "}
-                              <span className="c-val">"{project.terminalCode.framework || project.badge}"</span>,
-                            </div>
-                            <div className="code-line indent">
-                              <span className="c-prop">status:</span>{" "}
-                              <span className="c-val green">"HEALTHY (200 OK)"</span>,
-                            </div>
-                            <div className="code-line indent">
-                              <span className="c-prop">query:</span>{" "}
-                              <span className="c-val yellow">"{project.terminalCode.dbQuery || project.terminalCode.bookingLogic || project.terminalCode.bundler}"</span>
-                            </div>
-                            <div className="code-line">{"};"}</div>
-                          </div>
-                        ) : (
-                          <div className="window-metrics-body">
-                            {Object.entries(project.metrics).map(([key, val], idx) => (
-                              <div key={idx} className="metric-row-pill">
-                                <span className="m-label">{key}</span>
-                                <span className="m-val" style={{ color: project.accentColor }}>{val}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="card-caption-group">
-                        <h3 className="card-project-title">{project.name}</h3>
-                        <p className="card-tagline">{project.tagline}</p>
-                      </div>
-                    </div>
-
-                    {/* CARD BOTTOM STATS BAR */}
-                    <div className="card-bottom">
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="card-direct-live-link"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Globe size={11} />
-                        <span>OPEN APP</span>
-                        <ArrowUpRight size={11} />
-                      </a>
-
+                    <div className="ln-card-view-tabs">
                       <button
-                        onClick={() => openProjectModal(project)}
-                        className="card-inspect-hint"
+                        className={`ln-tab-btn ${getTab(project.id) === "config" ? "active" : ""}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setTab(project.id, "config");
+                          playTelemetryScan();
+                        }}
+                        onMouseEnter={() => playHoverSound(30)}
                       >
-                        <span>FULL ARCHITECTURE</span>
-                        <Zap size={11} />
+                        CONFIG
+                      </button>
+                      <button
+                        className={`ln-tab-btn ${getTab(project.id) === "metrics" ? "active" : ""}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setTab(project.id, "metrics");
+                          playTelemetryScan();
+                        }}
+                        onMouseEnter={() => playHoverSound(60)}
+                      >
+                        METRICS
                       </button>
                     </div>
                   </div>
 
-                  <div className="card-corner"></div>
+                  {/* DISPLAY TERMINAL / METRICS */}
+                  <div className="ln-card-window">
+                    <div className="window-header">
+                      <div className="window-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                      <span className="window-title">
+                        {project.name.toLowerCase().replace(/\s+/g, "-")}.config.js
+                      </span>
+                    </div>
+
+                    {getTab(project.id) === "config" ? (
+                      <div className="window-body">
+                        <div className="code-line">
+                          <span className="c-key">const</span> <span className="c-name">{project.name}</span> = &#123;
+                        </div>
+                        <div className="code-line indent">
+                          <span className="c-prop">stack:</span> <span className="c-val">"{project.badge}"</span>,
+                        </div>
+                        <div className="code-line indent">
+                          <span className="c-prop">status:</span> <span className="c-val text-lime">"{project.terminalCode.health}"</span>,
+                        </div>
+                        <div className="code-line indent">
+                          <span className="c-prop">query:</span> <span className="c-val text-off-white">"{project.terminalCode.query || project.terminalCode.audit}"</span>
+                        </div>
+                        <div className="code-line">&#125;;</div>
+                      </div>
+                    ) : (
+                      <div className="window-metrics">
+                        {Object.entries(project.metrics).map(([k, v], i) => (
+                          <div key={i} className="metric-item">
+                            <span className="m-label">{k}</span>
+                            <span className="m-val text-lime">{v}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* PROJECT META */}
+                  <div className="ln-card-meta">
+                    <div className="ln-meta-titles">
+                      <h3 className="ln-project-title">{project.name}</h3>
+                      <span className="ln-project-subtitle">{project.subtitle}</span>
+                    </div>
+                    <p className="ln-project-tagline">{project.tagline}</p>
+                  </div>
+
+                  {/* HIGHLIGHT FEATURES */}
+                  <div className="ln-card-highlights">
+                    {project.highlights.slice(0, 2).map((h, i) => (
+                      <div key={i} className="ln-highlight-row">
+                        <CheckCircle2 size={12} className="text-lime" />
+                        <span>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* TECH PILLS */}
+                  <div className="ln-card-tech">
+                    {project.tech.slice(0, 4).map((t, i) => (
+                      <span key={i} className="tech-chip">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* ACTION LAUNCH BAR */}
+                  <div className="ln-card-actions">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ln-action-btn primary"
+                      onClick={playEngineRevSound}
+                      onMouseEnter={() => playHoverSound(50)}
+                    >
+                      <Globe size={13} />
+                      <span>LAUNCH APP</span>
+                      <ArrowUpRight size={13} />
+                    </a>
+
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ln-action-btn secondary"
+                      onClick={playClickSound}
+                      onMouseEnter={() => playHoverSound(20)}
+                    >
+                      <GithubIcon size={14} />
+                      <span>GITHUB</span>
+                    </a>
+
+                    <button
+                      onClick={() => {
+                        setSelectedProject(project);
+                        playCockpitWhoosh();
+                      }}
+                      className="ln-action-btn spec"
+                      onMouseEnter={() => playHoverSound(70)}
+                    >
+                      <span>SPECS</span>
+                      <Zap size={12} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* EXTENDER LIME CORNER (FROM LANDO NORRIS EXTENDER MASK) */}
+                <div className="ln-helmet-extender">
+                  <div className="extender-notch-line"></div>
                 </div>
               </div>
-            </article>
-          ))
-        )}
-      </div>
 
-      {/* FOOTER INFO */}
-      <div className="projects-bottom">
-        <div className="projects-bottom-left">
-          <span>03 FEATURED PRODUCTION APPS</span>
-          <span>•</span>
-          <span>FULL STACK MERN & VITE ARCHITECTURES</span>
-        </div>
-
-        <div className="projects-bottom-right">
-          <span>ALL PROJECTS HOSTED LIVE ON GITHUB</span>
-          <a
-            href="https://github.com/riteshraj851116"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bottom-github-link"
-          >
-            <span>@riteshraj851116</span>
-            <ArrowUpRight size={13} />
-          </a>
+              {/* CARD BOTTOM LABEL & YEAR */}
+              <div className="ln-helmet-bottom-label">
+                <span className="label-name">{project.name}</span>
+                <span className="label-year">{project.year}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* PROJECT DETAILS SPEC MODAL */}
+      {/* SPECIFICATIONS MODAL */}
       {selectedProject && (
-        <div
-          className="project-modal-backdrop"
-          onClick={() => setSelectedProject(null)}
-        >
-          <div
-            className="project-modal-content"
-            onClick={(e) => e.stopPropagation()}
-            style={{ "--modal-accent": selectedProject.accentColor }}
-          >
+        <div className="ln-modal-backdrop" onClick={() => setSelectedProject(null)}>
+          <div className="ln-modal-card" onClick={(e) => e.stopPropagation()}>
             <button
-              className="modal-close-btn"
+              className="ln-modal-close"
               onClick={() => setSelectedProject(null)}
               aria-label="Close modal"
             >
               <X size={20} />
             </button>
 
-            <div className="modal-header">
-              <div className="modal-top-tags">
-                <span className="modal-badge">{selectedProject.badge}</span>
-                <span className="modal-number">PROJECT #{selectedProject.number}</span>
-                <span className="modal-live-indicator">● LIVE DEMO ONLINE</span>
+            <div className="modal-top">
+              <div className="modal-badge-row">
+                <span className="modal-badge text-lime">{selectedProject.badge}</span>
+                <span className="modal-num">PROJECT #{selectedProject.number}</span>
+                <span className="modal-live-tag">● PRODUCTION DEPLOYED</span>
               </div>
               <h2 className="modal-title">{selectedProject.name}</h2>
               <p className="modal-subtitle">{selectedProject.subtitle}</p>
             </div>
 
-            <div className="modal-body">
-              <div className="modal-section">
-                <h4>
-                  <Code2 size={15} /> OVERVIEW & OBJECTIVE
-                </h4>
+            <div className="modal-sections">
+              <div className="modal-sec">
+                <h4>OVERVIEW & ARCHITECTURE</h4>
                 <p>{selectedProject.description}</p>
               </div>
 
-              <div className="modal-section">
-                <h4>
-                  <Sparkles size={15} /> KEY ENGINEERING HIGHLIGHTS
-                </h4>
-                <ul className="modal-highlights-list">
+              <div className="modal-sec">
+                <h4>KEY VERIFIED HIGHLIGHTS</h4>
+                <ul className="modal-list">
                   {selectedProject.highlights.map((h, i) => (
                     <li key={i}>
-                      <CheckCircle2 size={14} className="h-check" />
+                      <CheckCircle2 size={14} className="text-lime" />
                       <span>{h}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="modal-section">
-                <h4>
-                  <Server size={15} /> ARCHITECTURE & VERIFIED METRICS
-                </h4>
-                <div className="modal-architecture-box">
-                  <p>{selectedProject.architecture}</p>
-                  <div className="modal-stats-grid">
-                    {Object.entries(selectedProject.metrics).map(([k, v], i) => (
-                      <div key={i} className="m-stat-card">
-                        <span className="stat-label">{k.toUpperCase()}</span>
-                        <span className="stat-value">{v}</span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="modal-sec">
+                <h4>VERIFIED METRICS</h4>
+                <div className="modal-metrics-grid">
+                  {Object.entries(selectedProject.metrics).map(([k, v], i) => (
+                    <div key={i} className="modal-m-card">
+                      <span className="m-label">{k}</span>
+                      <strong className="m-val text-lime">{v}</strong>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="modal-section">
-                <h4>
-                  <Layers size={15} /> COMPLETE TECH STACK
-                </h4>
+              <div className="modal-sec">
+                <h4>COMPLETE TECH STACK</h4>
                 <div className="modal-tech-cloud">
-                  {selectedProject.tech.map((tech, i) => (
-                    <span key={i} className="modal-tech-pill">
-                      {tech}
+                  {selectedProject.tech.map((t, i) => (
+                    <span key={i} className="m-tech-pill">
+                      {t}
                     </span>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="modal-footer">
-              <button
-                onClick={() => handleCopyLink(selectedProject.liveUrl, selectedProject.id)}
-                className="modal-btn modal-btn-secondary"
-              >
-                <BookmarkCheck size={15} />
-                <span>{copiedId === selectedProject.id ? "LINK COPIED!" : "COPY LIVE URL"}</span>
-              </button>
-
+            <div className="modal-footer-actions">
               <a
                 href={selectedProject.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="modal-btn modal-btn-secondary"
+                className="ln-btn ln-btn-outline"
+                onClick={playClickSound}
               >
                 <GithubIcon size={16} />
-                <span>GITHUB REPO</span>
+                <span>GITHUB CODE</span>
               </a>
 
               <a
                 href={selectedProject.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="modal-btn modal-btn-primary"
+                className="ln-btn ln-btn-lime"
+                onClick={playClickSound}
               >
-                <span>VISIT LIVE DEMO</span>
+                <span>OPEN LIVE WEB APP</span>
                 <ExternalLink size={16} />
               </a>
             </div>

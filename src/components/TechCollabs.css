@@ -1,0 +1,180 @@
+/* ==========================================================================
+   LANDO NORRIS TECH STACK & TOOLCHAIN (PARTNERS STYLE)
+   ========================================================================== */
+
+.ln-collabs-section {
+  position: relative;
+  background-color: var(--color--black);
+  padding: 6.5rem 0;
+  border-bottom: 1px solid rgba(244, 244, 237, 0.08);
+}
+
+.ln-collabs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.collabs-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.collabs-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color--lime);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.collabs-title {
+  font-family: var(--font-primary);
+  font-size: clamp(2.6rem, 5.5vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--color--white);
+  line-height: 0.95;
+}
+
+.collabs-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.25rem;
+  max-width: 480px;
+}
+
+.collabs-desc {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color--green-off-white-2);
+  text-align: right;
+}
+
+.collabs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(40, 44, 32, 0.7);
+  border: 1px solid rgba(210, 255, 0, 0.25);
+  border-radius: 9999px;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color--lime);
+  font-weight: 700;
+}
+
+/* CARDS GRID */
+.ln-collabs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.ln-tech-card {
+  background: rgba(22, 24, 18, 0.85);
+  border: 1px solid rgba(244, 244, 237, 0.1);
+  border-radius: 10px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  transition: all 0.3s var(--cubic-default);
+  cursor: pointer;
+}
+
+.ln-tech-card:hover {
+  background: rgba(40, 44, 32, 0.85);
+  border-color: var(--color--lime);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(210, 255, 0, 0.15);
+}
+
+.tech-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.tech-badge-cat {
+  color: var(--color--green-off-white-2);
+}
+
+.tech-badge-level {
+  font-weight: 700;
+}
+
+.tech-card-title {
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--color--white);
+  margin: 0.75rem 0 0.25rem;
+}
+
+.tech-card-desc {
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  color: var(--color--green-off-white-2);
+  line-height: 1.4;
+}
+
+.tech-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.85rem;
+  margin-top: 1rem;
+}
+
+.tech-card-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.tech-card-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color--lime);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.ln-tech-card:hover .tech-card-dot {
+  opacity: 1;
+  box-shadow: 0 0 8px var(--color--lime);
+}
+
+@media (max-width: 1200px) {
+  .ln-collabs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .ln-collabs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .ln-collabs-grid {
+    grid-template-columns: 1fr;
+  }
+}

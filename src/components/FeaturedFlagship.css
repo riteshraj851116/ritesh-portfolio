@@ -1,0 +1,137 @@
+/* ==========================================================================
+   LANDO NORRIS FEATURED FLAGSHIP STYLES
+   ========================================================================== */
+
+.ln-flagship-section {
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, rgba(40, 44, 32, 0.7) 0%, rgba(17, 17, 18, 0.98) 80%);
+  padding: 7rem 0;
+  border-bottom: 1px solid rgba(244, 244, 237, 0.1);
+  overflow: hidden;
+}
+
+.ln-flagship-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 1200px;
+}
+
+.flagship-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(244, 244, 237, 0.1);
+  padding-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.flagship-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color--lime);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.flagship-id {
+  color: var(--color--green-off-white-2);
+}
+
+.flagship-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  line-height: 0.9;
+}
+
+.flagship-super-title {
+  font-family: var(--font-primary);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--color--white);
+}
+
+.flagship-super-sub {
+  font-size: clamp(1.6rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.flagship-description {
+  font-family: var(--font-primary);
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  line-height: 1.6;
+  color: var(--color--green-off-white-1);
+  max-width: 980px;
+}
+
+.flagship-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(244, 244, 237, 0.1);
+}
+
+.flagship-metric-card {
+  background: rgba(25, 27, 21, 0.8);
+  border: 1px solid rgba(244, 244, 237, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+}
+
+.flagship-metric-card:hover {
+  border-color: var(--color--lime);
+  transform: translateY(-3px);
+  background: rgba(40, 44, 32, 0.6);
+}
+
+.flagship-metric-card .m-val {
+  font-family: var(--font-primary);
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.flagship-metric-card .m-label {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color--white);
+}
+
+.flagship-metric-card .m-detail {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color--green-off-white-2);
+}
+
+.flagship-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+}
+
+@media (max-width: 992px) {
+  .flagship-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .flagship-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

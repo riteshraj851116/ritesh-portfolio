@@ -1,0 +1,297 @@
+/* ==========================================================================
+   ADVANCED 3D TELEMETRY MONOCOQUE & WIND TUNNEL STYLES
+   McLaren / Lando Norris Motorsport Telemetry Laboratory
+   ========================================================================== */
+
+.telemetry-monocoque-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: radial-gradient(circle at 50% 50%, rgba(26, 30, 20, 0.4) 0%, rgba(13, 14, 11, 0.95) 75%);
+  border: 1px solid rgba(210, 255, 0, 0.2);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.7), 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* 3D FLOATING HTML INSPECTION PINS */
+.three-pin-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(14, 15, 12, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(210, 255, 0, 0.35);
+  border-radius: 9999px;
+  padding: 0.28rem 0.65rem;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 10px rgba(210, 255, 0, 0.15);
+  transition: all 0.25s var(--cubic-default);
+  pointer-events: auto;
+}
+
+.three-pin-pill:hover,
+.three-pin-pill.is-active {
+  background: rgba(26, 30, 20, 0.95);
+  border-color: var(--color--lime);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8), 0 0 16px var(--color--lime-glow);
+}
+
+.pin-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color--lime);
+  box-shadow: 0 0 8px var(--color--lime);
+  flex-shrink: 0;
+  animation: pinBlink 1.6s infinite ease-in-out;
+}
+
+@keyframes pinBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+
+.pin-text-wrap {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.pin-label {
+  font-family: var(--font-primary);
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: var(--color--white);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pin-spec {
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  font-weight: 600;
+  color: var(--color--lime);
+  letter-spacing: 0.03em;
+}
+
+/* COCKPIT 3D MODE SWITCHER HUD */
+.telemetry-hud-controls {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.hud-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(20, 24, 16, 0.85);
+  border: 1px solid rgba(210, 255, 0, 0.3);
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color--white);
+  letter-spacing: 0.06em;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.hud-mode-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(15, 17, 12, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px;
+  border-radius: 9999px;
+}
+
+.hud-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 28px;
+  padding: 0 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--color--green-off-white-2);
+  font-family: var(--font-primary);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.hud-mode-btn:hover {
+  color: var(--color--white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hud-mode-btn.is-active {
+  color: var(--color--black);
+  background: var(--color--lime);
+  font-weight: 800;
+  box-shadow: 0 0 12px var(--color--lime-glow);
+}
+
+/* ACTIVE NODE INSPECTION CALLOUT CARD */
+.telemetry-inspect-card {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  background: rgba(14, 16, 12, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(210, 255, 0, 0.4);
+  border-radius: 14px;
+  padding: 1.15rem;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(210, 255, 0, 0.15);
+  animation: cardSlideUp 0.3s var(--cubic-default);
+  z-index: 20;
+  pointer-events: auto;
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inspect-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
+}
+
+.inspect-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--color--lime);
+  letter-spacing: 0.08em;
+  display: block;
+}
+
+.inspect-title {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color--white);
+  margin: 0.15rem 0 0 0;
+}
+
+.inspect-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color--white);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.inspect-close-btn:hover {
+  background: var(--color--lime);
+  color: var(--color--black);
+}
+
+.inspect-tagline {
+  font-family: var(--font-primary);
+  font-size: 0.78rem;
+  color: var(--color--green-off-white-2);
+  margin-bottom: 0.85rem;
+  line-height: 1.4;
+}
+
+.inspect-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+
+.inspect-metric-box {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+}
+
+.m-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--color--green-off-white-2);
+  letter-spacing: 0.04em;
+}
+
+.m-val {
+  font-family: var(--font-primary);
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-top: 0.15rem;
+}
+
+.inspect-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color--lime);
+  letter-spacing: 0.05em;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+@media (max-width: 768px) {
+  .telemetry-monocoque-wrapper {
+    min-height: 400px;
+  }
+
+  .telemetry-hud-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hud-mode-pills {
+    width: 100%;
+    overflow-x: auto;
+  }
+}

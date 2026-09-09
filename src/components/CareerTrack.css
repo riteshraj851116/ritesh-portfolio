@@ -1,0 +1,354 @@
+/* ==========================================================================
+   LANDO NORRIS CAREER TRACK (HORIZONTAL SCROLL) STYLES
+   ========================================================================== */
+
+.ln-track-section {
+  position: relative;
+  background-color: var(--color--dark-green);
+  padding: 6rem 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(244, 244, 237, 0.1);
+}
+
+.ln-track-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.track-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.track-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eyebrow-num {
+  color: var(--color--lime);
+}
+
+.eyebrow-sep {
+  opacity: 0.4;
+}
+
+.eyebrow-desc {
+  color: var(--color--green-off-white-2);
+}
+
+.track-title {
+  font-family: var(--font-primary);
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--color--white);
+  line-height: 0.95;
+}
+
+.track-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.5rem;
+  max-width: 440px;
+}
+
+.track-intro {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color--green-off-white-1);
+  text-align: right;
+}
+
+.track-scroll-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.track-nav-btn {
+  background: var(--color--dark-green-tint-1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color--white);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.track-nav-btn:hover {
+  background: var(--color--lime);
+  color: var(--color--black);
+  border-color: var(--color--lime);
+  transform: scale(1.05);
+}
+
+/* HORIZONTAL SCROLL CONTAINER */
+.ln-horizontal-scroll-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem var(--container-padding) 2.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.ln-horizontal-scroll-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.ln-track-rail {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+}
+
+/* BASE TRACK CARD (LIGHT EDITORIAL) */
+.track-card {
+  width: 420px;
+  min-height: 440px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 14px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.35s var(--cubic-default);
+  position: relative;
+  overflow: hidden;
+}
+
+.track-card:hover {
+  border-color: var(--color--brown-vibrant);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(146, 64, 14, 0.12);
+}
+
+/* CALLOUT QUOTE CARD */
+.track-card.callout-card {
+  width: 480px;
+  background: linear-gradient(135deg, #fdfbf7 0%, #f7f2e9 100%);
+  border: 1px solid rgba(146, 64, 14, 0.25);
+  box-shadow: 0 10px 32px rgba(146, 64, 14, 0.08);
+}
+
+.callout-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 2rem;
+}
+
+.callout-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color--lime);
+  letter-spacing: 0.08em;
+}
+
+.callout-quote {
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 2.6vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--color--white);
+}
+
+.callout-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-top: 1px solid rgba(244, 244, 237, 0.1);
+  padding-top: 1.5rem;
+}
+
+.callout-sig {
+  width: 170px;
+  height: 42px;
+}
+
+.callout-sig-name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color--lime);
+  letter-spacing: 0.05em;
+}
+
+/* MILESTONE CARD CONTENT */
+.card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 1.25rem;
+}
+
+.card-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-pill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color--brown-vibrant);
+  background: rgba(146, 64, 14, 0.08);
+  border: 1px solid rgba(146, 64, 14, 0.25);
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+}
+
+.card-period {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #09090b;
+  font-weight: 700;
+}
+
+.card-location {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #71717a;
+  letter-spacing: 0.04em;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.card-title {
+  font-family: var(--font-primary);
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #09090b;
+  line-height: 1.15;
+}
+
+.card-subtitle {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #52525b;
+}
+
+.card-score-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fdfaf6;
+  border: 1px solid rgba(146, 64, 14, 0.2);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  width: max-content;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.score-label {
+  color: #71717a;
+}
+
+.score-val {
+  font-weight: 700;
+  color: var(--color--brown-vibrant);
+}
+
+.card-details {
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #52525b;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 1.25rem;
+}
+
+.card-verify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color--brown-vibrant);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.card-verify-btn:hover {
+  color: var(--color--brown-deep);
+  text-decoration: underline;
+}
+
+.card-verified-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color--green-off-white-2);
+}
+
+.card-index {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .track-header-right {
+    align-items: flex-start;
+  }
+
+  .track-intro {
+    text-align: left;
+  }
+
+  .track-card {
+    width: 320px;
+    min-height: 400px;
+    padding: 1.5rem;
+  }
+
+  .track-card.callout-card {
+    width: 340px;
+  }
+}
