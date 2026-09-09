@@ -47,7 +47,7 @@ const projectsData = [
     ],
     metrics: { "REST APIs": "40+ Endpoints", "Chat Latency": "<50ms", "Auth Security": "JWT + Bcrypt", "Pipeline": "Automated ATS" },
     accentColor: "#d2ff00",
-    liveUrl: "https://riteshraj851116.github.io/jobsphere/",
+    liveUrl: "https://jobsphere-vercel.vercel.app",
     githubUrl: "https://github.com/riteshraj851116/jobsphere",
     terminalCode: {
       framework: "Express.js / Socket.IO",
@@ -59,7 +59,7 @@ const projectsData = [
   {
     id: "02",
     number: "02",
-    name: "VELOCEDRIVE",
+    name: "TERACAR (VELOCEDRIVE)",
     subtitle: "CAR RENTAL MANAGEMENT SYSTEM",
     category: "FLEET BOOKING & VEHICLE ENGINE",
     badge: "MERN STACK",
@@ -76,7 +76,7 @@ const projectsData = [
     ],
     metrics: { "Query Latency": "<200ms", "UI Components": "15+ Modular", "Backend Shield": "Express Middleware", "Fleet Logic": "Full Lifecycle" },
     accentColor: "#38bdf8",
-    liveUrl: "https://riteshraj851116.github.io/teracar/",
+    liveUrl: "https://teracar-tan.vercel.app/",
     githubUrl: "https://github.com/riteshraj851116/teracar",
     terminalCode: {
       framework: "Node.js / Express / Mongoose",

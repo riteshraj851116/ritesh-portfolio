@@ -41,7 +41,13 @@ const NewspaperHero = () => {
       {/* 01 — TOP BROADSHEET ROW: ALL WORK! SELECTION */}
       <div className="broadsheet-triptych">
         {/* LEFT COLUMN: PROJECT 01 - JOBSPHERE */}
-        <article className="triptych-col project-preview-col">
+        <a
+          href="https://jobsphere-vercel.vercel.app"
+          target="_blank"
+          rel="noreferrer"
+          className="triptych-col project-preview-col preview-anchor-link"
+          title="Launch JobSphere Live Application"
+        >
           <div className="preview-img-frame">
             <img
               src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop"
@@ -53,16 +59,17 @@ const NewspaperHero = () => {
           <div className="preview-caption">
             <div className="caption-head">
               <h3 className="project-brand">JOBSPHERE</h3>
-              <span className="badge-new">NEW</span>
+              <span className="badge-new">LIVE ↗</span>
             </div>
             <p className="project-desc">
               Production-ready recruitment portal connecting applicants & hiring teams. Features JWT authentication, 40+ modular RESTful APIs, and sub-50ms Socket.IO live messaging.
             </p>
           </div>
-        </article>
+        </a>
 
         {/* CENTER COLUMN: EDITORIAL ANNOUNCEMENT */}
         <div className="triptych-col editorial-title-col">
+          <span className="editorial-kicker font-blackletter">The Chronicle</span>
           <h1 className="editorial-all-work">ALL WORK!</h1>
           <p className="editorial-lead">
             A Featured selection of full-stack systems, RESTful APIs & real-time applications — 2024 to 2026.
@@ -70,32 +77,38 @@ const NewspaperHero = () => {
           <span className="editorial-tip">TIP! Explore below for verified live demonstrations</span>
         </div>
 
-        {/* RIGHT COLUMN: PROJECT 02 - VELOCEDRIVE */}
-        <article className="triptych-col project-preview-col">
+        {/* RIGHT COLUMN: PROJECT 02 - TERACAR (VELOCEDRIVE) */}
+        <a
+          href="https://teracar-tan.vercel.app/"
+          target="_blank"
+          rel="noreferrer"
+          className="triptych-col project-preview-col preview-anchor-link"
+          title="Launch TeraCar Live Application"
+        >
           <div className="preview-img-frame">
             <img
               src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop"
-              alt="VeloceDrive preview"
+              alt="TeraCar VeloceDrive preview"
               className="preview-img"
               loading="lazy"
             />
           </div>
           <div className="preview-caption">
             <div className="caption-head">
-              <h3 className="project-brand">VELOCEDRIVE</h3>
-              <span className="badge-new">NEW</span>
+              <h3 className="project-brand">TERACAR</h3>
+              <span className="badge-new">LIVE ↗</span>
             </div>
             <p className="project-desc">
               End-to-end vehicle rental management platform with Mongoose indexing achieving complex fleet filter queries in &lt;200ms and custom auth middleware.
             </p>
           </div>
-        </article>
+        </a>
       </div>
 
-      {/* 02 — INVERTED BLACK BANNER: RITESH */}
+      {/* 02 — INVERTED BLACK BANNER: RITESH RAJ (AUTHENTIC OLD ENGLISH BLACKLETTER WITH DECODE EFFECT) */}
       <div className="inverted-black-banner">
-        <h2 className="banner-gigantic-title">
-          <ScrambleText text="RITESH" as="span" />
+        <h2 className="banner-gigantic-title font-blackletter" title="Ritesh Raj — Hover or tap to decode">
+          <ScrambleText text="Ritesh Raj" as="span" />
         </h2>
       </div>
 
@@ -103,16 +116,12 @@ const NewspaperHero = () => {
       <div className="broadsheet-artisan-spread">
         {/* LEFT: ARTISAN EDITORIAL */}
         <div className="artisan-left-col">
-          {/* GSAP ANIMATED ROLE CHANGER */}
+          {/* CALM DIGNIFIED ROLE DISPATCH INDICATOR */}
           <DynamicTextRotater />
 
           <h2 className="artisan-headline">
-            <span>
-              <ScrambleText text="SOFTWARE" as="span" />
-            </span>
-            <span className="artisan-accent">
-              <ScrambleText text="ARTISAN!" as="span" />
-            </span>
+            <span className="headline-word-tech">SOFTWARE</span>
+            <span className="artisan-accent font-blackletter">Artisan</span>
           </h2>
           <div className="artisan-pullquote">
             <p>
@@ -155,8 +164,8 @@ const NewspaperHero = () => {
       {/* 04 — SECOND INVERTED BANNER WITH POSTAGE STAMP */}
       <div className="inverted-banner-stamp-row">
         <div className="inverted-black-banner banner-engineer">
-          <h2 className="banner-gigantic-title">
-            <ScrambleText text="ENGINEER" as="span" />
+          <h2 className="banner-gigantic-title font-blackletter" title="Full Stack Engineer">
+            Engineer
           </h2>
         </div>
         <div className="hero-stamp-slot">

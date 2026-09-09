@@ -3,11 +3,12 @@ import gsap from "gsap";
 import { playScrambleTick, playHoverBlip } from "../utils/audio";
 import "./ScrambleText.css";
 
-const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#%&*+=/?@";
+const UPPER_GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789§¶✦†‡";
+const LOWER_GLYPHS = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 /**
  * ScrambleText Component
- * Renders text with an authentic mechanical broadsheet letter-shuffle effect on hover,
+ * Renders text with an authentic mechanical broadsheet letter-shuffle effect on hover/tap,
  * complete with GSAP spring transition and typewriter audio ticks.
  */
 const ScrambleText = ({ text, className = "", as = "span" }) => {
@@ -15,7 +16,7 @@ const ScrambleText = ({ text, className = "", as = "span" }) => {
   const isAnimating = useRef(false);
   const elementRef = useRef(null);
 
-  const handleMouseEnter = () => {
+  const triggerScramble = () => {
     if (isAnimating.current) return;
     isAnimating.current = true;
     try { playHoverBlip(); } catch (e) {}
@@ -37,11 +38,13 @@ const ScrambleText = ({ text, className = "", as = "span" }) => {
         text
           .split("")
           .map((char, index) => {
-            if (char === " " || char === "!" || char === "/" || char === "-") return char;
+            if (char === " " || char === "!" || char === "/" || char === "-" || char === "—") return char;
             if (index < iteration) {
               return text[index];
             }
-            return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+            const isUpper = char === char.toUpperCase() && char !== char.toLowerCase();
+            const glyphPool = isUpper ? UPPER_GLYPHS : LOWER_GLYPHS;
+            return glyphPool[Math.floor(Math.random() * glyphPool.length)];
           })
           .join("")
       );
@@ -52,7 +55,7 @@ const ScrambleText = ({ text, className = "", as = "span" }) => {
         isAnimating.current = false;
       }
 
-      iteration += 1 / 2;
+      iteration += 1 / 2.5;
     }, 28);
   };
 
@@ -62,9 +65,10 @@ const ScrambleText = ({ text, className = "", as = "span" }) => {
     <Component
       ref={elementRef}
       className={`scramble-text-hover ${className}`}
-      onMouseEnter={handleMouseEnter}
-      style={{ display: "inline-block", cursor: "default" }}
-      title="Hover for mechanical broadsheet decode"
+      onMouseEnter={triggerScramble}
+      onClick={triggerScramble}
+      style={{ display: "inline-block", cursor: "pointer" }}
+      title="Hover or click for mechanical broadsheet decode"
     >
       {displayText}
     </Component>

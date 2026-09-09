@@ -48,7 +48,26 @@ export const initAudioContext = () => {
   return audioCtx;
 };
 
-// Global user interaction unlock
+let clickMode = "mechanical"; // "mechanical" | "leica" | "press"
+
+export const getClickMode = () => clickMode;
+
+export const setClickMode = (mode) => {
+  if (["mechanical", "leica", "press"].includes(mode)) {
+    clickMode = mode;
+  }
+  return clickMode;
+};
+
+export const cycleClickMode = () => {
+  const modes = ["mechanical", "leica", "press"];
+  const nextIdx = (modes.indexOf(clickMode) + 1) % modes.length;
+  clickMode = modes[nextIdx];
+  playClickSound();
+  return clickMode;
+};
+
+// Global user interaction unlock & intelligent tactile click delegation
 if (typeof window !== "undefined") {
   const unlock = () => {
     initAudioContext();
@@ -58,7 +77,43 @@ if (typeof window !== "undefined") {
   window.addEventListener("keydown", unlock, { passive: true });
   window.addEventListener("mousemove", unlock, { once: true, passive: true });
 
-  // Dedicated touch sound on any interactive element (mobile taps)
+  // Intelligent global click sound on all interactive broadsheet elements
+  window.addEventListener(
+    "click",
+    (e) => {
+      unlock();
+      const target = e.target;
+      if (
+        target &&
+        (target.closest("button") ||
+          target.closest("a") ||
+          target.closest("[role='button']") ||
+          target.closest(".project-broadsheet-card") ||
+          target.closest(".paper-postage-stamp") ||
+          target.closest(".preset-btn") ||
+          target.closest(".skill-filter-btn") ||
+          target.closest(".about-tab-btn") ||
+          target.closest(".contact-link") ||
+          target.closest(".playbook-card") ||
+          target.closest(".sound-mode-btn") ||
+          target.closest(".interactive") ||
+          target.closest("input") ||
+          target.closest("summary"))
+      ) {
+        playClickSound();
+        try {
+          if (typeof navigator !== "undefined" && navigator.vibrate) {
+            navigator.vibrate(12);
+          }
+        } catch {
+          // ignore
+        }
+      }
+    },
+    { passive: true }
+  );
+
+  // Dedicated touch sound on mobile taps
   window.addEventListener(
     "touchstart",
     (e) => {
@@ -72,6 +127,7 @@ if (typeof window !== "undefined") {
           target.closest(".about-tab-btn") ||
           target.closest(".contact-link") ||
           target.closest(".project-card") ||
+          target.closest(".project-broadsheet-card") ||
           target.closest(".playbook-turn-btn") ||
           target.closest("[role='button']"))
       ) {
@@ -88,7 +144,7 @@ export const toggleSound = () => {
   soundEnabled = !soundEnabled;
   initAudioContext();
   if (soundEnabled) {
-    playSuccessSound();
+    playClickSound();
   } else {
     stopAmbientDrone();
   }
@@ -181,60 +237,138 @@ export const playHoverSound = (pitchOffset = 0) => {
 };
 
 /**
- * 3. PRECISION LEICA MECHANICAL SHUTTER / TACTILE RELAY CLICK
- * Dual-stage impulse: crisp transient micro-snap + warm damped mechanical body thud.
+ * 3. ADVANCED TACTILE MECHANICAL / EDITORIAL CLICK SOUND ENGINE
+ * Real-time physical modeling with organic micro-pitch detuning (±3.5%)
+ * Supports 3 high-fidelity tactile profiles: "mechanical", "leica", "press".
  */
-export const playClickSound = () => {
+export const playClickSound = (overrideMode = null) => {
   if (!soundEnabled) return;
   try {
     const ctx = initAudioContext();
     if (!ctx) return;
 
+    const mode = overrideMode || clickMode;
     const now = ctx.currentTime;
+    // Organic micro-pitch detuning prevents the repetitive "machine-gun" buzz
+    const detune = 1 + (Math.random() * 0.07 - 0.035);
 
-    // Stage 1: Ultra-fast mechanical snap transient
-    const snapOsc = ctx.createOscillator();
-    const snapGain = ctx.createGain();
-    const snapFilter = ctx.createBiquadFilter();
+    if (mode === "mechanical") {
+      // PROFILE 1: TACTILE MECHANICAL TYPEWRITER / KEY SWITCH STRIKE
+      // Layer A: Crisp mechanical contact transient snap
+      const snapOsc = ctx.createOscillator();
+      const snapGain = ctx.createGain();
+      const snapFilter = ctx.createBiquadFilter();
 
-    snapOsc.type = "triangle";
-    snapOsc.frequency.setValueAtTime(950, now);
-    snapOsc.frequency.exponentialRampToValueAtTime(220, now + 0.02);
+      snapOsc.type = "triangle";
+      snapOsc.frequency.setValueAtTime(1850 * detune, now);
+      snapOsc.frequency.exponentialRampToValueAtTime(420 * detune, now + 0.012);
 
-    snapFilter.type = "bandpass";
-    snapFilter.frequency.setValueAtTime(850, now);
-    snapFilter.Q.setValueAtTime(1.8, now);
+      snapFilter.type = "bandpass";
+      snapFilter.frequency.setValueAtTime(1450 * detune, now);
+      snapFilter.Q.setValueAtTime(2.6, now);
 
-    snapGain.gain.setValueAtTime(0.16, now);
-    snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.02);
+      snapGain.gain.setValueAtTime(0.24, now);
+      snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.012);
 
-    snapOsc.connect(snapFilter);
-    snapFilter.connect(snapGain);
-    snapGain.connect(ctx.destination);
+      snapOsc.connect(snapFilter);
+      snapFilter.connect(snapGain);
+      snapGain.connect(ctx.destination);
 
-    snapOsc.start(now);
-    snapOsc.stop(now + 0.02);
+      snapOsc.start(now);
+      snapOsc.stop(now + 0.012);
 
-    // Stage 2: Woody mechanical body thud (120Hz damped)
-    const bodyOsc = ctx.createOscillator();
-    const bodyGain = ctx.createGain();
+      // Layer B: Metallic leaf-spring click ping
+      const pingOsc = ctx.createOscillator();
+      const pingGain = ctx.createGain();
+      pingOsc.type = "sine";
+      pingOsc.frequency.setValueAtTime(2900 * detune, now);
+      pingOsc.frequency.exponentialRampToValueAtTime(1900 * detune, now + 0.009);
 
-    bodyOsc.type = "sine";
-    bodyOsc.frequency.setValueAtTime(140, now + 0.004);
-    bodyOsc.frequency.exponentialRampToValueAtTime(55, now + 0.05);
+      pingGain.gain.setValueAtTime(0.12, now);
+      pingGain.gain.exponentialRampToValueAtTime(0.001, now + 0.009);
 
-    bodyGain.gain.setValueAtTime(0.22, now + 0.004);
-    bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+      pingOsc.connect(pingGain);
+      pingGain.connect(ctx.destination);
+      pingOsc.start(now);
+      pingOsc.stop(now + 0.009);
 
-    bodyOsc.connect(bodyGain);
-    bodyGain.connect(ctx.destination);
+      // Layer C: Resonant oak typewriter plinth thud
+      const bodyOsc = ctx.createOscillator();
+      const bodyGain = ctx.createGain();
 
-    bodyOsc.start(now + 0.004);
-    bodyOsc.stop(now + 0.05);
+      bodyOsc.type = "sine";
+      bodyOsc.frequency.setValueAtTime(135 * detune, now + 0.002);
+      bodyOsc.frequency.exponentialRampToValueAtTime(42, now + 0.045);
 
-    notifySoundPlayed(0.65);
+      bodyGain.gain.setValueAtTime(0.26, now + 0.002);
+      bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+
+      bodyOsc.connect(bodyGain);
+      bodyGain.connect(ctx.destination);
+
+      bodyOsc.start(now + 0.002);
+      bodyOsc.stop(now + 0.045);
+
+      notifySoundPlayed(0.75);
+    } else if (mode === "leica") {
+      // PROFILE 2: PRECISION LEICA RANGEFINDER SHUTTER CLICK (Dual-stage)
+      const t1 = now;
+      const t2 = now + 0.014;
+
+      // First stage: contact release micro-tick
+      const tickOsc = ctx.createOscillator();
+      const tickGain = ctx.createGain();
+      tickOsc.type = "triangle";
+      tickOsc.frequency.setValueAtTime(2400 * detune, t1);
+      tickOsc.frequency.exponentialRampToValueAtTime(800, t1 + 0.006);
+      tickGain.gain.setValueAtTime(0.18, t1);
+      tickGain.gain.exponentialRampToValueAtTime(0.001, t1 + 0.006);
+      tickOsc.connect(tickGain);
+      tickGain.connect(ctx.destination);
+      tickOsc.start(t1);
+      tickOsc.stop(t1 + 0.006);
+
+      // Second stage: mechanical curtain snap & body
+      const curtainOsc = ctx.createOscillator();
+      const curtainGain = ctx.createGain();
+      curtainOsc.type = "sine";
+      curtainOsc.frequency.setValueAtTime(620 * detune, t2);
+      curtainOsc.frequency.exponentialRampToValueAtTime(110, t2 + 0.035);
+      curtainGain.gain.setValueAtTime(0.25, t2);
+      curtainGain.gain.exponentialRampToValueAtTime(0.001, t2 + 0.035);
+      curtainOsc.connect(curtainGain);
+      curtainGain.connect(ctx.destination);
+      curtainOsc.start(t2);
+      curtainOsc.stop(t2 + 0.035);
+
+      notifySoundPlayed(0.7);
+    } else {
+      // PROFILE 3: BROADSHEET HEAVY LETTERPRESS INK THUD
+      const pressOsc = ctx.createOscillator();
+      const pressGain = ctx.createGain();
+      const pressFilter = ctx.createBiquadFilter();
+
+      pressOsc.type = "triangle";
+      pressOsc.frequency.setValueAtTime(450 * detune, now);
+      pressOsc.frequency.exponentialRampToValueAtTime(50, now + 0.065);
+
+      pressFilter.type = "lowpass";
+      pressFilter.frequency.setValueAtTime(750, now);
+
+      pressGain.gain.setValueAtTime(0.32, now);
+      pressGain.gain.exponentialRampToValueAtTime(0.001, now + 0.065);
+
+      pressOsc.connect(pressFilter);
+      pressFilter.connect(pressGain);
+      pressGain.connect(ctx.destination);
+
+      pressOsc.start(now);
+      pressOsc.stop(now + 0.065);
+
+      notifySoundPlayed(0.85);
+    }
   } catch {
-    // Ignore
+    // Ignore audio engine failures
   }
 };
 

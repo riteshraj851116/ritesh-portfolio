@@ -1,5 +1,4 @@
 import { playHoverBlip, playClickSound } from "../utils/audio";
-import ScrambleText from "./ScrambleText";
 import "./NewspaperProjects.css";
 
 const projectsData = [
@@ -11,18 +10,18 @@ const projectsData = [
     desc: "Production-ready recruitment ecosystem connecting applicants and hiring teams with role-based dashboards. Built with JWT & bcrypt stateless authentication, 40+ modular RESTful API endpoints, and sub-50ms Socket.IO live messaging.",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=900&auto=format&fit=crop",
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "Socket.IO", "REST APIs"],
-    demoUrl: "https://riteshraj851116.github.io/jobsphere/",
+    demoUrl: "https://jobsphere-vercel.vercel.app",
     githubUrl: "https://github.com/riteshraj851116/jobsphere",
   },
   {
     id: "velocedrive",
     badge: "NEW",
-    title: "VELOCEDRIVE",
+    title: "TERACAR (VELOCEDRIVE)",
     subtitle: "Car Rental Management System (2026)",
     desc: "End-to-end car rental platform managing fleet discovery, real-time availability checks, and booking pipelines. Features Mongoose query optimization under 200ms, 15+ atomic React components, and custom auth middleware.",
     image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=900&auto=format&fit=crop",
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "Tailwind CSS"],
-    demoUrl: "https://riteshraj851116.github.io/teracar/",
+    demoUrl: "https://teracar-tan.vercel.app/",
     githubUrl: "https://github.com/riteshraj851116/teracar",
   },
   {
@@ -44,19 +43,17 @@ const NewspaperProjects = () => {
       {/* SECTION HEADER EDITORIAL SPREAD */}
       <div className="projects-editorial-header">
         <div className="header-column-left">
-          <span className="section-label">UPCOMING & RECENT WORKS</span>
+          <span className="section-label font-blackletter" style={{ fontSize: "1.1rem", color: "var(--terracotta)", letterSpacing: "0.02em" }}>
+            The Gazette of Works
+          </span>
           <h2 className="projects-headline-lead">
             Fresh entries — A curated catalog of full-stack engineering releases.
           </h2>
         </div>
         <div className="header-column-right">
           <h2 className="projects-headline-huge">
-            <span>
-              <ScrambleText text="THINK, CODE" as="span" />
-            </span>
-            <span className="deliver-word">
-              <ScrambleText text="DELIVERED" as="span" />
-            </span>
+            <span>THINK, CODE</span>
+            <span className="deliver-word font-blackletter">Delivered</span>
           </h2>
         </div>
       </div>

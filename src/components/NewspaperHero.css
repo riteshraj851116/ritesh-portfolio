@@ -28,6 +28,21 @@
   border-right: 1px solid var(--ink-rule);
 }
 
+.preview-anchor-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.preview-anchor-link:hover {
+  background-color: rgba(29, 29, 27, 0.03);
+}
+
+.preview-anchor-link:hover .project-brand {
+  color: var(--terracotta);
+}
+
 /* PROJECT PREVIEWS */
 .preview-img-frame {
   width: 100%;
@@ -123,6 +138,14 @@
   letter-spacing: 0.02em;
 }
 
+.editorial-kicker {
+  font-family: var(--font-blackletter);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  color: var(--terracotta);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+
 /* 02 — INVERTED BLACK BANNER */
 .inverted-black-banner {
   background-color: #171615;
@@ -147,6 +170,33 @@
   user-select: none;
   width: 100%;
   text-align: center;
+}
+
+.banner-gigantic-title.font-blackletter {
+  font-family: var(--font-blackletter);
+  font-size: clamp(4.5rem, 14vw, 15.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #e8e3db;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  transition: color 0.3s ease;
+  padding: 0.2rem 0;
+}
+
+.banner-gigantic-title.font-blackletter:hover {
+  color: #ffffff;
+}
+
+.artisan-accent.font-blackletter {
+  font-family: var(--font-blackletter);
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--terracotta);
+  letter-spacing: 0.01em;
+  display: inline-block;
+  text-transform: none;
 }
 
 /* 03 — SOFTWARE ARTISAN SPREAD */

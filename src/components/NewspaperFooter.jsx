@@ -14,7 +14,7 @@ const NewspaperFooter = () => {
       <div className="footer-container">
         {/* LEFT: RAJ BRAND & LEGAL */}
         <div className="footer-left-col">
-          <span className="footer-brand">RAJ©</span>
+          <span className="footer-brand font-blackletter" style={{ fontSize: "1.4rem", letterSpacing: "0.02em" }}>Ritesh Raj©</span>
           <div className="footer-stamp-mini">
             <svg viewBox="0 0 20 20" width="16" height="16" fill="var(--terracotta)">
               <circle cx="10" cy="10" r="8" />

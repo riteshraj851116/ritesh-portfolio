@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { playClickSound, playHoverBlip } from "../utils/audio";
-import ScrambleText from "./ScrambleText";
 import "./NewspaperMenu.css";
 
 const navItems = [
@@ -37,7 +36,7 @@ const NewspaperMenu = ({ isOpen, onClose }) => {
     <div className="newspaper-menu-overlay" role="dialog" aria-modal="true">
       {/* TOP BAR */}
       <div className="menu-topbar">
-        <span className="menu-masthead">Ritesh Raj</span>
+        <span className="menu-masthead font-blackletter">Ritesh Raj</span>
         <button className="menu-close-btn" onClick={onClose} aria-label="Close menu">
           ✕
         </button>
@@ -58,9 +57,7 @@ const NewspaperMenu = ({ isOpen, onClose }) => {
                 handleNav(item.href);
               }}
             >
-              <span className="link-text">
-                <ScrambleText text={item.label} as="span" />
-              </span>
+              <span className="link-text">{item.label}</span>
               {item.active && <span className="link-strikethrough"></span>}
             </a>
           </div>

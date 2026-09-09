@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
-import { playHoverBlip, playScrambleTick } from "../utils/audio";
+import { playClickSound } from "../utils/audio";
 import "./DynamicTextRotater.css";
 
 const titles = [
@@ -19,48 +19,41 @@ const DynamicTextRotater = () => {
     const interval = setInterval(() => {
       if (!textRef.current) return;
 
-      // Typewriter keystroke audio
-      try { playScrambleTick(); } catch (e) {}
-
-      // GSAP Out animation
+      // Smooth GSAP Out animation without jarring background audio ticking
       gsap.to(textRef.current, {
-        y: -18,
+        y: -12,
         opacity: 0,
-        filter: "blur(2px)",
-        duration: 0.28,
+        duration: 0.35,
         ease: "power2.in",
         onComplete: () => {
           setIndex((prev) => (prev + 1) % titles.length);
-          try { playHoverBlip(); } catch (e) {}
-          // GSAP In animation with slight typewriter click
+          // Smooth GSAP In animation
           gsap.fromTo(
             textRef.current,
-            { y: 18, opacity: 0, filter: "blur(2px)" },
-            { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.38, ease: "power2.out" }
+            { y: 12, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.45, ease: "power2.out" }
           );
         },
       });
-    }, 2800);
+    }, 4500);
 
     return () => clearInterval(interval);
   }, []);
 
   const handleManualCycle = () => {
     if (!textRef.current) return;
-    try { playScrambleTick(); } catch (e) {}
+    try { playClickSound(); } catch (e) {}
     gsap.to(textRef.current, {
-      y: -18,
+      y: -12,
       opacity: 0,
-      filter: "blur(2px)",
       duration: 0.2,
       ease: "power2.in",
       onComplete: () => {
         setIndex((prev) => (prev + 1) % titles.length);
-        try { playHoverBlip(); } catch (e) {}
         gsap.fromTo(
           textRef.current,
-          { y: 18, opacity: 0, filter: "blur(2px)" },
-          { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power2.out" }
+          { y: 12, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }
         );
       },
     });

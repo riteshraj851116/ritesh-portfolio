@@ -40,61 +40,252 @@
   color: var(--ink-muted);
 }
 
-/* CENTER GOTHIC BLACKLETTER MASTHEAD */
+/* LOCATION & METADATA */
+.location-edition {
+  font-family: var(--font-stamp);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  letter-spacing: 0.06em;
+}
+
+.location-rule {
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+}
+
+/* CENTER AUTHENTIC OLD ENGLISH / BLACKLETTER MASTHEAD */
 .header-masthead {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
 }
 
 .masthead-title {
-  font-family: var(--font-masthead);
-  font-size: clamp(1.4rem, 2.2vw, 1.95rem);
+  font-family: var(--font-blackletter);
+  font-size: clamp(1.85rem, 2.9vw, 2.6rem);
+  font-weight: 700;
   color: var(--ink-black);
   text-decoration: none;
   letter-spacing: 0.02em;
-  transition: opacity 0.2s ease;
+  transition: all 0.25s ease;
+  line-height: 0.95;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .masthead-title:hover {
-  opacity: 0.75;
+  color: var(--terracotta);
 }
 
-/* RIGHT: SOUND TOGGLE & MINIMAL 2-LINE NEWSPAPER HAMBURGER */
+.masthead-edition-subtitle {
+  font-family: var(--font-stamp);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+/* RIGHT: ADVANCED AUDIO SUITE & HAMBURGER */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
-.paper-sound-btn {
+.header-audio-wrapper {
+  position: relative;
+}
+
+.paper-sound-capsule {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.55rem;
   background-color: transparent;
-  border: 1px solid rgba(29, 29, 27, 0.25);
-  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(29, 29, 27, 0.35);
+  padding: 0.32rem 0.7rem;
   font-family: var(--font-stamp);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
+  font-weight: 600;
   color: var(--ink-black);
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
+  border-radius: 2px;
 }
 
-.paper-sound-btn:hover {
-  background-color: rgba(192, 63, 19, 0.1);
+.paper-sound-capsule:hover {
+  background-color: rgba(192, 63, 19, 0.08);
   border-color: var(--terracotta);
   color: var(--terracotta);
 }
 
-.paper-sound-btn.is-active {
+.paper-sound-capsule.is-active {
   border-color: var(--ink-black);
 }
 
-.sound-pulse-icon {
+.paper-sound-capsule.is-muted {
+  opacity: 0.65;
+  border-style: dashed;
+}
+
+/* LIVE DANCING EQUALIZER BARS */
+.audio-eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+  width: 14px;
+}
+
+.eq-bar {
+  display: block;
+  width: 2px;
+  background-color: var(--ink-black);
+  border-radius: 1px;
+  transition: height 0.12s ease;
+}
+
+.paper-sound-capsule:hover .eq-bar {
+  background-color: var(--terracotta);
+}
+
+.paper-sound-capsule.is-muted .eq-bar {
+  background-color: var(--ink-faint);
+}
+
+.sound-text {
+  font-family: var(--font-stamp);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+
+.sound-state-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #27ae60;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.paper-sound-capsule.is-muted .sound-state-dot {
+  background-color: #c0392b;
+}
+
+/* AUDIO MODE FLYOUT POPOVER */
+.audio-mode-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 250px;
+  background-color: var(--paper-light);
+  border: 1px solid var(--ink-black);
+  box-shadow: 4px 4px 0px rgba(29, 29, 27, 0.9);
+  padding: 0.85rem;
+  z-index: 999;
+  animation: popoverFadeIn 0.2s ease;
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popover-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  border-bottom: 1px solid var(--ink-rule);
+  padding-bottom: 0.35rem;
+}
+
+.popover-title {
+  font-family: var(--font-headline);
   font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--ink-black);
+  letter-spacing: 0.04em;
+}
+
+.popover-badge {
+  font-family: var(--font-stamp);
+  font-size: 0.58rem;
+  color: var(--terracotta);
+  font-weight: 700;
+}
+
+.popover-hint {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+
+.popover-modes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.mode-select-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: 1px solid var(--ink-rule);
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  font-family: var(--font-stamp);
+  font-size: 0.7rem;
+  color: var(--ink-black);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.mode-select-btn:hover {
+  background-color: rgba(192, 63, 19, 0.08);
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+.mode-select-btn.is-selected {
+  background-color: var(--ink-black);
+  color: #ffffff;
+  border-color: var(--ink-black);
+}
+
+.mode-btn-icon {
+  font-size: 0.85rem;
+}
+
+.mode-btn-label {
+  flex: 1;
+  font-weight: 600;
+}
+
+.mode-active-mark {
+  font-weight: bold;
+  color: var(--terracotta-bright);
+}
+
+.mode-select-btn.is-selected .mode-active-mark {
+  color: #2ecc71;
 }
 
 .paper-menu-trigger {

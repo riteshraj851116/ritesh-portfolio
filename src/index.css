@@ -20,6 +20,15 @@
   font-display: swap;
 }
 
+/* AUTHENTIC OLD ENGLISH BLACKLETTER WEBFONT */
+@font-face {
+  font-family: "Old English Text MT";
+  src: url("/fonts/OldEnglishTextMT.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* NICCOLÒ MIRANDA "THE PAPER PORTFOLIO" DESIGN SYSTEM */
   --paper-bg: #cdc6be;
@@ -47,8 +56,9 @@
   --text-dim: #787873;
   --accent-primary: #c03f13;
 
-  /* Authentic Typography Stack */
-  --font-masthead: "Pirata One", "Cinzel", cursive, serif;
+  /* Authentic Typography Stack: Prestigious Old English Blackletter & Editorial */
+  --font-blackletter: "Old English Text MT", "Grenze Gotisch", "Cinzel Decorative", "UnifrakturCook", "Pirata One", Georgia, serif;
+  --font-masthead: var(--font-blackletter);
   --font-headline: "Big Shoulders Display", "Bebas Neue", sans-serif;
   --font-editorial: "Playfair Display", "Newsreader", serif;
   --font-body: "Newsreader", "Playfair Display", Georgia, serif;
@@ -132,6 +142,12 @@ body {
 /* TYPOGRAPHY UTILITIES */
 .font-display {
   font-family: var(--font-display);
+}
+
+.font-blackletter,
+.font-old-english {
+  font-family: var(--font-blackletter);
+  letter-spacing: 0.02em;
 }
 
 .font-mono {
