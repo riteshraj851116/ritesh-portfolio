@@ -1,3 +1,4 @@
+import ScrambleText from "./ScrambleText";
 import "./NewspaperPlaybook.css";
 
 const endorsements = [
@@ -38,9 +39,11 @@ const endorsements = [
 const NewspaperPlaybook = () => {
   return (
     <section className="newspaper-playbook-section" id="playbook">
-      {/* 01 — INVERTED BLACK BANNER: ARCHITECT */}
+      {/* 01 — INVERTED BLACK BANNER: CREDENTIALS */}
       <div className="inverted-black-banner">
-        <h2 className="banner-gigantic-title">CREDENTIALS</h2>
+        <h2 className="banner-gigantic-title">
+          <ScrambleText text="CREDENTIALS" as="span" />
+        </h2>
       </div>
 
       {/* 02 — EDITORIAL STATEMENT SPREAD */}

@@ -1,4 +1,5 @@
 import { playHoverBlip, playClickSound } from "../utils/audio";
+import ScrambleText from "./ScrambleText";
 import "./NewspaperProjects.css";
 
 const projectsData = [
@@ -50,8 +51,12 @@ const NewspaperProjects = () => {
         </div>
         <div className="header-column-right">
           <h2 className="projects-headline-huge">
-            <span>THINK, CODE</span>
-            <span className="deliver-word">DELIVERED</span>
+            <span>
+              <ScrambleText text="THINK, CODE" as="span" />
+            </span>
+            <span className="deliver-word">
+              <ScrambleText text="DELIVERED" as="span" />
+            </span>
           </h2>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { playClickSound } from "../utils/audio";
+import { playClickSound, playHoverBlip } from "../utils/audio";
+import ScrambleText from "./ScrambleText";
 import "./NewspaperMenu.css";
 
 const navItems = [
@@ -49,12 +50,17 @@ const NewspaperMenu = ({ isOpen, onClose }) => {
             <a
               href={item.href}
               className="menu-link-item"
+              onMouseEnter={() => {
+                try { playHoverBlip(); } catch (e) {}
+              }}
               onClick={(e) => {
                 e.preventDefault();
                 handleNav(item.href);
               }}
             >
-              <span className="link-text">{item.label}</span>
+              <span className="link-text">
+                <ScrambleText text={item.label} as="span" />
+              </span>
               {item.active && <span className="link-strikethrough"></span>}
             </a>
           </div>

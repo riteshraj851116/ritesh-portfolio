@@ -1,0 +1,8 @@
+.scramble-text-hover {
+  transition: color 0.2s ease, transform 0.2s ease;
+  will-change: transform, color;
+}
+
+.scramble-text-hover:hover {
+  color: var(--terracotta);
+}

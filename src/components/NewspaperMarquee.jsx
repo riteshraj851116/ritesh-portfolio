@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { playClickSound, playStampThud, playHoverBlip } from "../utils/audio";
 import "./NewspaperMarquee.css";
 
 const NewspaperMarquee = () => {
@@ -6,6 +7,7 @@ const NewspaperMarquee = () => {
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("riteshraj851116@gmail.com");
+    try { playStampThud(); } catch (e) {}
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };

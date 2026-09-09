@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import DynamicTextRotater from "./DynamicTextRotater";
+import ScrambleText from "./ScrambleText";
 import PostageStamp from "./PostageStamp";
 import riteshPortrait from "../assets/Adobe Express - file.png";
 import "./NewspaperHero.css";
@@ -93,7 +94,9 @@ const NewspaperHero = () => {
 
       {/* 02 — INVERTED BLACK BANNER: RITESH */}
       <div className="inverted-black-banner">
-        <h2 className="banner-gigantic-title">RITESH</h2>
+        <h2 className="banner-gigantic-title">
+          <ScrambleText text="RITESH" as="span" />
+        </h2>
       </div>
 
       {/* 03 — SOFTWARE ARTISAN & PORTRAIT SPREAD */}
@@ -104,8 +107,12 @@ const NewspaperHero = () => {
           <DynamicTextRotater />
 
           <h2 className="artisan-headline">
-            <span>SOFTWARE</span>
-            <span className="artisan-accent">ARTISAN!</span>
+            <span>
+              <ScrambleText text="SOFTWARE" as="span" />
+            </span>
+            <span className="artisan-accent">
+              <ScrambleText text="ARTISAN!" as="span" />
+            </span>
           </h2>
           <div className="artisan-pullquote">
             <p>
@@ -148,7 +155,9 @@ const NewspaperHero = () => {
       {/* 04 — SECOND INVERTED BANNER WITH POSTAGE STAMP */}
       <div className="inverted-banner-stamp-row">
         <div className="inverted-black-banner banner-engineer">
-          <h2 className="banner-gigantic-title">ENGINEER</h2>
+          <h2 className="banner-gigantic-title">
+            <ScrambleText text="ENGINEER" as="span" />
+          </h2>
         </div>
         <div className="hero-stamp-slot">
           <PostageStamp />
