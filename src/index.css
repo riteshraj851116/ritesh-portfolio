@@ -54,6 +54,7 @@
   --font-body: "Newsreader", "Playfair Display", Georgia, serif;
   --font-stamp: "Special Elite", "Courier Prime", monospace;
   --font-mono: "JetBrains Mono", monospace;
+  --font-script: "Stalemate", cursive;
 
   --font-primary: var(--font-body);
   --font-display: var(--font-headline);

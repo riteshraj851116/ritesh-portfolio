@@ -57,15 +57,15 @@
   text-transform: uppercase;
 }
 
-/* SCRIPT PHRASE */
+/* SCRIPT PHRASE WITH STALEMATE FONT */
 .marquee-script-phrase {
-  font-family: var(--font-editorial);
-  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
-  font-style: italic;
+  font-family: var(--font-script);
+  font-size: clamp(3rem, 6.5vw, 6.5rem);
   font-weight: 400;
   color: var(--ink-black);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
   white-space: nowrap;
+  line-height: 1;
 }
 
 /* TOAST ON COPY */

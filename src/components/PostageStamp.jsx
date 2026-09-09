@@ -28,17 +28,9 @@ const PostageStamp = () => {
           </svg>
         </div>
 
-        {/* ARTISAN SIGNATURE */}
+        {/* ARTISAN SIGNATURE (Rendered in Stalemate handwritten script) */}
         <div className="stamp-signature-wrapper">
-          <svg className="stamp-signature" viewBox="0 0 160 50" fill="none">
-            <path
-              d="M10 35 C 30 10, 45 45, 60 15 C 75 5, 85 40, 100 20 C 115 10, 130 35, 150 25"
-              stroke="#1d1d1b"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <span className="stamp-signature-stalemate">Ritesh Raj</span>
         </div>
 
         {/* TYPEWRITER METADATA */}
