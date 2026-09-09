@@ -446,7 +446,7 @@ export const playSuccessSound = () => {
 };
 
 /**
- * 8. TEXT SCRAMBLE SHUFFLING TICK (Soft, muffled parchment micro-clicks)
+ * 8. TEXT SCRAMBLE SHUFFLING TICK (Tactile typewriter parchment key-strike)
  */
 export const playScrambleTick = () => {
   if (!soundEnabled) return;
@@ -459,23 +459,25 @@ export const playScrambleTick = () => {
     const gain = ctx.createGain();
     const filter = ctx.createBiquadFilter();
 
-    const randomFreq = 260 + Math.random() * 180;
-    osc.type = "sine";
+    const randomFreq = 420 + Math.random() * 240;
+    osc.type = "triangle";
     osc.frequency.setValueAtTime(randomFreq, now);
+    osc.frequency.exponentialRampToValueAtTime(120, now + 0.025);
 
-    filter.type = "lowpass";
-    filter.frequency.setValueAtTime(600, now);
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(800, now);
+    filter.Q.setValueAtTime(2.0, now);
 
-    gain.gain.setValueAtTime(0.02, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.02);
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
 
     osc.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start(now);
-    osc.stop(now + 0.02);
-    notifySoundPlayed(0.15);
+    osc.stop(now + 0.025);
+    notifySoundPlayed(0.35);
   } catch {
     // Ignore
   }
@@ -636,7 +638,7 @@ export const playPaperFlipSound = () => {
 
 /**
  * 11. DELICATE WOODEN ESCAPEMENT TICK (Precision horology micro-click)
- * Fired only on milestone intervals, never in continuous repetitive bursts.
+ * Fired cleanly on loader language cycles and milestones.
  */
 export const playLoaderTick = () => {
   if (!soundEnabled) return;
@@ -649,24 +651,25 @@ export const playLoaderTick = () => {
     const gain = ctx.createGain();
     const filter = ctx.createBiquadFilter();
 
-    // Very soft acoustic watch escapement click
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(280, now);
-    osc.frequency.exponentialRampToValueAtTime(140, now + 0.02);
+    // Crisp mechanical horology click
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(480, now);
+    osc.frequency.exponentialRampToValueAtTime(190, now + 0.03);
 
-    filter.type = "lowpass";
-    filter.frequency.setValueAtTime(450, now);
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(750, now);
+    filter.Q.setValueAtTime(1.8, now);
 
-    gain.gain.setValueAtTime(0.018, now);
-    gain.gain.exponentialRampToValueAtTime(0.0005, now + 0.02);
+    gain.gain.setValueAtTime(0.07, now);
+    gain.gain.exponentialRampToValueAtTime(0.0005, now + 0.03);
 
     osc.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start(now);
-    osc.stop(now + 0.02);
-    notifySoundPlayed(0.12);
+    osc.stop(now + 0.03);
+    notifySoundPlayed(0.25);
   } catch {
     // ignore
   }

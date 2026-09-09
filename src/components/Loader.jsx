@@ -19,13 +19,14 @@ const Loader = ({ onComplete }) => {
   const contentRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const wordRef = useRef(null);
 
   // Cycle through greetings and increment progress to 100%
   useEffect(() => {
     let prog = 0;
 
     const progressInterval = setInterval(() => {
-      prog += Math.floor(Math.random() * 4) + 2;
+      prog += Math.floor(Math.random() * 3) + 2;
       if (prog >= 100) {
         prog = 100;
         setProgress(100);
@@ -34,12 +35,19 @@ const Loader = ({ onComplete }) => {
       } else {
         setProgress(prog);
       }
-    }, 32);
+    }, 38);
 
     const greetingInterval = setInterval(() => {
       try { playLoaderTick(); } catch (e) {}
+      if (wordRef.current) {
+        gsap.fromTo(
+          wordRef.current,
+          { y: 15, opacity: 0.2 },
+          { y: 0, opacity: 1, duration: 0.18, ease: "power2.out" }
+        );
+      }
       setCurrentIndex((prev) => (prev + 1) % greetings.length);
-    }, 240);
+    }, 250);
 
     return () => {
       clearInterval(progressInterval);
@@ -89,43 +97,39 @@ const Loader = ({ onComplete }) => {
           <span className="pulse-beacon"></span>
           <span>RR // INITIALIZING</span>
         </div>
-        <span className="hud-title">RITESH RAJ · PORTFOLIO</span>
+        <span className="hud-title">RITESH RAJ</span>
         <span className="hud-edition">{currentGreeting.lang} // GREETING</span>
       </div>
 
       {/* CENTER: ICONIC BOLD HELLO STAGE */}
       <div className="hello-center-stage" ref={contentRef}>
         <div className="hello-main-row">
-          <span className="hello-dot" />
-          <h1 className="hello-headline">HELLO</h1>
+          <span className="hello-dot-accent" />
+          <h1 className="hello-word-display" ref={wordRef}>{currentGreeting.text}</h1>
         </div>
 
-        <div className="hello-sub-row">
-          <div className="hello-greeting-pill">
-            <span className="hello-intl-text">{currentGreeting.text}</span>
-            <span className="hello-lang-badge">[{currentGreeting.lang}]</span>
-          </div>
-          <span className="hello-arch-text">FULL STACK ENGINEER & MERN SPECIALIST</span>
+        <div className="hello-sub-meta">
+          <span className="meta-lang">[{currentGreeting.lang}]</span>
+          <span className="meta-divider">//</span>
+          <span className="meta-role">FULL STACK MERN ENGINEER</span>
         </div>
       </div>
 
-      {/* BOTTOM HUD & PROGRESS TRACK */}
+      {/* BOTTOM HUD: PROGRESS & TELEMETRY */}
       <div className="loader-bottom-hud">
-        <div className="loader-status-col">
-          <span className="status-indicator-dot"></span>
-          <span className="status-live-text">
-            {progress < 100 ? "COMPILING KERNEL & ASSETS..." : "WORKSPACE INITIALIZED"}
-          </span>
+        <div className="loader-progress-track">
+          <div
+            className="loader-progress-fill"
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
 
-        <div className="loader-progress-wrap">
-          <div className="loader-bar-track">
-            <div
-              className="loader-bar-fill"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-          <span className="loader-percentage">{progress}%</span>
+        <div className="bottom-telemetry-row">
+          <span className="telemetry-val">
+            {progress < 100 ? "COMPILING KERNEL & ASSETS..." : "WORKSPACE INITIALIZED"}
+          </span>
+          <span className="bottom-tagline">GALGOTIAS UNIVERSITY CSE · CGPA 7.3</span>
+          <span className="telemetry-val">{progress}%</span>
         </div>
       </div>
     </aside>

@@ -44,7 +44,7 @@ const NewspaperHeader = ({ onOpenMenu }) => {
 
       {/* CENTER: GOTHIC BLACKLETTER MASTHEAD */}
       <div className="header-masthead">
-        <a href="#hero" className="masthead-title">The Paper Portfolio</a>
+        <a href="#hero" className="masthead-title">Ritesh Raj</a>
       </div>
 
       {/* RIGHT: SOUND TOGGLE & MINIMAL 2-LINE HAMBURGER */}

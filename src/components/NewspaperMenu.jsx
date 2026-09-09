@@ -36,7 +36,7 @@ const NewspaperMenu = ({ isOpen, onClose }) => {
     <div className="newspaper-menu-overlay" role="dialog" aria-modal="true">
       {/* TOP BAR */}
       <div className="menu-topbar">
-        <span className="menu-masthead">The Paper Portfolio</span>
+        <span className="menu-masthead">Ritesh Raj</span>
         <button className="menu-close-btn" onClick={onClose} aria-label="Close menu">
           ✕
         </button>

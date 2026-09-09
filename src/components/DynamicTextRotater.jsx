@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
-import { playHoverBlip } from "../utils/audio";
+import { playHoverBlip, playScrambleTick } from "../utils/audio";
 import "./DynamicTextRotater.css";
 
 const titles = [
@@ -19,20 +19,24 @@ const DynamicTextRotater = () => {
     const interval = setInterval(() => {
       if (!textRef.current) return;
 
+      // Typewriter keystroke audio
+      try { playScrambleTick(); } catch (e) {}
+
       // GSAP Out animation
       gsap.to(textRef.current, {
-        y: -20,
+        y: -18,
         opacity: 0,
-        duration: 0.35,
+        filter: "blur(2px)",
+        duration: 0.28,
         ease: "power2.in",
         onComplete: () => {
           setIndex((prev) => (prev + 1) % titles.length);
           try { playHoverBlip(); } catch (e) {}
-          // GSAP In animation
+          // GSAP In animation with slight typewriter click
           gsap.fromTo(
             textRef.current,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.45, ease: "power2.out" }
+            { y: 18, opacity: 0, filter: "blur(2px)" },
+            { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.38, ease: "power2.out" }
           );
         },
       });
@@ -43,18 +47,20 @@ const DynamicTextRotater = () => {
 
   const handleManualCycle = () => {
     if (!textRef.current) return;
-    try { playHoverBlip(); } catch (e) {}
+    try { playScrambleTick(); } catch (e) {}
     gsap.to(textRef.current, {
-      y: -20,
+      y: -18,
       opacity: 0,
-      duration: 0.25,
+      filter: "blur(2px)",
+      duration: 0.2,
       ease: "power2.in",
       onComplete: () => {
         setIndex((prev) => (prev + 1) % titles.length);
+        try { playHoverBlip(); } catch (e) {}
         gsap.fromTo(
           textRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.35, ease: "power2.out" }
+          { y: 18, opacity: 0, filter: "blur(2px)" },
+          { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power2.out" }
         );
       },
     });
