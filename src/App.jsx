@@ -7,9 +7,7 @@ import NewspaperHeader from "./components/NewspaperHeader";
 import NewspaperMenu from "./components/NewspaperMenu";
 import NewspaperHero from "./components/NewspaperHero";
 import NewspaperSkills3D from "./components/NewspaperSkills3D";
-import KineticBroadsheet3D from "./components/KineticBroadsheet3D";
-import BakedRoom3D from "./components/BakedRoom3D";
-import SpectralGhost3D from "./components/SpectralGhost3D";
+import MasterStudio3D from "./components/MasterStudio3D";
 import NewspaperProjects from "./components/NewspaperProjects";
 import NewspaperMetrics from "./components/NewspaperMetrics";
 import NewspaperPlaybook from "./components/NewspaperPlaybook";
@@ -19,7 +17,6 @@ import NewspaperFooter from "./components/NewspaperFooter";
 function App() {
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [spectralLabOpen, setSpectralLabOpen] = useState(false);
 
   // Initialize Lenis smooth scroll for effortless broadsheet reading
   useEffect(() => {
@@ -53,17 +50,15 @@ function App() {
       {/* INK CUSTOM CURSOR */}
       <CustomCursor />
 
-      {/* PINNED NEWSPAPER HEADER (Masthead, Location, Audio Suite & Spectral Lab Trigger) */}
+      {/* PINNED NEWSPAPER HEADER (Masthead, Location & Audio Suite) */}
       <NewspaperHeader
         onOpenMenu={() => setMenuOpen(true)}
-        onOpenSpectralLab={() => setSpectralLabOpen(true)}
       />
 
       {/* FULLSCREEN DARK NEWSPAPER NAVIGATION OVERLAY */}
       <NewspaperMenu
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
-        onOpenSpectralLab={() => setSpectralLabOpen(true)}
       />
 
       {/* MAIN BROADSHEET EDITORIAL PORTFOLIO */}
@@ -74,50 +69,24 @@ function App() {
         {/* 02 — 3D MOVING SKILLS MATRIX */}
         <NewspaperSkills3D />
 
-        {/* 03 — 3D KINETIC BROADSHEET: THREE-HTML-TO-CANVAS MESH & SPECTRAL LAB PORTAL */}
-        <KineticBroadsheet3D onOpenSpectralLab={() => setSpectralLabOpen(true)} />
+        {/* 03 — UNIFIED 3D ARCHITECTURAL STUDIO (KINETIC BROADSHEET + BAKED ROOM + SPECTRAL ENTITY) */}
+        <MasterStudio3D />
 
-        {/* 04 — 3D BAKED DEVELOPER STUDIO: ISOMETRIC AMBIENT OCCLUSION WORKSPACE */}
-        <BakedRoom3D />
-
-        {/* 05 — BROADSHEET PROJECTS CATALOG */}
+        {/* 04 — BROADSHEET PROJECTS CATALOG */}
         <NewspaperProjects />
 
-        {/* 06 — EDITORIAL METRICS & STATS STRIP */}
+        {/* 05 — EDITORIAL METRICS & STATS STRIP */}
         <NewspaperMetrics />
 
-        {/* 07 — ARCHITECT INVERTED BANNER & STITCHED COUPON CARDS */}
+        {/* 06 — ARCHITECT INVERTED BANNER & STITCHED COUPON CARDS */}
         <NewspaperPlaybook />
 
-        {/* 08 — CONTINUOUS EMAIL ME MARQUEE RIBBON */}
+        {/* 07 — CONTINUOUS EMAIL ME MARQUEE RIBBON */}
         <NewspaperMarquee />
 
-        {/* 09 — BROADSHEET COLOPHON FOOTER */}
+        {/* 08 — BROADSHEET COLOPHON FOOTER */}
         <NewspaperFooter />
       </main>
-
-      {/* FLOATING QUICK DOCK FOR 3D SPECTRAL LAB */}
-      <button
-        type="button"
-        className="floating-spectral-dock"
-        onClick={() => {
-          setSpectralLabOpen(true);
-        }}
-        title="Launch 3D Spectral Entity Laboratory (Analog Decay & Organic Mesh)"
-        aria-label="Launch 3D Spectral Lab"
-      >
-        <span className="dock-ghost-icon">👻</span>
-        <div className="dock-meta">
-          <span className="dock-title">3D SPECTRAL LAB</span>
-          <span className="dock-fps">● 90 FPS V-SYNC</span>
-        </div>
-      </button>
-
-      {/* 3D SPECTRAL LAB MODAL (ON-DEMAND ANALOG DECAY & ORGANIC MESH LABORATORY) */}
-      <SpectralGhost3D
-        isOpen={spectralLabOpen}
-        onClose={() => setSpectralLabOpen(false)}
-      />
     </>
   );
 }

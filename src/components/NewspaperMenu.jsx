@@ -4,14 +4,13 @@ import "./NewspaperMenu.css";
 
 const navItems = [
   { label: "INDEX", href: "#hero", active: true },
-  { label: "KINETIC BROADSHEET", href: "#kinetic-broadsheet", active: false },
-  { label: "3D SPECTRAL LAB", action: "spectral-lab", isModal: true },
+  { label: "3D STUDIO", href: "#studio-3d", active: false },
   { label: "WORK", href: "#work", active: false },
   { label: "PLAYBOOK", href: "#playbook", active: false },
   { label: "CONTACT", href: "#contact", active: false },
 ];
 
-const NewspaperMenu = ({ isOpen, onClose, onOpenSpectralLab }) => {
+const NewspaperMenu = ({ isOpen, onClose }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape" && isOpen) {
@@ -27,10 +26,6 @@ const NewspaperMenu = ({ isOpen, onClose, onOpenSpectralLab }) => {
   const handleNav = (item) => {
     try { playClickSound(); } catch (e) {}
     onClose();
-    if (item.isModal) {
-      if (onOpenSpectralLab) onOpenSpectralLab();
-      return;
-    }
     const target = document.querySelector(item.href);
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
