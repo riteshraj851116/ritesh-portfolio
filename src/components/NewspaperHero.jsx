@@ -4,14 +4,12 @@ import DynamicTextRotater from "./DynamicTextRotater";
 import ScrambleText from "./ScrambleText";
 import PostageStamp from "./PostageStamp";
 import riteshPortrait from "../assets/Adobe Express - file.png";
-import riteshPastelPoster from "../assets/ritesh-pastel-poster.jpg";
 import { playClickSound, playHoverBlip } from "../utils/audio";
 import "./NewspaperHero.css";
 
 const NewspaperHero = () => {
   const heroRef = useRef(null);
   const portraitRef = useRef(null);
-  const [heroView, setHeroView] = useState("poster"); // default to pastel art poster
   const [activeHeroRight, setActiveHeroRight] = useState("cineai");
   const btnFillRef = useRef(null);
   const btnOutlineRef = useRef(null);
@@ -249,17 +247,36 @@ const NewspaperHero = () => {
       <div className="broadsheet-artisan-spread">
         {/* LEFT: ARTISAN EDITORIAL */}
         <div className="artisan-left-col">
+          <div className="artisan-badge-row">
+            <span className="artisan-status-beacon">
+              <span className="beacon-pulse-dot" />
+              OPEN FOR FULL-STACK & SDE ROLES
+            </span>
+          </div>
+
           <DynamicTextRotater />
 
           <h2 className="artisan-headline">
             <span className="headline-word-tech">SOFTWARE</span>
             <span className="artisan-accent font-blackletter">Artisan</span>
           </h2>
+
           <div className="artisan-pullquote">
             <p>
               Engineering <strong>high-throughput MERN stack systems</strong>, sub-50ms real-time Socket.IO pipelines, and resilient web applications. Computer Science graduate from <strong>Galgotias University</strong> with 200+ algorithm challenges solved.
             </p>
           </div>
+
+          {/* CURATED SKILLS MATRIX PILLS */}
+          <div className="artisan-skills-matrix">
+            <span className="artisan-skill-pill">⚡ MERN Stack</span>
+            <span className="artisan-skill-pill">📡 Socket.IO</span>
+            <span className="artisan-skill-pill">☕ Java DSA (200+)</span>
+            <span className="artisan-skill-pill">🤖 AI Systems</span>
+            <span className="artisan-skill-pill">◈ MongoDB</span>
+            <span className="artisan-skill-pill">🚀 Vercel CI/CD</span>
+          </div>
+
           <div className="artisan-action-links">
             <a
               href="#work"
@@ -290,7 +307,7 @@ const NewspaperHero = () => {
           </div>
         </div>
 
-        {/* RIGHT: PORTRAIT / 3D CORE DUAL PRESENTATION */}
+        {/* RIGHT: PORTRAIT PRESENTATION (OFFICIAL PHOTOGRAPH ONLY) */}
         <div className="artisan-right-col">
           <div
             className="portrait-editorial-frame"
@@ -302,69 +319,30 @@ const NewspaperHero = () => {
             <div className="frame-toggle-bar">
               <div className="frame-toggle-left">
                 <span className="frame-status-dot"></span>
-                <span className="frame-title-text">
-                  {heroView === "poster" ? "ARTISAN PASTEL POSTER // BROADSIDE" : "OFFICIAL PHOTOGRAPH"}
-                </span>
+                <span className="frame-title-text">VERIFIED PORTRAIT // RITESH RAJ</span>
               </div>
-              <div className="frame-toggle-buttons">
-                <button
-                  type="button"
-                  className={`frame-switch-btn ${heroView === "poster" ? "active" : ""}`}
-                  onClick={() => {
-                    try {
-                      playClickSound();
-                    } catch (e) {}
-                    setHeroView("poster");
-                  }}
-                  onMouseEnter={() => {
-                    try {
-                      playHoverBlip();
-                    } catch (e) {}
-                  }}
-                >
-                  PASTEL POSTER ✦
-                </button>
-                <button
-                  type="button"
-                  className={`frame-switch-btn ${heroView === "portrait" ? "active" : ""}`}
-                  onClick={() => {
-                    try {
-                      playClickSound();
-                    } catch (e) {}
-                    setHeroView("portrait");
-                  }}
-                  onMouseEnter={() => {
-                    try {
-                      playHoverBlip();
-                    } catch (e) {}
-                  }}
-                >
-                  PHOTO
-                </button>
-              </div>
+              <span className="frame-edition-badge">EDITION 2026</span>
             </div>
 
-            {/* CONTENT: PASTEL DRAWING POSTER OR PHOTOGRAPH */}
+            {/* CONTENT: OFFICIAL PROFESSIONAL PHOTOGRAPH */}
             <div className="portrait-image-wrapper">
-              {heroView === "poster" ? (
-                <img
-                  src={riteshPastelPoster}
-                  alt="Ritesh Raj - Artisan Pastel Drawing Poster"
-                  className="portrait-editorial-img pastel-poster-img"
-                />
-              ) : (
-                <img
-                  src={riteshPortrait}
-                  alt="Ritesh Raj - Full Stack Engineer Portrait"
-                  className="portrait-editorial-img"
-                />
-              )}
+              <img
+                src={riteshPortrait}
+                alt="Ritesh Raj - Full Stack Software Engineer"
+                className="portrait-editorial-img"
+              />
+              <div className="portrait-corner-stamp">
+                <span>RAJ // CSE '27</span>
+              </div>
             </div>
 
             {/* CAPTION BAR */}
             <div className="portrait-caption-bar">
-              <span className="portrait-label">RITESH RAJ</span>
-              <span className="portrait-sub">B.TECH CSE · GALGOTIAS UNIV (CGPA 6.72)</span>
+              <div className="caption-main-info">
+                <span className="portrait-label">RITESH RAJ</span>
+                <span className="portrait-role-sub">FULL STACK SOFTWARE ENGINEER</span>
+              </div>
+              <span className="portrait-sub">GALGOTIAS UNIV (CGPA 6.72)</span>
             </div>
           </div>
         </div>
