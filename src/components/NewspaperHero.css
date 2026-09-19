@@ -43,6 +43,59 @@
   color: var(--terracotta);
 }
 
+.triptych-toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.triptych-edition-tag {
+  font-size: 1rem;
+  color: var(--terracotta);
+}
+
+.triptych-toggle-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.triptych-switch-btn {
+  font-family: var(--font-headline);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  background-color: transparent;
+  color: var(--ink-muted);
+  border: 1px solid rgba(29, 29, 27, 0.25);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.triptych-switch-btn:hover {
+  border-color: var(--ink-black);
+  color: var(--ink-black);
+}
+
+.triptych-switch-btn.active {
+  background-color: var(--ink-black);
+  color: var(--paper-bg);
+  border-color: var(--ink-black);
+}
+
+.preview-anchor-inner {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.preview-anchor-inner:hover .project-brand {
+  color: var(--terracotta);
+}
+
 /* PROJECT PREVIEWS */
 .preview-img-frame {
   width: 100%;

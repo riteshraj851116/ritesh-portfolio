@@ -12,6 +12,7 @@ const NewspaperHero = () => {
   const heroRef = useRef(null);
   const portraitRef = useRef(null);
   const [heroView, setHeroView] = useState("poster"); // default to pastel art poster
+  const [activeHeroRight, setActiveHeroRight] = useState("cineai");
   const btnFillRef = useRef(null);
   const btnOutlineRef = useRef(null);
 
@@ -149,32 +150,92 @@ const NewspaperHero = () => {
           <span className="editorial-tip">TIP! Explore below for verified live demonstrations</span>
         </div>
 
-        {/* RIGHT COLUMN: PROJECT 02 - TERACAR (VELOCEDRIVE) */}
-        <a
-          href="https://teracar-tan.vercel.app/"
-          target="_blank"
-          rel="noreferrer"
-          className="triptych-col project-preview-col preview-anchor-link"
-          title="Launch TeraCar Live Application"
-        >
-          <div className="preview-img-frame">
-            <img
-              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop"
-              alt="TeraCar VeloceDrive preview"
-              className="preview-img"
-              loading="lazy"
-            />
-          </div>
-          <div className="preview-caption">
-            <div className="caption-head">
-              <h3 className="project-brand">TERACAR</h3>
-              <span className="badge-new">LIVE ↗</span>
+        {/* RIGHT COLUMN: PROJECT 02 - CINEAI / TERACAR DUAL FLAGSHIP SWITCHER */}
+        <div className="triptych-col project-preview-col">
+          <div className="triptych-toggle-row">
+            <span className="triptych-edition-tag font-blackletter">Flagship Release</span>
+            <div className="triptych-toggle-buttons">
+              <button
+                type="button"
+                className={`triptych-switch-btn ${activeHeroRight === "cineai" ? "active" : ""}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  try { playClickSound(); } catch (err) {}
+                  setActiveHeroRight("cineai");
+                }}
+                onMouseEnter={() => { try { playHoverBlip(); } catch (err) {} }}
+              >
+                02 CINEAI
+              </button>
+              <button
+                type="button"
+                className={`triptych-switch-btn ${activeHeroRight === "teracar" ? "active" : ""}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  try { playClickSound(); } catch (err) {}
+                  setActiveHeroRight("teracar");
+                }}
+                onMouseEnter={() => { try { playHoverBlip(); } catch (err) {} }}
+              >
+                03 TERACAR
+              </button>
             </div>
-            <p className="project-desc">
-              End-to-end vehicle rental management platform with Mongoose indexing achieving complex fleet filter queries in &lt;200ms and custom auth middleware.
-            </p>
           </div>
-        </a>
+
+          {activeHeroRight === "cineai" ? (
+            <a
+              href="https://cineai-pi-steel.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="preview-anchor-inner"
+              title="Launch CineAI Live Application"
+            >
+              <div className="preview-img-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800&auto=format&fit=crop"
+                  alt="CineAI preview"
+                  className="preview-img"
+                  loading="lazy"
+                />
+              </div>
+              <div className="preview-caption">
+                <div className="caption-head">
+                  <h3 className="project-brand">CINEAI</h3>
+                  <span className="badge-new">AI & DOLBY ↗</span>
+                </div>
+                <p className="project-desc">
+                  Production cinema ticketing platform featuring AI Acoustic Sweet Spot calibration, Web Speech conversational concierge, and 256-bit cryptographic QR passes.
+                </p>
+              </div>
+            </a>
+          ) : (
+            <a
+              href="https://teracar-tan.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="preview-anchor-inner"
+              title="Launch TeraCar Live Application"
+            >
+              <div className="preview-img-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop"
+                  alt="TeraCar VeloceDrive preview"
+                  className="preview-img"
+                  loading="lazy"
+                />
+              </div>
+              <div className="preview-caption">
+                <div className="caption-head">
+                  <h3 className="project-brand">TERACAR</h3>
+                  <span className="badge-new">MERN ↗</span>
+                </div>
+                <p className="project-desc">
+                  End-to-end vehicle rental management platform with Mongoose indexing achieving complex fleet filter queries in &lt;200ms and custom auth middleware.
+                </p>
+              </div>
+            </a>
+          )}
+        </div>
       </div>
 
       {/* 02 — INVERTED BLACK BANNER: RITESH RAJ (AUTHENTIC OLD ENGLISH BLACKLETTER WITH DECODE EFFECT) */}
