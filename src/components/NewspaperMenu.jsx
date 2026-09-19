@@ -4,8 +4,8 @@ import "./NewspaperMenu.css";
 
 const navItems = [
   { label: "INDEX", href: "#hero", active: true },
+  { label: "SPECTRAL LAB", href: "#spectral-lab", active: false },
   { label: "WORK", href: "#work", active: false },
-  { label: "ABOUT", href: "#about", active: false },
   { label: "PLAYBOOK", href: "#playbook", active: false },
   { label: "CONTACT", href: "#contact", active: false },
 ];

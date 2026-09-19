@@ -7,6 +7,7 @@ import NewspaperHeader from "./components/NewspaperHeader";
 import NewspaperMenu from "./components/NewspaperMenu";
 import NewspaperHero from "./components/NewspaperHero";
 import NewspaperSkills3D from "./components/NewspaperSkills3D";
+import SpectralGhost3D from "./components/SpectralGhost3D";
 import NewspaperProjects from "./components/NewspaperProjects";
 import NewspaperMetrics from "./components/NewspaperMetrics";
 import NewspaperPlaybook from "./components/NewspaperPlaybook";
@@ -63,7 +64,10 @@ function App() {
         {/* 02 — 3D MOVING SKILLS MATRIX */}
         <NewspaperSkills3D />
 
-        {/* 03 — BROADSHEET PROJECTS CATALOG */}
+        {/* 03 — 3D SPECTRAL LAB: THE ANALOG GHOST & CRT SHADERS */}
+        <SpectralGhost3D />
+
+        {/* 04 — BROADSHEET PROJECTS CATALOG */}
         <NewspaperProjects />
 
         {/* 03 — EDITORIAL METRICS & STATS STRIP */}
