@@ -76,6 +76,9 @@ const CustomCursor = () => {
         target.closest("a") ||
         target.closest("button") ||
         target.closest(".project-card") ||
+        target.closest(".project-broadsheet-card") ||
+        target.closest(".skill-3d-card") ||
+        target.closest(".stitched-ticket-card") ||
         target.closest(".contact-link") ||
         target.closest(".preset-btn") ||
         target.closest("[data-hover]")
