@@ -4,7 +4,6 @@ import "./NewspaperMenu.css";
 
 const navItems = [
   { label: "INDEX", href: "#hero", active: true },
-  { label: "3D STUDIO", href: "#studio-3d", active: false },
   { label: "WORK", href: "#work", active: false },
   { label: "PLAYBOOK", href: "#playbook", active: false },
   { label: "CONTACT", href: "#contact", active: false },
