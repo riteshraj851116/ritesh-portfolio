@@ -8,9 +8,17 @@ let ambientDroneNode = null;
 let ambientGainNode = null;
 let isAmbientActive = false;
 
-// Cooldown limiter to prevent hover sound spamming
+// Cooldown limiters to prevent click echo, double-firing, and hover spamming
+let lastClickTime = 0;
+const CLICK_COOLDOWN_MS = 65;
+
 let lastHoverTime = 0;
 const HOVER_COOLDOWN_MS = 65;
+
+let lastHoverBlipTime = 0;
+const HOVER_BLIP_COOLDOWN_MS = 65;
+
+let lastTouchTime = 0;
 
 // Event listeners for UI Equalizer animation
 const audioListeners = new Set();
@@ -36,11 +44,11 @@ export const initAudioContext = () => {
     if (!audioCtx) {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (AudioContextClass) {
-        audioCtx = new AudioContextClass();
+        audioCtx = new AudioContextClass({ latencyHint: "interactive" });
       }
     }
     if (audioCtx && audioCtx.state === "suspended") {
-      audioCtx.resume();
+      audioCtx.resume().catch(() => {});
     }
   } catch {
     // Ignore
@@ -67,20 +75,24 @@ export const cycleClickMode = () => {
   return clickMode;
 };
 
-// Global user interaction unlock & intelligent tactile click delegation
+// Global user interaction unlock & zero-latency tactile click delegation
 if (typeof window !== "undefined") {
   const unlock = () => {
     initAudioContext();
   };
-  window.addEventListener("click", unlock, { passive: true });
-  window.addEventListener("touchstart", unlock, { passive: true });
-  window.addEventListener("keydown", unlock, { passive: true });
-  window.addEventListener("mousemove", unlock, { once: true, passive: true });
+
+  // Pre-warm AudioContext on earliest possible interaction pointerdown / keydown
+  window.addEventListener("pointerdown", unlock, { passive: true, capture: true });
+  window.addEventListener("touchstart", unlock, { passive: true, capture: true });
+  window.addEventListener("keydown", unlock, { passive: true, capture: true });
+  window.addEventListener("click", unlock, { passive: true, capture: true });
 
   // Intelligent global click sound on all interactive broadsheet elements
   window.addEventListener(
     "click",
     (e) => {
+      // If this click was synthesized by a touch event that already played sound, skip to prevent 300ms delay echo
+      if (performance.now() - lastTouchTime < 450) return;
       unlock();
       const target = e.target;
       if (
@@ -103,7 +115,7 @@ if (typeof window !== "undefined") {
         playClickSound();
         try {
           if (typeof navigator !== "undefined" && navigator.vibrate) {
-            navigator.vibrate(12);
+            navigator.vibrate(8);
           }
         } catch {
           // ignore
@@ -113,7 +125,7 @@ if (typeof window !== "undefined") {
     { passive: true }
   );
 
-  // Dedicated touch sound on mobile taps
+  // Dedicated touch sound on mobile taps - record lastTouchTime to prevent 300ms delayed click duplicate
   window.addEventListener(
     "touchstart",
     (e) => {
@@ -131,7 +143,8 @@ if (typeof window !== "undefined") {
           target.closest(".playbook-turn-btn") ||
           target.closest("[role='button']"))
       ) {
-        playTouchSound();
+        lastTouchTime = performance.now();
+        playClickSound(); // Clean synchronized tactile click instantly on tap
       }
     },
     { passive: true }
@@ -203,9 +216,9 @@ export const playHoverSound = (pitchOffset = 0) => {
 
   try {
     const ctx = initAudioContext();
-    if (!ctx) return;
+    if (!ctx || ctx.state !== "running") return;
 
-    const now = ctx.currentTime;
+    const now = ctx.currentTime + 0.001;
 
     // Body tone: warm resonant sine blip
     const osc = ctx.createOscillator();
@@ -243,14 +256,20 @@ export const playHoverSound = (pitchOffset = 0) => {
  */
 export const playClickSound = (overrideMode = null) => {
   if (!soundEnabled) return;
+
+  const nowMs = performance.now();
+  if (nowMs - lastClickTime < CLICK_COOLDOWN_MS) return;
+  lastClickTime = nowMs;
+
   try {
     const ctx = initAudioContext();
     if (!ctx) return;
 
-    const mode = overrideMode || clickMode;
-    const now = ctx.currentTime;
-    // Organic micro-pitch detuning prevents the repetitive "machine-gun" buzz
-    const detune = 1 + (Math.random() * 0.07 - 0.035);
+    const executeClick = () => {
+      const mode = overrideMode || clickMode;
+      const now = ctx.currentTime + 0.001;
+      // Organic micro-pitch detuning prevents the repetitive "machine-gun" buzz
+      const detune = 1 + (Math.random() * 0.06 - 0.03);
 
     if (mode === "mechanical") {
       // PROFILE 1: TACTILE MECHANICAL TYPEWRITER / KEY SWITCH STRIKE
@@ -366,6 +385,13 @@ export const playClickSound = (overrideMode = null) => {
       pressOsc.stop(now + 0.065);
 
       notifySoundPlayed(0.85);
+    }
+  };
+
+    if (ctx.state === "suspended") {
+      ctx.resume().then(executeClick).catch(() => {});
+    } else {
+      executeClick();
     }
   } catch {
     // Ignore audio engine failures
@@ -864,10 +890,15 @@ export const playBootSound = () => {
  */
 export const playHoverBlip = () => {
   if (!soundEnabled) return;
+
+  const nowMs = performance.now();
+  if (nowMs - lastHoverBlipTime < HOVER_BLIP_COOLDOWN_MS) return;
+  lastHoverBlipTime = nowMs;
+
   try {
     const ctx = initAudioContext();
-    if (!ctx) return;
-    const now = ctx.currentTime;
+    if (!ctx || ctx.state !== "running") return;
+    const now = ctx.currentTime + 0.001;
 
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
@@ -875,21 +906,21 @@ export const playHoverBlip = () => {
 
     osc.type = "sine";
     osc.frequency.setValueAtTime(320, now);
-    osc.frequency.exponentialRampToValueAtTime(180, now + 0.03);
+    osc.frequency.exponentialRampToValueAtTime(180, now + 0.025);
 
     filter.type = "lowpass";
     filter.frequency.setValueAtTime(600, now);
 
-    gain.gain.setValueAtTime(0.04, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+    gain.gain.setValueAtTime(0.035, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
 
     osc.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start(now);
-    osc.stop(now + 0.03);
-    notifySoundPlayed(0.2);
+    osc.stop(now + 0.025);
+    notifySoundPlayed(0.18);
   } catch {
     // ignore
   }
