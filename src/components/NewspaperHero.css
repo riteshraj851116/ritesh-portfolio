@@ -393,6 +393,63 @@
   color: #cdc6be;
 }
 
+.broadsheet-btn-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: rgba(29, 29, 27, 0.06);
+  color: var(--ink-black);
+  font-family: var(--font-headline);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.25rem;
+  border: 1px dashed rgba(29, 29, 27, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.broadsheet-btn-copy:hover {
+  background-color: var(--ink-black);
+  color: var(--paper-bg);
+  border-color: var(--ink-black);
+}
+
+.broadsheet-btn-copy.copied {
+  background-color: #166534;
+  color: #ffffff;
+  border-color: #166534;
+}
+
+.copy-icon-check {
+  color: #ffffff;
+}
+
+.artisan-telemetry-ticker {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(29, 29, 27, 0.2);
+  flex-wrap: wrap;
+}
+
+.ticker-label {
+  font-family: var(--font-stamp);
+  font-size: 0.65rem;
+  color: var(--terracotta);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.ticker-val {
+  font-family: var(--font-stamp);
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+
 /* ARTISAN RIGHT: PORTRAIT */
 .artisan-right-col {
   padding: clamp(2rem, 4vw, 3.5rem);

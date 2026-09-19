@@ -15,9 +15,21 @@ const skillsData = [
     title: "MERN Stack Systems",
     icon: "⚡",
     rating: "98% PROFICIENT",
+    level: 98,
     tech: ["React.js", "Node.js", "Express.js", "MongoDB"],
     desc: "Architecting end-to-end full stack web platforms with role-based JWT auth, custom middleware, and modular MVC architecture.",
     highlight: "40+ Production REST APIs",
+  },
+  {
+    id: "ai-voice",
+    category: "INTELLIGENT SYSTEMS",
+    title: "AI & Multimodal Voice",
+    icon: "🎙️",
+    rating: "ZERO LATENCY",
+    level: 95,
+    tech: ["Web Speech API", "Audio Synthesis", "Atmos Calibration", "Sensory Radar"],
+    desc: "Engineering conversational voice concierges, acoustic calibration algorithms, and interactive fidelity radar pipelines.",
+    highlight: "Dolby Atmos 64-Channel Logic",
   },
   {
     id: "algorithms",
@@ -25,6 +37,7 @@ const skillsData = [
     title: "Data Structures & Java",
     icon: "✦",
     rating: "200+ PROBLEMS",
+    level: 96,
     tech: ["Java", "Binary Trees", "Graphs", "Dynamic Programming"],
     desc: "Rigorous computational problem solving covering asymptotic complexity, recursion, memoization, and graph traversal algorithms.",
     highlight: "200+ LeetCode / Curated Solved",
@@ -35,19 +48,10 @@ const skillsData = [
     title: "Socket.IO & Real-Time",
     icon: "📡",
     rating: "<50ms LATENCY",
+    level: 94,
     tech: ["WebSockets", "Socket.IO", "Event Pipelines", "State Sync"],
     desc: "Bi-directional event-driven architecture streaming live messages, multi-user rooms, and notifications with zero polling overhead.",
     highlight: "Sub-50ms Event Delivery",
-  },
-  {
-    id: "threejs-gsap",
-    category: "SPATIAL & ANIMATION",
-    title: "Three.js & GSAP Motion",
-    icon: "⬡",
-    rating: "60 FPS OPTIMIZED",
-    tech: ["Three.js", "WebGL 2.0", "GSAP ScrollTrigger", "Lenis"],
-    desc: "Crafting immersive 3D viewports, procedural particle matrices, armillary geometries, and fluid kinetic scroll interactions.",
-    highlight: "Hardware Accelerated 3D",
   },
   {
     id: "database",
@@ -55,6 +59,7 @@ const skillsData = [
     title: "MongoDB & Mongoose",
     icon: "◈",
     rating: "<200ms QUERIES",
+    level: 95,
     tech: ["Aggregation Pipelines", "Indexing", "Atlas", "Relational Schemas"],
     desc: "Designing robust NoSQL schemas with indexing strategies achieving high-throughput document lookups under 200ms.",
     highlight: "Schema Indexing & Performance",
@@ -65,6 +70,7 @@ const skillsData = [
     title: "Cloud, Git & Vercel",
     icon: "🚀",
     rating: "100% AUTOMATED",
+    level: 97,
     tech: ["Git / GitHub", "Vercel CI/CD", "Vite", "Postman"],
     desc: "Modern deployment workflows with automated build triggers, semantic versioning, and environment-isolated cloud hosting.",
     highlight: "Verified Live Deployments",
@@ -255,6 +261,17 @@ const NewspaperSkills3D = () => {
                       {t}
                     </span>
                   ))}
+                </div>
+
+                {/* TACTILE MASTERY METER STRIP */}
+                <div className="card-3d-meter-strip">
+                  <div className="meter-label-row">
+                    <span className="meter-caption">PROFICIENCY INDEX</span>
+                    <span className="meter-val">{skill.level}%</span>
+                  </div>
+                  <div className="meter-track">
+                    <div className="meter-fill" style={{ width: `${skill.level}%` }} />
+                  </div>
                 </div>
 
                 {/* BOTTOM METRIC STRIP */}

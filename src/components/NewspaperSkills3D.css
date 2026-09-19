@@ -197,6 +197,47 @@
   padding: 2px 6px;
 }
 
+/* TACTILE MASTERY METER */
+.card-3d-meter-strip {
+  margin-bottom: 1rem;
+}
+
+.meter-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.meter-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #7d7870;
+}
+
+.meter-val {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--terracotta);
+}
+
+.meter-track {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(29, 29, 27, 0.1);
+  border: 1px solid rgba(29, 29, 27, 0.15);
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  background-color: var(--terracotta);
+  transition: width 0.6s ease;
+}
+
 /* FOOTER BENCHMARK */
 .card-3d-footer {
   padding-top: 0.75rem;

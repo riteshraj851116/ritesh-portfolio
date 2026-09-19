@@ -4,6 +4,7 @@ import DynamicTextRotater from "./DynamicTextRotater";
 import ScrambleText from "./ScrambleText";
 import PostageStamp from "./PostageStamp";
 import riteshPortrait from "../assets/Adobe Express - file.png";
+import { Copy, Check, Terminal } from "lucide-react";
 import { playClickSound, playHoverBlip } from "../utils/audio";
 import "./NewspaperHero.css";
 
@@ -11,6 +12,7 @@ const NewspaperHero = () => {
   const heroRef = useRef(null);
   const portraitRef = useRef(null);
   const [activeHeroRight, setActiveHeroRight] = useState("cineai");
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const btnFillRef = useRef(null);
   const btnOutlineRef = useRef(null);
 
@@ -304,6 +306,35 @@ const NewspaperHero = () => {
             >
               LINKEDIN PROFILE ↗
             </a>
+            <button
+              type="button"
+              className={`broadsheet-btn-copy ${copiedEmail ? "copied" : ""}`}
+              onClick={() => {
+                navigator.clipboard.writeText("riteshraj851116@gmail.com");
+                try { playClickSound(); } catch (e) {}
+                setCopiedEmail(true);
+                setTimeout(() => setCopiedEmail(false), 2200);
+              }}
+              title="Copy email to clipboard"
+            >
+              {copiedEmail ? (
+                <>
+                  <Check size={14} className="copy-icon-check" />
+                  <span>COPIED!</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={14} />
+                  <span>COPY EMAIL</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* TELEMETRY RUNTIME TICKER */}
+          <div className="artisan-telemetry-ticker">
+            <span className="ticker-label">RUNTIME:</span>
+            <span className="ticker-val">NODE 20 LTS · REACT 19 · SOCKET.IO · MONGOOSE IXSCAN · VERCEL CI/CD</span>
           </div>
         </div>
 

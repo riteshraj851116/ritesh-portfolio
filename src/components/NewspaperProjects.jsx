@@ -4,6 +4,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowUpRight,
   CheckCircle2,
+  Play,
+  Terminal,
+  Activity,
+  Layers,
+  Sparkles,
 } from "lucide-react";
 import { playHoverBlip, playClickSound } from "../utils/audio";
 import "./NewspaperProjects.css";
@@ -55,6 +60,19 @@ const projectsData = [
       "Low-latency Socket.IO bidirectional channels with sub-50ms packet delivery",
     ],
     blueprint: "React Client ↔ Express REST / Socket.IO Gateway ↔ Mongoose Collections (MongoDB)",
+    apiSim: {
+      method: "GET",
+      route: "/api/jobs/match?active=true",
+      status: "200 OK",
+      latency: "38ms",
+      response: {
+        platform: "JobSphere",
+        pipeline: "Automated ATS Candidate Scoring",
+        socketStatus: "Connected (TLS 1.3)",
+        activeRecruiters: 84,
+        latency: "38ms",
+      },
+    },
   },
   {
     id: "cineai",
@@ -82,6 +100,19 @@ const projectsData = [
       "Zero-latency failover caching & Mongoose database guardrails ensuring 100% uptime",
     ],
     blueprint: "Vite SPA ↔ Express REST APIs ↔ Web Speech AI ↔ Cryptographic QR Passes",
+    apiSim: {
+      method: "POST",
+      route: "/api/ai/seat-calibration",
+      status: "200 OK",
+      latency: "14ms",
+      response: {
+        platform: "CineAI Intelligent Cinema",
+        audioProfile: "Dolby Atmos 64-Channel Balanced",
+        optimalRows: ["D", "E", "F"],
+        zeroParallaxFOV: "120deg",
+        securityPass: "256-Bit Cryptographic QR",
+      },
+    },
   },
   {
     id: "velocedrive",
@@ -109,6 +140,18 @@ const projectsData = [
       "Strict payload validation, JWT authorization, and structured error handling",
     ],
     blueprint: "React Client ↔ Express Middleware ↔ Indexed Mongoose Models (MongoDB)",
+    apiSim: {
+      method: "GET",
+      route: "/api/vehicles/filter?available=true",
+      status: "200 OK",
+      latency: "148ms",
+      response: {
+        platform: "TeraCar Fleet Management",
+        indexScan: "IXSCAN [status_1_rate_1]",
+        availableFleetUnits: 46,
+        middlewareDefenses: ["Helmet", "RateLimit", "JWTGuard"],
+      },
+    },
   },
 ];
 
@@ -116,6 +159,7 @@ const NewspaperProjects = () => {
   const sectionRef = useRef(null);
   const [activeTab, setActiveTab] = useState({});
   const [activeFilter, setActiveFilter] = useState("ALL");
+  const [runningSim, setRunningSim] = useState({});
 
   const getCardTab = (id) => activeTab[id] || "overview";
   const setCardTab = (id, tab) => {
@@ -123,6 +167,16 @@ const NewspaperProjects = () => {
       playClickSound();
     } catch (e) {}
     setActiveTab((prev) => ({ ...prev, [id]: tab }));
+  };
+
+  const handleRunSim = (id) => {
+    try {
+      playClickSound();
+    } catch (e) {}
+    setRunningSim((prev) => ({ ...prev, [id]: true }));
+    setTimeout(() => {
+      setRunningSim((prev) => ({ ...prev, [id]: false }));
+    }, 280);
   };
 
   const categories = ["ALL", "AI & MULTIMODAL", "REAL-TIME & EVENT", "FULL STACK MERN"];
@@ -255,6 +309,7 @@ const NewspaperProjects = () => {
       <div className="projects-broadsheet-grid">
         {filteredProjects.map((project) => {
           const currentTab = getCardTab(project.id);
+          const isSimulating = !!runningSim[project.id];
 
           return (
             <article
@@ -373,7 +428,15 @@ const NewspaperProjects = () => {
                   <div className="tab-pane tab-telemetry animate-fade-in">
                     <div className="telemetry-header-bar">
                       <span className="telemetry-section-tag font-blackletter">System Telemetry</span>
-                      <span className="telemetry-live-pill">BENCHMARKS</span>
+                      <button
+                        type="button"
+                        className={`sim-trigger-btn ${isSimulating ? "is-running" : ""}`}
+                        onClick={() => handleRunSim(project.id)}
+                        title="Simulate live API response"
+                      >
+                        <Play size={11} className="sim-play-icon" />
+                        <span>{isSimulating ? "CALLING..." : "TEST API"}</span>
+                      </button>
                     </div>
 
                     <div className="card-telemetry-grid">
@@ -386,9 +449,16 @@ const NewspaperProjects = () => {
                       ))}
                     </div>
 
-                    <div className="card-blueprint-box">
-                      <span className="blueprint-label">PIPELINE ARCHITECTURE:</span>
-                      <code className="blueprint-code">{project.blueprint}</code>
+                    {/* LIVE API RESPONSE SIMULATOR BOX */}
+                    <div className="card-api-sim-box">
+                      <div className="api-sim-topbar">
+                        <span className="api-method-badge">{project.apiSim.method}</span>
+                        <span className="api-route-text">{project.apiSim.route}</span>
+                        <span className="api-status-pill">{project.apiSim.status}</span>
+                      </div>
+                      <pre className="api-sim-pre">
+                        <code>{JSON.stringify(project.apiSim.response, null, 2)}</code>
+                      </pre>
                     </div>
                   </div>
                 )}
@@ -408,6 +478,11 @@ const NewspaperProjects = () => {
                         </li>
                       ))}
                     </ul>
+
+                    <div className="card-blueprint-box">
+                      <span className="blueprint-label">PIPELINE ARCHITECTURE:</span>
+                      <code className="blueprint-code">{project.blueprint}</code>
+                    </div>
                   </div>
                 )}
 
