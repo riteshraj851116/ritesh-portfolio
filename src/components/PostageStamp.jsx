@@ -45,7 +45,7 @@ const PostageStamp = () => {
           </p>
           <p className="stamp-meta-row">
             <span className="stamp-meta-label">DEGREE:</span>
-            <span className="stamp-meta-val">B.Tech CSE (7.3)</span>
+            <span className="stamp-meta-val">B.Tech CSE (6.72)</span>
           </p>
           <p className="stamp-meta-row">
             <span className="stamp-meta-label">PHONE:</span>

@@ -84,7 +84,7 @@ const FeaturedFlagship = () => {
         {/* ACTION BUTTONS */}
         <div className="flagship-actions">
           <a
-            href="https://riteshraj851116.github.io/jobsphere/"
+            href="https://jobsphere-vercel.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="ln-btn ln-btn-lime"

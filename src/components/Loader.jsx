@@ -128,7 +128,7 @@ const Loader = ({ onComplete }) => {
           <span className="telemetry-val">
             {progress < 100 ? "COMPILING KERNEL & ASSETS..." : "WORKSPACE INITIALIZED"}
           </span>
-          <span className="bottom-tagline">GALGOTIAS UNIVERSITY CSE · CGPA 7.3</span>
+          <span className="bottom-tagline">GALGOTIAS UNIVERSITY CSE · CGPA 6.72</span>
           <span className="telemetry-val">{progress}%</span>
         </div>
       </div>

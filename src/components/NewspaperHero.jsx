@@ -303,7 +303,7 @@ const NewspaperHero = () => {
             {/* CAPTION BAR */}
             <div className="portrait-caption-bar">
               <span className="portrait-label">RITESH RAJ</span>
-              <span className="portrait-sub">B.TECH CSE · GALGOTIAS UNIV (CGPA 7.3)</span>
+              <span className="portrait-sub">B.TECH CSE · GALGOTIAS UNIV (CGPA 6.72)</span>
             </div>
           </div>
         </div>

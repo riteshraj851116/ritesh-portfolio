@@ -5,6 +5,11 @@ import "./TerminalSimulator.css";
 
 const COMMAND_PRESETS = [
   {
+    cmd: "curl /api/cineai/acoustic-calibration",
+    label: "CINEAI ATMOS CALIBRATION",
+    tag: "DOLBY ATMOS",
+  },
+  {
     cmd: "curl /api/jobsphere/match",
     label: "JOBSPHERE REST API",
     tag: "SOCKET.IO",
@@ -15,11 +20,6 @@ const COMMAND_PRESETS = [
     tag: "<200MS",
   },
   {
-    cmd: "ws://jobsphere:8080/chat/handshake",
-    label: "WEBSOCKET LATENCY",
-    tag: "SUB-50MS",
-  },
-  {
     cmd: "cat /credentials/status",
     label: "ENGINEER METRICS",
     tag: "MERN",
@@ -27,6 +27,18 @@ const COMMAND_PRESETS = [
 ];
 
 const RESPONSES = {
+  "curl /api/cineai/acoustic-calibration": {
+    status: "DOLBY ATMOS 64-CHANNEL CALIBRATION 200 OK",
+    headers: { "Content-Type": "application/json", "X-Audio-Profile": "ATMOS-SWEET-SPOT", "X-FOV": "120deg" },
+    payload: {
+      platform: "CineAI Intelligent Cinema",
+      optimalRows: ["D", "E", "F"],
+      geometricParallax: "0.00%",
+      speechEngine: "Web Speech API (STT & TTS Narration)",
+      bookingPipeline: "4-Stage Flow (Seats, Concessions, Pay, QR Pass)",
+      health: "Production Ready (100% Verified)",
+    },
+  },
   "curl /api/jobsphere/match": {
     status: "HTTP/1.1 200 OK",
     headers: { "Content-Type": "application/json", "X-Latency": "42ms", "Auth": "Bearer JWT.Verified" },
@@ -50,26 +62,15 @@ const RESPONSES = {
       securityMiddleware: ["Helmet", "RateLimit", "JWTGuard"],
     },
   },
-  "ws://jobsphere:8080/chat/handshake": {
-    status: "UPGRADE: WEBSOCKET [101 SWITCHING PROTOCOLS]",
-    headers: { "Transport": "websocket", "Engine": "Socket.IO v4", "Heartbeat": "25000ms" },
-    payload: {
-      connectionId: "ws_live_9983x",
-      bidirectionalLatency: "38ms",
-      encryption: "AES-256 GCM",
-      activeRooms: 34,
-      messageLossRate: "0.00%",
-    },
-  },
   "cat /credentials/status": {
     status: "RITESH RAJ // FULL STACK PROFILE TELEMETRY",
-    headers: { "Degree": "B.Tech CSE (Galgotias University, 2023-2027)", "CGPA": "7.3/10" },
+    headers: { "Degree": "B.Tech CSE (Galgotias University, 2023-2027)", "CGPA": "6.72/10" },
     payload: {
       certifications: [
         "CodeHelp Babbar — MERN Stack Web Development (150+ hrs)",
         "Apna College — Java Data Structures & Algorithms (200+ Solved)",
       ],
-      coreStrengths: ["React 19", "Node.js", "Express.js", "MongoDB", "Socket.IO", "Three.js", "GSAP"],
+      coreStrengths: ["React.js", "Node.js", "Express.js", "MongoDB", "Web Speech API", "Socket.IO", "Tailwind CSS", "GSAP"],
       contact: {
         phone: "+91-9709721676",
         email: "riteshraj851116@gmail.com",

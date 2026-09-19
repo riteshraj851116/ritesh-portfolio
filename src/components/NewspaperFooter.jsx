@@ -21,7 +21,7 @@ const NewspaperFooter = () => {
             </svg>
           </div>
           <span className="footer-colophon">
-            Ritesh Raj · Galgotias University CSE (2023--2027) · CGPA 7.3
+            Ritesh Raj · Galgotias University CSE (2023--2027) · CGPA 6.72
           </span>
         </div>
 

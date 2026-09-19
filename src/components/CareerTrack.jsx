@@ -15,7 +15,7 @@ const milestones = [
     location: "GREATER NOIDA, INDIA",
     title: "GALGOTIAS UNIVERSITY",
     subtitle: "B.Tech in Computer Science & Engineering",
-    score: "CGPA: 7.3 / 10",
+    score: "CGPA: 6.72 / 10",
     details:
       "Comprehensive CS curriculum: Advanced Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems (DBMS), and modern Web Engineering architectures.",
     badge: "UNDERGRADUATE CSE",

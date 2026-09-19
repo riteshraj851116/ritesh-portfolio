@@ -28,7 +28,7 @@ const endorsements = [
   {
     badge: "ACADEMIC HONORS",
     title: "B.Tech Computer Science",
-    quote: "“Galgotias University CSE candidate (2023 -- 2027) with CGPA 7.3/10. Specializing in Distributed Systems, OOP, and Database Architecture.”",
+    quote: "“Galgotias University CSE candidate (2023 -- 2027) with CGPA 6.72/10. Specializing in Distributed Systems, OOP, and Database Architecture.”",
     author: "Galgotias University",
     link: "https://www.linkedin.com/in/ritesh-raj-9b52162a7/",
     linkLabel: "LINKEDIN DOSSIER ↗",

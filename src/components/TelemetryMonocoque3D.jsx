@@ -257,7 +257,7 @@ const MonocoqueChassis = ({ mode, audioBoost, activeNode, onSelectNode }) => {
         position={[0.2, -0.6, 0.8]}
         id="galgotias"
         label="04 // GALGOTIAS B.TECH CSE"
-        spec="2023-2027 · CGPA 7.3"
+        spec="2023-2027 · CGPA 6.72"
         active={activeNode === "galgotias"}
         onSelect={onSelectNode}
       />
@@ -371,7 +371,7 @@ const TelemetryMonocoque3D = () => {
       title: "GALGOTIAS UNIVERSITY · B.TECH CSE (2023-2027)",
       tagline: "Bachelor of Technology in Computer Science & Engineering.",
       metrics: [
-        { label: "Academic CGPA", val: "7.3 / 10" },
+        { label: "Academic CGPA", val: "6.72 / 10" },
         { label: "Current Semester", val: "4th Semester (Expected 2027)" },
         { label: "Campus Track", val: "Greater Noida, NCR" },
       ],

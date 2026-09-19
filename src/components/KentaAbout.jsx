@@ -16,7 +16,7 @@ const riteshData = {
   awards: [
     { title: "LEETCODE & CODEHELP", desc: "200+ DSA IN JAVA, CONCURRENCY & OOP" },
     { title: "APNA COLLEGE", desc: "CERTIFIED JAVA DATA STRUCTURES & ALGORITHMS" },
-    { title: "GALGOTIAS UNIVERSITY", desc: "B.TECH COMPUTER SCIENCE & ENGINEERING (CGPA 7.3)" },
+    { title: "GALGOTIAS UNIVERSITY", desc: "B.TECH COMPUTER SCIENCE & ENGINEERING (CGPA 6.72)" },
     { title: "CODEHELP (LOVE BABBAR)", desc: "FULL-STACK MERN ARCHITECTURE CERTIFICATION" },
   ],
   contact: [
@@ -27,9 +27,9 @@ const riteshData = {
   ],
   contactNote: "*Currently open for high-impact software engineering roles & technical collaborations.",
   recentWorks: [
-    { name: "JobSphere Recruitment Engine", role: "Full Stack MERN, Cloudinary, REST", url: "https://jobsphere-topaz.vercel.app/" },
-    { name: "VeloceDrive Luxury Rentals", role: "React, Tailwind, Node.js, Stripe", url: "https://github.com/riteshraj851116" },
-    { name: "RCB Fan Experience & Team App", role: "Full Stack MERN, Interactive 3D", url: "https://github.com/riteshraj851116" },
+    { name: "JobSphere Recruitment Engine", role: "Full Stack MERN, Cloudinary, REST", url: "https://jobsphere-vercel.vercel.app/" },
+    { name: "VeloceDrive Luxury Rentals (TeraCar)", role: "Full Stack MERN, Tailwind, Node.js", url: "https://teracar-tan.vercel.app/" },
+    { name: "CineAI Intelligent Cinema & Booking", role: "Full Stack MERN, Web Speech API, AI", url: "https://cineai-pi-steel.vercel.app/" },
     { name: "ChatPulse Realtime Engine", role: "Socket.IO, Express, Redis, MERN", url: "https://github.com/riteshraj851116" },
     { name: "Algorithmic Problem Suite", role: "Java, Collections, 200+ Solved", url: "https://github.com/riteshraj851116" },
     { name: "CodeHelp Full-Stack Platform", role: "React, Node.js, MongoDB, JWT", url: "https://github.com/riteshraj851116" },
