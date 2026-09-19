@@ -13,7 +13,6 @@ import NewspaperMetrics from "./components/NewspaperMetrics";
 import NewspaperPlaybook from "./components/NewspaperPlaybook";
 import NewspaperMarquee from "./components/NewspaperMarquee";
 import NewspaperFooter from "./components/NewspaperFooter";
-import PaperCanvas3D from "./components/PaperCanvas3D";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -45,9 +44,6 @@ function App() {
 
   return (
     <>
-      {/* 3D AMBIENT WEBGL INK PARTICLES & ASTROLABE CODEX */}
-      <PaperCanvas3D />
-
       {/* 00 — HELLO MULTILINGUAL BROADSHEET LOADER */}
       {loading && <Loader onComplete={() => setLoading(false)} />}
 
