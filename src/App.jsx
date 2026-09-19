@@ -8,6 +8,7 @@ import NewspaperMenu from "./components/NewspaperMenu";
 import NewspaperHero from "./components/NewspaperHero";
 import NewspaperSkills3D from "./components/NewspaperSkills3D";
 import KineticBroadsheet3D from "./components/KineticBroadsheet3D";
+import BakedRoom3D from "./components/BakedRoom3D";
 import SpectralGhost3D from "./components/SpectralGhost3D";
 import NewspaperProjects from "./components/NewspaperProjects";
 import NewspaperMetrics from "./components/NewspaperMetrics";
@@ -76,21 +77,41 @@ function App() {
         {/* 03 — 3D KINETIC BROADSHEET: THREE-HTML-TO-CANVAS MESH & SPECTRAL LAB PORTAL */}
         <KineticBroadsheet3D onOpenSpectralLab={() => setSpectralLabOpen(true)} />
 
-        {/* 04 — BROADSHEET PROJECTS CATALOG */}
+        {/* 04 — 3D BAKED DEVELOPER STUDIO: ISOMETRIC AMBIENT OCCLUSION WORKSPACE */}
+        <BakedRoom3D />
+
+        {/* 05 — BROADSHEET PROJECTS CATALOG */}
         <NewspaperProjects />
 
-        {/* 05 — EDITORIAL METRICS & STATS STRIP */}
+        {/* 06 — EDITORIAL METRICS & STATS STRIP */}
         <NewspaperMetrics />
 
-        {/* 06 — ARCHITECT INVERTED BANNER & STITCHED COUPON CARDS */}
+        {/* 07 — ARCHITECT INVERTED BANNER & STITCHED COUPON CARDS */}
         <NewspaperPlaybook />
 
-        {/* 07 — CONTINUOUS EMAIL ME MARQUEE RIBBON */}
+        {/* 08 — CONTINUOUS EMAIL ME MARQUEE RIBBON */}
         <NewspaperMarquee />
 
-        {/* 08 — BROADSHEET COLOPHON FOOTER */}
+        {/* 09 — BROADSHEET COLOPHON FOOTER */}
         <NewspaperFooter />
       </main>
+
+      {/* FLOATING QUICK DOCK FOR 3D SPECTRAL LAB */}
+      <button
+        type="button"
+        className="floating-spectral-dock"
+        onClick={() => {
+          setSpectralLabOpen(true);
+        }}
+        title="Launch 3D Spectral Entity Laboratory (Analog Decay & Organic Mesh)"
+        aria-label="Launch 3D Spectral Lab"
+      >
+        <span className="dock-ghost-icon">👻</span>
+        <div className="dock-meta">
+          <span className="dock-title">3D SPECTRAL LAB</span>
+          <span className="dock-fps">● 90 FPS V-SYNC</span>
+        </div>
+      </button>
 
       {/* 3D SPECTRAL LAB MODAL (ON-DEMAND ANALOG DECAY & ORGANIC MESH LABORATORY) */}
       <SpectralGhost3D

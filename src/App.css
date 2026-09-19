@@ -182,3 +182,77 @@
     border-right-color: var(--border);
   }
 }
+
+/* FLOATING QUICK DOCK FOR 3D SPECTRAL LAB */
+.floating-spectral-dock {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 850;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #1a1a18;
+  border: 1.5px solid var(--terracotta);
+  padding: 8px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 12px rgba(192, 63, 19, 0.3);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.floating-spectral-dock:hover {
+  background-color: var(--terracotta);
+  border-color: var(--terracotta);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(192, 63, 19, 0.45);
+}
+
+.dock-ghost-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  animation: dockFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes dockFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.dock-meta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.dock-title {
+  font-family: var(--font-stamp);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.dock-fps {
+  font-family: var(--font-stamp);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #00ffaa;
+  letter-spacing: 0.05em;
+}
+
+.floating-spectral-dock:hover .dock-fps {
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .floating-spectral-dock {
+    bottom: 16px;
+    right: 16px;
+    padding: 6px 10px;
+  }
+  .dock-fps {
+    display: none;
+  }
+}

@@ -1,0 +1,417 @@
+/* ==========================================================================
+   INTERACTIVE 3D BAKED ROOM CONCEPT // ISOMETRIC DEVELOPER STUDIO
+   Preserves Antique Broadsheet Newspaper Framework
+   ========================================================================== */
+
+.baked-room-section {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 4rem 2rem;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  border-bottom: 2px solid var(--ink-rule);
+}
+
+/* SECTION MASTHEAD */
+.baked-room-header {
+  border-bottom: 3px double var(--ink-rule);
+  padding-bottom: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.baked-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-stamp);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-black);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.baked-tag {
+  color: var(--terracotta);
+}
+
+.baked-sep {
+  color: var(--ink-rule);
+}
+
+.baked-pipeline {
+  color: var(--ink-muted);
+}
+
+.baked-fps {
+  background-color: var(--paper-light);
+  border: 1px solid var(--ink-rule);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  color: #008855;
+  font-size: 0.65rem;
+  font-family: var(--font-stamp);
+  font-weight: 800;
+}
+
+.baked-headline {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4.2vw, 3.6rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--ink-black);
+  margin: 0.35rem 0 0.75rem 0;
+}
+
+.baked-deck {
+  font-family: var(--font-serif);
+  font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+  font-style: italic;
+  color: #3b3935;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 950px;
+}
+
+/* WORKBENCH GRID */
+.baked-workbench-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* LEFT VIEWPORT CARD */
+.baked-viewport-card {
+  background-color: #12100e;
+  border: 1px solid var(--ink-rule);
+  box-shadow: 4px 4px 0px rgba(29, 29, 27, 0.35);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+/* WINDOW CHROME */
+.baked-window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.9rem;
+  background-color: #1d1b18;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-stamp);
+  color: #ded7cd;
+}
+
+.window-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.window-dots .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.dot-red { background-color: #ff5f56; }
+.dot-amber { background-color: #ffbd2e; }
+.dot-green { background-color: #27c93f; }
+
+.window-address {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  color: #a89f91;
+  font-family: monospace;
+}
+
+.window-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #00ffaa;
+  letter-spacing: 0.05em;
+}
+
+.beacon-green {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #00ffaa;
+  box-shadow: 0 0 6px #00ffaa;
+}
+
+/* CANVAS MOUNT */
+.baked-canvas-mount {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  cursor: grab;
+  position: relative;
+  background: radial-gradient(circle at center, #24201c 0%, #12100e 100%);
+}
+
+.baked-canvas-mount:active {
+  cursor: grabbing;
+}
+
+/* OVERLAY HUD CONTROLS */
+.baked-overlay-hud {
+  position: absolute;
+  top: 48px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 10;
+  align-items: flex-end;
+}
+
+.lighting-preset-pills {
+  display: flex;
+  gap: 0.35rem;
+  background-color: rgba(20, 18, 16, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.hud-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  background: none;
+  border: none;
+  color: #c4bcb2;
+  font-family: var(--font-stamp);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+}
+
+.hud-pill-btn:hover {
+  color: #ffffff;
+}
+
+.hud-pill-btn.is-active {
+  background-color: var(--terracotta);
+  color: #ffffff;
+}
+
+.hud-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: rgba(29, 29, 27, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ded7cd;
+  padding: 0.35rem 0.65rem;
+  font-family: var(--font-stamp);
+  font-size: 0.62rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-action-btn:hover {
+  background-color: var(--terracotta);
+  color: #ffffff;
+}
+
+/* FOOTER STRIP */
+.baked-footer-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  background-color: #1a1815;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-stamp);
+  font-size: 0.6rem;
+  color: #8c8273;
+  letter-spacing: 0.05em;
+  flex-wrap: wrap;
+}
+
+.strip-sep {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* RIGHT SIDEBAR PANEL */
+.baked-sidebar-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.baked-dossier-card {
+  background-color: var(--paper-light);
+  border: 1px solid var(--ink-rule);
+  box-shadow: 4px 4px 0px rgba(29, 29, 27, 0.35);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.dossier-tags-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dossier-badge {
+  background-color: var(--terracotta);
+  color: #ffffff;
+  padding: 2px 6px;
+  font-family: var(--font-stamp);
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.dossier-iso-badge {
+  background-color: #1d1d1b;
+  color: #ded7cd;
+  padding: 2px 6px;
+  font-family: var(--font-stamp);
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.dossier-main-title {
+  font-family: var(--font-headline);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem 0;
+  color: var(--ink-black);
+}
+
+.dossier-lead-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: #3b3935;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* STUDIO RIG GRID */
+.studio-rig-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+}
+
+.rig-item-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #ede6dc;
+  border: 1px solid var(--ink-rule);
+  padding: 0.65rem 0.85rem;
+}
+
+.rig-card-icon {
+  color: var(--terracotta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rig-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rig-label {
+  font-family: var(--font-stamp);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+}
+
+.rig-val {
+  font-family: monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ink-black);
+}
+
+/* TECHNIQUE BOX */
+.technique-box {
+  background-color: #f7f3ed;
+  border: 1px dashed var(--ink-rule);
+  padding: 0.85rem 1rem;
+}
+
+.technique-box-title {
+  font-family: var(--font-stamp);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--terracotta);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.technique-desc {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #3b3834;
+  margin: 0;
+}
+
+/* SEAL */
+.baked-seal-footer {
+  margin-top: auto;
+  border-top: 2px double var(--ink-rule);
+  padding-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-stamp);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .baked-workbench-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .baked-room-section {
+    padding: 2.5rem 1rem 3rem 1rem;
+  }
+  .baked-canvas-mount {
+    min-height: 420px;
+  }
+}
