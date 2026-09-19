@@ -587,37 +587,6 @@
   gap: 0.5rem;
 }
 
-.browser-status-chip {
-  font-family: var(--font-stamp);
-  font-size: 0.58rem;
-  color: #9e978e;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 1px 4px;
-  border-radius: 2px;
-}
-
-.browser-mode-toggle-btn {
-  background-color: var(--terracotta);
-  color: #ffffff;
-  border: 1px solid var(--terracotta);
-  font-family: var(--font-stamp);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 3px 8px;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.browser-mode-toggle-btn:hover {
-  background-color: #ffffff;
-  color: var(--ink-black);
-  border-color: #ffffff;
-}
-
 .api-method-badge {
   font-family: var(--font-stamp);
   font-size: 0.58rem;

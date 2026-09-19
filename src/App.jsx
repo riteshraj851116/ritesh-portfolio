@@ -7,7 +7,6 @@ import NewspaperHeader from "./components/NewspaperHeader";
 import NewspaperMenu from "./components/NewspaperMenu";
 import NewspaperHero from "./components/NewspaperHero";
 import NewspaperSkills3D from "./components/NewspaperSkills3D";
-import NewspaperCodex3D from "./components/NewspaperCodex3D";
 import NewspaperProjects from "./components/NewspaperProjects";
 import NewspaperMetrics from "./components/NewspaperMetrics";
 import NewspaperPlaybook from "./components/NewspaperPlaybook";
@@ -64,10 +63,7 @@ function App() {
         {/* 02 — 3D MOVING SKILLS MATRIX */}
         <NewspaperSkills3D />
 
-        {/* 03 — 3D KINETIC ARCHITECTURAL CODEX (WEBGL WORKBENCH) */}
-        <NewspaperCodex3D />
-
-        {/* 04 — BROADSHEET PROJECTS CATALOG */}
+        {/* 03 — BROADSHEET PROJECTS CATALOG */}
         <NewspaperProjects />
 
         {/* 03 — EDITORIAL METRICS & STATS STRIP */}
