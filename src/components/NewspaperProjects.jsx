@@ -11,6 +11,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { playHoverBlip, playClickSound } from "../utils/audio";
+import ProjectCanvas3D from "./ProjectCanvas3D";
 import "./NewspaperProjects.css";
 
 if (typeof window !== "undefined") {
@@ -160,6 +161,21 @@ const NewspaperProjects = () => {
   const [activeTab, setActiveTab] = useState({});
   const [activeFilter, setActiveFilter] = useState("ALL");
   const [runningSim, setRunningSim] = useState({});
+  const [visualMode, setVisualMode] = useState({
+    cineai: "3d",
+    jobsphere: "3d",
+    velocedrive: "3d",
+  });
+
+  const toggleVisualMode = (id) => {
+    try {
+      playClickSound();
+    } catch (e) {}
+    setVisualMode((prev) => ({
+      ...prev,
+      [id]: prev[id] === "2d" ? "3d" : "2d",
+    }));
+  };
 
   const getCardTab = (id) => activeTab[id] || "overview";
   const setCardTab = (id, tab) => {
@@ -347,34 +363,47 @@ const NewspaperProjects = () => {
                     <span className="url-lock-icon">🔒</span>
                     <span className="url-domain">https://{project.urlDisplay}</span>
                   </div>
-                  <span className="browser-status-chip">TLS 1.3</span>
+                  <button
+                    type="button"
+                    className="browser-mode-toggle-btn"
+                    onClick={() => toggleVisualMode(project.id)}
+                    title="Switch between 3D WebGL Hologram and 2D Capture"
+                  >
+                    {visualMode[project.id] === "3d" ? "🪐 3D WEBGL" : "📷 2D PREVIEW"}
+                  </button>
                 </div>
 
                 <div className="card-visual-frame">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="card-visual-img"
-                    loading="lazy"
-                  />
-                  <div className="visual-hover-backdrop">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="visual-hover-action-btn"
-                      onClick={() => {
-                        try {
-                          playClickSound();
-                        } catch (e) {}
-                      }}
-                    >
-                      <span>LAUNCH APPLICATION</span>
-                      <ArrowUpRight size={14} />
-                    </a>
-                  </div>
+                  {visualMode[project.id] === "3d" ? (
+                    <ProjectCanvas3D projectId={project.id} />
+                  ) : (
+                    <>
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="card-visual-img"
+                        loading="lazy"
+                      />
+                      <div className="visual-hover-backdrop">
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="visual-hover-action-btn"
+                          onClick={() => {
+                            try {
+                              playClickSound();
+                            } catch (e) {}
+                          }}
+                        >
+                          <span>LAUNCH APPLICATION</span>
+                          <ArrowUpRight size={14} />
+                        </a>
+                      </div>
+                    </>
+                  )}
                   <div className="visual-overlay-stamp">
-                    <span>VERIFIED 2026 BUILD</span>
+                    <span>{visualMode[project.id] === "3d" ? "3D WEBGL ENGINE" : "VERIFIED 2026 BUILD"}</span>
                   </div>
                 </div>
               </div>

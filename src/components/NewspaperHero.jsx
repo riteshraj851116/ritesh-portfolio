@@ -83,7 +83,7 @@ const NewspaperHero = () => {
 
   // GSAP 3D Tilt for the Portrait
   const handlePortraitMouseMove = (e) => {
-    if (!portraitRef.current || heroView !== "portrait") return;
+    if (!portraitRef.current) return;
     const rect = portraitRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
