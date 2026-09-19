@@ -7,6 +7,7 @@ import NewspaperHeader from "./components/NewspaperHeader";
 import NewspaperMenu from "./components/NewspaperMenu";
 import NewspaperHero from "./components/NewspaperHero";
 import NewspaperSkills3D from "./components/NewspaperSkills3D";
+import KineticBroadsheet3D from "./components/KineticBroadsheet3D";
 import SpectralGhost3D from "./components/SpectralGhost3D";
 import NewspaperProjects from "./components/NewspaperProjects";
 import NewspaperMetrics from "./components/NewspaperMetrics";
@@ -17,6 +18,7 @@ import NewspaperFooter from "./components/NewspaperFooter";
 function App() {
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [spectralLabOpen, setSpectralLabOpen] = useState(false);
 
   // Initialize Lenis smooth scroll for effortless broadsheet reading
   useEffect(() => {
@@ -50,11 +52,18 @@ function App() {
       {/* INK CUSTOM CURSOR */}
       <CustomCursor />
 
-      {/* PINNED NEWSPAPER HEADER (Masthead, Location & Menu Trigger) */}
-      <NewspaperHeader onOpenMenu={() => setMenuOpen(true)} />
+      {/* PINNED NEWSPAPER HEADER (Masthead, Location, Audio Suite & Spectral Lab Trigger) */}
+      <NewspaperHeader
+        onOpenMenu={() => setMenuOpen(true)}
+        onOpenSpectralLab={() => setSpectralLabOpen(true)}
+      />
 
       {/* FULLSCREEN DARK NEWSPAPER NAVIGATION OVERLAY */}
-      <NewspaperMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      <NewspaperMenu
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onOpenSpectralLab={() => setSpectralLabOpen(true)}
+      />
 
       {/* MAIN BROADSHEET EDITORIAL PORTFOLIO */}
       <main className="paper-portfolio-main">
@@ -64,24 +73,30 @@ function App() {
         {/* 02 — 3D MOVING SKILLS MATRIX */}
         <NewspaperSkills3D />
 
-        {/* 03 — 3D SPECTRAL LAB: THE ANALOG GHOST & CRT SHADERS */}
-        <SpectralGhost3D />
+        {/* 03 — 3D KINETIC BROADSHEET: THREE-HTML-TO-CANVAS MESH & SPECTRAL LAB PORTAL */}
+        <KineticBroadsheet3D onOpenSpectralLab={() => setSpectralLabOpen(true)} />
 
         {/* 04 — BROADSHEET PROJECTS CATALOG */}
         <NewspaperProjects />
 
-        {/* 03 — EDITORIAL METRICS & STATS STRIP */}
+        {/* 05 — EDITORIAL METRICS & STATS STRIP */}
         <NewspaperMetrics />
 
-        {/* 04 — ARCHITECT INVERTED BANNER & STITCHED COUPON CARDS */}
+        {/* 06 — ARCHITECT INVERTED BANNER & STITCHED COUPON CARDS */}
         <NewspaperPlaybook />
 
-        {/* 05 — CONTINUOUS EMAIL ME MARQUEE RIBBON */}
+        {/* 07 — CONTINUOUS EMAIL ME MARQUEE RIBBON */}
         <NewspaperMarquee />
 
-        {/* 06 — BROADSHEET COLOPHON FOOTER */}
+        {/* 08 — BROADSHEET COLOPHON FOOTER */}
         <NewspaperFooter />
       </main>
+
+      {/* 3D SPECTRAL LAB MODAL (ON-DEMAND ANALOG DECAY & ORGANIC MESH LABORATORY) */}
+      <SpectralGhost3D
+        isOpen={spectralLabOpen}
+        onClose={() => setSpectralLabOpen(false)}
+      />
     </>
   );
 }

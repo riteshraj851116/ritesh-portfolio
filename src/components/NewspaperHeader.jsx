@@ -16,7 +16,7 @@ const CLICK_MODES = [
   { id: "press", label: "LETTERPRESS STAMP", icon: "📰" },
 ];
 
-const NewspaperHeader = ({ onOpenMenu }) => {
+const NewspaperHeader = ({ onOpenMenu, onOpenSpectralLab }) => {
   const [timeStr, setTimeStr] = useState("");
   const [soundOn, setSoundOn] = useState(true);
   const [currentMode, setCurrentMode] = useState("mechanical");
@@ -157,6 +157,24 @@ const NewspaperHeader = ({ onOpenMenu }) => {
             </div>
           )}
         </div>
+
+        {/* 3D SPECTRAL LAB TRIGGER BUTTON */}
+        {onOpenSpectralLab && (
+          <button
+            type="button"
+            className="header-spectral-btn"
+            onClick={() => {
+              playClickSound();
+              onOpenSpectralLab();
+            }}
+            title="Launch 3D Spectral Entity Lab (Analog Decay & Organic Mesh)"
+            aria-label="Launch 3D Spectral Lab"
+          >
+            <span className="spectral-indicator-dot" />
+            <span className="spectral-btn-text">SPECTRAL LAB</span>
+            <span className="spectral-fps-tag">90 FPS</span>
+          </button>
+        )}
 
         {/* 2-LINE BROADSHEET HAMBURGER */}
         <button

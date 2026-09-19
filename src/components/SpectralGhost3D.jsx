@@ -18,6 +18,7 @@ import {
   Palette,
   Tv,
   Flame,
+  X,
 } from "lucide-react";
 import { playClickSound, playHoverBlip } from "../utils/audio";
 import "./SpectralGhost3D.css";
@@ -164,9 +165,8 @@ const analogDecayShader = {
   `,
 };
 
-const SpectralGhost3D = () => {
+const SpectralGhost3D = ({ isOpen = false, onClose }) => {
   const mountRef = useRef(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(false);
 
   // Active tweakable parameters
@@ -188,7 +188,31 @@ const SpectralGhost3D = () => {
   const cameraRef = useRef(null);
   const sceneRef = useRef(null);
 
+  // Keyboard Escape listener to close modal
   useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && onClose) {
+        playClickSound();
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Lock body scroll while modal is active
+  useEffect(() => {
+    if (!isOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
     const container = mountRef.current;
     if (!container) return;
 
@@ -725,7 +749,7 @@ const SpectralGhost3D = () => {
       composer.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [isOpen]);
 
   // Update Glow Color
   useEffect(() => {
@@ -757,42 +781,32 @@ const SpectralGhost3D = () => {
     }
   }, [analogIntensity, filmGrain, colorBleeding, scanlines, limboMode]);
 
+  if (!isOpen) return null;
+
   return (
-    <section
-      className={`spectral-ghost-section ${isFullscreen ? "is-fullscreen-active" : ""}`}
-      id="spectral-lab"
-    >
-      {/* SECTION EDITORIAL MASTHEAD */}
-      <div className="spectral-header">
-        <div className="spectral-meta-bar">
-          <span className="spectral-tag">SECTION 03 // 3D SPECTRAL LAB</span>
-          <span className="spectral-dot">◈</span>
-          <span className="spectral-shader-tag">ANALOG DECAY & ORGANIC MESH</span>
-          <span className="spectral-fps-badge">● {fps} FPS V-SYNC</span>
-        </div>
-
-        <h2 className="spectral-headline">THE SPECTRAL ENTITY</h2>
-
-        <p className="spectral-subhead">
-          Interactive WebGL experiment featuring procedural vertex wave noise, dynamic
-          velocity-responsive glowing eyes, organic fireflies, particle trailing, and a custom CRT
-          analog decay postprocessing pipeline.
-        </p>
-      </div>
-
-      {/* 3D WORKBENCH VIEWPORT CONTAINER */}
-      <div className="spectral-workbench-card">
+    <div className="spectral-modal-overlay" role="dialog" aria-modal="true">
+      <div className="spectral-modal-backdrop" onClick={onClose} />
+      <div className="spectral-modal-container">
         {/* Top Window Bar */}
         <div className="spectral-window-bar">
           <div className="window-dots">
-            <span className="dot dot-close"></span>
-            <span className="dot dot-min"></span>
-            <span className="dot dot-max"></span>
+            <button
+              type="button"
+              className="dot dot-close"
+              onClick={() => {
+                playClickSound();
+                if (onClose) onClose();
+              }}
+              title="Close Spectral Lab (ESC)"
+            />
+            <span className="dot dot-min" />
+            <span className="dot dot-max" />
           </div>
 
           <div className="window-address">
             <Compass size={12} className="compass-icon" />
-            <span>threejs://spectral-ghost.render/analog-decay-pipeline</span>
+            <span>threejs://spectral-entity.lab/analog-decay-pipeline</span>
+            <span className="modal-header-fps">● {fps} FPS V-SYNC</span>
           </div>
 
           <div className="window-actions">
@@ -824,22 +838,24 @@ const SpectralGhost3D = () => {
 
             <button
               type="button"
-              className="action-icon-btn"
+              className="modal-close-action-btn"
               onClick={() => {
                 playClickSound();
-                setIsFullscreen((prev) => !prev);
+                if (onClose) onClose();
               }}
-              title={isFullscreen ? "Exit Fullscreen View" : "Expand to Fullscreen View"}
+              title="Close Laboratory (ESC)"
             >
-              {isFullscreen ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
+              <X size={13} />
+              <span>EXIT LAB</span>
             </button>
           </div>
         </div>
 
-        {/* THREE.JS CANVAS CONTAINER */}
-        <div className="spectral-canvas-viewport" ref={mountRef}>
-          {/* Subtle Instruction Overlay */}
-          <div className="canvas-guidance-pill">
+        {/* 3D WORKBENCH VIEWPORT CONTAINER */}
+        <div className="spectral-workbench-card">
+          <div className="spectral-canvas-viewport" ref={mountRef}>
+            {/* Subtle Instruction Overlay */}
+            <div className="canvas-guidance-pill">
             <Activity size={12} className="guidance-dot" />
             <span>MOVE CURSOR TO DIRECT SPECTRAL ENTITY · WATCH EYES IGNITE ON VELOCITY</span>
           </div>
@@ -965,7 +981,8 @@ const SpectralGhost3D = () => {
           </div>
         )}
       </div>
-    </section>
+    </div>
+    </div>
   );
 };
 

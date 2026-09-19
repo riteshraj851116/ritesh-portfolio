@@ -288,6 +288,60 @@
   color: #2ecc71;
 }
 
+/* HEADER 3D SPECTRAL LAB TRIGGER BUTTON */
+.header-spectral-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #1d1d1b;
+  color: #ded7cd;
+  border: 1px solid #1d1d1b;
+  padding: 5px 10px;
+  font-family: var(--font-stamp);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+}
+
+.header-spectral-btn:hover {
+  background-color: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(192, 63, 19, 0.3);
+}
+
+.spectral-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #00ffaa;
+  box-shadow: 0 0 6px #00ffaa;
+  animation: spectralPulse 2s infinite ease-in-out;
+}
+
+@keyframes spectralPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.spectral-fps-tag {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 1px 4px;
+  font-size: 0.55rem;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .header-spectral-btn .spectral-fps-tag {
+    display: none;
+  }
+}
+
 .paper-menu-trigger {
   display: flex;
   flex-direction: column;

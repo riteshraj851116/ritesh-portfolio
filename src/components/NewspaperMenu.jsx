@@ -4,13 +4,14 @@ import "./NewspaperMenu.css";
 
 const navItems = [
   { label: "INDEX", href: "#hero", active: true },
-  { label: "SPECTRAL LAB", href: "#spectral-lab", active: false },
+  { label: "KINETIC BROADSHEET", href: "#kinetic-broadsheet", active: false },
+  { label: "3D SPECTRAL LAB", action: "spectral-lab", isModal: true },
   { label: "WORK", href: "#work", active: false },
   { label: "PLAYBOOK", href: "#playbook", active: false },
   { label: "CONTACT", href: "#contact", active: false },
 ];
 
-const NewspaperMenu = ({ isOpen, onClose }) => {
+const NewspaperMenu = ({ isOpen, onClose, onOpenSpectralLab }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape" && isOpen) {
@@ -23,10 +24,14 @@ const NewspaperMenu = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const handleNav = (href) => {
+  const handleNav = (item) => {
     try { playClickSound(); } catch (e) {}
     onClose();
-    const target = document.querySelector(href);
+    if (item.isModal) {
+      if (onOpenSpectralLab) onOpenSpectralLab();
+      return;
+    }
+    const target = document.querySelector(item.href);
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
@@ -47,14 +52,14 @@ const NewspaperMenu = ({ isOpen, onClose }) => {
         {navItems.map((item) => (
           <div key={item.label} className={`menu-link-wrapper ${item.active ? "is-active" : ""}`}>
             <a
-              href={item.href}
+              href={item.href || "#"}
               className="menu-link-item"
               onMouseEnter={() => {
                 try { playHoverBlip(); } catch (e) {}
               }}
               onClick={(e) => {
                 e.preventDefault();
-                handleNav(item.href);
+                handleNav(item);
               }}
             >
               <span className="link-text">{item.label}</span>
